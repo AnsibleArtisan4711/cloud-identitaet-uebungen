@@ -1,0 +1,11 @@
+{
+  "version": "1.0",
+  "owner": "Governance Lead",
+  "reviewIntervalDays": 180,
+  "rules": {
+    "maxGlobalAdmins": 4,
+    "minGroupOwners": 2,
+    "guestsAllowed": true,
+    "groupExpirationDays": 365
+  }
+}

@@ -1,0 +1,388 @@
+{
+  "_hinweis": "Erfundene Beispieldaten fuer Offline-Tests (Modul 08). Keine echten Personen, Domains oder Tenant-Daten.",
+  "secureScores": [
+    {
+      "daysAgo": 0,
+      "current": 312.5,
+      "max": 604
+    },
+    {
+      "daysAgo": 1,
+      "current": 310,
+      "max": 604
+    }
+  ],
+  "caPolicies": [
+    {
+      "id": "p-001",
+      "name": "CA001 - Legacy blockieren",
+      "state": "enabled",
+      "excludeUsers": [],
+      "excludeGroups": [
+        "g-notfall"
+      ],
+      "excludeRoles": []
+    },
+    {
+      "id": "p-002",
+      "name": "CA002 - MFA fuer alle",
+      "state": "enabledForReportingButNotEnforced",
+      "excludeUsers": [
+        "u-lab1"
+      ],
+      "excludeGroups": [
+        "g-notfall",
+        "g-exc-1"
+      ],
+      "excludeRoles": [
+        "62e90394-69f5-4237-9190-012177145e10"
+      ]
+    },
+    {
+      "id": "p-003",
+      "name": "CA003 - Geraet konform",
+      "state": "disabled",
+      "excludeUsers": [],
+      "excludeGroups": [
+        "g-geloescht"
+      ],
+      "excludeRoles": []
+    }
+  ],
+  "groups": [
+    {
+      "id": "g-notfall",
+      "name": "SEC-BREAKGLASS",
+      "members": [
+        "u-bg1",
+        "u-bg2"
+      ]
+    },
+    {
+      "id": "g-exc-1",
+      "name": "SEC-EXC-CA001-LegacyAuth",
+      "members": [
+        "u-lab1"
+      ]
+    },
+    {
+      "id": "g-exc-2",
+      "name": "SEC-EXC-CA002-Reisen",
+      "members": [
+        "u-lab1",
+        "u-vertrieb1"
+      ]
+    },
+    {
+      "id": "g-exc-3",
+      "name": "SEC-EXC-CA003-Geraet",
+      "members": [
+        "u-lab1",
+        "u-vertrieb1"
+      ]
+    },
+    {
+      "id": "g-exc-4",
+      "name": "SEC-EXC-CA004-Test",
+      "members": [
+        "u-lab1"
+      ]
+    },
+    {
+      "id": "g-abt",
+      "name": "ABT-Vertrieb",
+      "members": [
+        "u-vertrieb1",
+        "u-01"
+      ]
+    }
+  ],
+  "directoryRole": {
+    "id": "role-ga-1",
+    "displayName": "Global Administrator",
+    "members": [
+      "u-admin1",
+      "u-admin2",
+      "u-admin3",
+      "u-admin4",
+      "u-admin5"
+    ]
+  },
+  "users": [
+    {
+      "id": "u-admin1",
+      "upn": "admin1@example.com",
+      "displayName": "Admin Eins",
+      "userType": "Member",
+      "accountEnabled": true,
+      "mail": null
+    },
+    {
+      "id": "u-admin2",
+      "upn": "admin2@example.com",
+      "displayName": "Admin Zwei",
+      "userType": "Member",
+      "accountEnabled": true,
+      "mail": null
+    },
+    {
+      "id": "u-admin3",
+      "upn": "admin3_extern.example.org#EXT#@example.onmicrosoft.com",
+      "displayName": "Admin Drei",
+      "userType": "Guest",
+      "accountEnabled": true,
+      "mail": null
+    },
+    {
+      "id": "u-admin4",
+      "upn": "admin4@example.com",
+      "displayName": "Admin Vier",
+      "userType": "Member",
+      "accountEnabled": true,
+      "mail": "admin4@example.com"
+    },
+    {
+      "id": "u-admin5",
+      "upn": "admin5@example.com",
+      "displayName": "Admin Fuenf",
+      "userType": "Member",
+      "accountEnabled": false,
+      "mail": null
+    }
+  ],
+  "registration": [
+    {
+      "id": "u-admin1",
+      "upn": "admin1@example.com",
+      "isAdmin": true,
+      "isMfaRegistered": true,
+      "isPasswordlessCapable": true,
+      "defaultMfaMethod": "fido2"
+    },
+    {
+      "id": "u-admin2",
+      "upn": "admin2@example.com",
+      "isAdmin": true,
+      "isMfaRegistered": false,
+      "isPasswordlessCapable": false,
+      "defaultMfaMethod": "none"
+    },
+    {
+      "id": "u-admin3",
+      "upn": "admin3_extern.example.org#EXT#@example.onmicrosoft.com",
+      "isAdmin": true,
+      "isMfaRegistered": true,
+      "isPasswordlessCapable": false,
+      "defaultMfaMethod": "microsoftAuthenticatorPush"
+    },
+    {
+      "id": "u-admin4",
+      "upn": "admin4@example.com",
+      "isAdmin": true,
+      "isMfaRegistered": true,
+      "isPasswordlessCapable": false,
+      "defaultMfaMethod": "microsoftAuthenticatorPush"
+    },
+    {
+      "id": "u-01",
+      "upn": "benutzer01@example.com",
+      "isAdmin": false,
+      "isMfaRegistered": true,
+      "isPasswordlessCapable": true,
+      "defaultMfaMethod": "microsoftAuthenticatorPush"
+    },
+    {
+      "id": "u-02",
+      "upn": "benutzer02@example.com",
+      "isAdmin": false,
+      "isMfaRegistered": true,
+      "isPasswordlessCapable": true,
+      "defaultMfaMethod": "microsoftAuthenticatorPush"
+    },
+    {
+      "id": "u-03",
+      "upn": "benutzer03@example.com",
+      "isAdmin": false,
+      "isMfaRegistered": true,
+      "isPasswordlessCapable": false,
+      "defaultMfaMethod": "sms"
+    },
+    {
+      "id": "u-04",
+      "upn": "benutzer04@example.com",
+      "isAdmin": false,
+      "isMfaRegistered": true,
+      "isPasswordlessCapable": false,
+      "defaultMfaMethod": "sms"
+    },
+    {
+      "id": "u-05",
+      "upn": "benutzer05@example.com",
+      "isAdmin": false,
+      "isMfaRegistered": true,
+      "isPasswordlessCapable": false,
+      "defaultMfaMethod": "microsoftAuthenticatorPush"
+    },
+    {
+      "id": "u-06",
+      "upn": "benutzer06@example.com",
+      "isAdmin": false,
+      "isMfaRegistered": false,
+      "isPasswordlessCapable": false,
+      "defaultMfaMethod": "none"
+    },
+    {
+      "id": "u-07",
+      "upn": "benutzer07@example.com",
+      "isAdmin": false,
+      "isMfaRegistered": false,
+      "isPasswordlessCapable": false,
+      "defaultMfaMethod": "none"
+    },
+    {
+      "id": "u-08",
+      "upn": "benutzer08@example.com",
+      "isAdmin": false,
+      "isMfaRegistered": false,
+      "isPasswordlessCapable": false,
+      "defaultMfaMethod": "none"
+    }
+  ],
+  "alerts": [
+    {
+      "hoursAgo": 2,
+      "severity": "high",
+      "source": "microsoftDefenderForEndpoint",
+      "status": "new",
+      "title": "Verdaechtiger Prozess"
+    },
+    {
+      "hoursAgo": 30,
+      "severity": "medium",
+      "source": "microsoftDefenderForOffice365",
+      "status": "inProgress",
+      "title": "Phishing-Mail"
+    },
+    {
+      "hoursAgo": 50,
+      "severity": "high",
+      "source": "microsoftDefenderForEndpoint",
+      "status": "resolved",
+      "title": "Malware blockiert"
+    },
+    {
+      "hoursAgo": 70,
+      "severity": "high",
+      "source": "microsoftDefenderForOffice365",
+      "status": "new",
+      "title": "Link geklickt"
+    },
+    {
+      "hoursAgo": 100,
+      "severity": "low",
+      "source": "microsoftDefenderForOffice365",
+      "status": "new",
+      "title": "Ungewoehnliche Weiterleitung"
+    },
+    {
+      "hoursAgo": 10,
+      "severity": "high",
+      "source": "microsoftDefenderForEndpoint",
+      "status": "inProgress",
+      "title": "Ransomware-Verhalten"
+    },
+    {
+      "hoursAgo": 200,
+      "severity": "high",
+      "source": "microsoftDefenderForEndpoint",
+      "status": "new",
+      "title": "Alte Warnung"
+    }
+  ],
+  "devices": [
+    {
+      "name": "PC-VERTRIEB-01",
+      "upn": "benutzer01@example.com",
+      "os": "Windows",
+      "osVersion": "10.0.19045.5000",
+      "lastSyncDaysAgo": 2,
+      "state": "noncompliant"
+    },
+    {
+      "name": "PC-LABOR-02",
+      "upn": "benutzer02@example.com",
+      "os": "Windows",
+      "osVersion": "10.0.19044.1000",
+      "lastSyncDaysAgo": 30,
+      "state": "noncompliant"
+    },
+    {
+      "name": "PC-FINANZ-03",
+      "upn": "benutzer03@example.com",
+      "os": "Windows",
+      "osVersion": "10.0.22631.4000",
+      "lastSyncDaysAgo": 0,
+      "state": "compliant"
+    },
+    {
+      "name": "PC-PROJEKT-04",
+      "upn": "benutzer04@example.com",
+      "os": "Windows",
+      "osVersion": "10.0.22631.4000",
+      "lastSyncDaysAgo": 9,
+      "state": "noncompliant"
+    }
+  ],
+  "signIns": [
+    {
+      "upn": "anna@example.com",
+      "hoursAgo": 2,
+      "app": "Microsoft Teams",
+      "errorCode": 0,
+      "reason": null,
+      "ca": "success",
+      "policies": [
+        {
+          "name": "CA001 - Legacy blockieren",
+          "result": "notApplied"
+        },
+        {
+          "name": "CA002 - MFA fuer alle",
+          "result": "success"
+        }
+      ]
+    },
+    {
+      "upn": "anna@example.com",
+      "hoursAgo": 3,
+      "app": "Microsoft Teams",
+      "errorCode": 53003,
+      "reason": "Access has been blocked by Conditional Access policies.",
+      "ca": "failure",
+      "policies": [
+        {
+          "name": "CA003 - Geraet konform",
+          "result": "failure"
+        }
+      ]
+    },
+    {
+      "upn": "anna@example.com",
+      "hoursAgo": 30,
+      "app": "Outlook",
+      "errorCode": 0,
+      "reason": null,
+      "ca": "success",
+      "policies": []
+    },
+    {
+      "upn": "ben@example.com",
+      "hoursAgo": 1,
+      "app": "SharePoint Online",
+      "errorCode": 0,
+      "reason": null,
+      "ca": "notApplied",
+      "policies": []
+    }
+  ]
+}

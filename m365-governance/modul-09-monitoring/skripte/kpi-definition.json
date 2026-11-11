@@ -1,0 +1,8 @@
+[
+  { "id": "mfa-abdeckung",    "name": "Benutzer mit MFA (Prozent)",
+    "ziel": 98, "alarm": 90, "richtung": "hoeher", "verantwortlich": "Identity-Team" },
+  { "id": "teams-2-besitzer", "name": "Teams mit mindestens 2 Besitzern (Prozent)",
+    "ziel": 98, "alarm": 90, "richtung": "hoeher", "verantwortlich": "Teams-Betrieb" },
+  { "id": "vorfaelle-offen",  "name": "Offene Sicherheitsvorfaelle (Anzahl)",
+    "ziel": 5, "alarm": 15, "richtung": "niedriger", "verantwortlich": "Security-Betrieb" }
+]

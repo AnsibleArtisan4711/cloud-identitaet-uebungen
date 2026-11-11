@@ -1,0 +1,367 @@
+{
+ "_hinweis": "Erfundene Beispieldaten fuer Offline-Tests (Modul 09). Keine echten Personen, Domains oder Tenant-Daten.",
+ "options": {
+  "hideNames": false,
+  "omitColumns": [],
+  "riskyUnavailable": false
+ },
+ "activeUsers": [
+  {
+   "upn": "anna@example.com",
+   "name": "Anna Beispiel",
+   "deleted": false,
+   "lic": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "act": [
+    1,
+    3,
+    null,
+    2
+   ]
+  },
+  {
+   "upn": "ben@example.com",
+   "name": "Ben Beispiel",
+   "deleted": false,
+   "lic": [
+    1,
+    0,
+    0,
+    1
+   ],
+   "act": [
+    null,
+    null,
+    null,
+    null
+   ]
+  },
+  {
+   "upn": "carla@example.com",
+   "name": "Carla Beispiel",
+   "deleted": false,
+   "lic": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "act": [
+    null,
+    null,
+    null,
+    null
+   ]
+  },
+  {
+   "upn": "dora@example.com",
+   "name": "Dora Beispiel",
+   "deleted": true,
+   "lic": [
+    1,
+    0,
+    0,
+    1
+   ],
+   "act": [
+    null,
+    null,
+    null,
+    null
+   ]
+  },
+  {
+   "upn": "emil@example.com",
+   "name": "Emil Beispiel",
+   "deleted": false,
+   "lic": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "act": [
+    50,
+    60,
+    70,
+    45
+   ]
+  },
+  {
+   "upn": "fritz@example.com",
+   "name": "Fritz Beispiel",
+   "deleted": false,
+   "lic": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "act": [
+    null,
+    null,
+    null,
+    20
+   ]
+  },
+  {
+   "upn": "gina@example.com",
+   "name": "Gina Beispiel",
+   "deleted": false,
+   "lic": [
+    1,
+    0,
+    0,
+    0
+   ],
+   "act": [
+    null,
+    null,
+    null,
+    null
+   ]
+  }
+ ],
+ "sites": [
+  {
+   "url": "https://example.sharepoint.com/sites/PRJ-Aktiv",
+   "deleted": false,
+   "daysAgo": 10,
+   "gb": 1
+  },
+  {
+   "url": "https://example.sharepoint.com/sites/PRJ-Alt",
+   "deleted": false,
+   "daysAgo": 200,
+   "gb": 2
+  },
+  {
+   "url": "https://example.sharepoint.com/sites/PRJ-OhneDatum",
+   "deleted": false,
+   "daysAgo": null,
+   "gb": 3
+  },
+  {
+   "url": "https://example.sharepoint.com/sites/PRJ-Geloescht",
+   "deleted": true,
+   "daysAgo": 400,
+   "gb": 9
+  },
+  {
+   "url": "https://example.sharepoint.com/sites/PRJ-Mittel",
+   "deleted": false,
+   "daysAgo": 100,
+   "gb": 1
+  }
+ ],
+ "labelAudit": [
+  {
+   "hoursAgo": 5,
+   "operation": "SensitivityLabelApplied"
+  },
+  {
+   "hoursAgo": 6,
+   "operation": "SensitivityLabelApplied"
+  },
+  {
+   "hoursAgo": 7,
+   "operation": "SensitivityLabelApplied"
+  },
+  {
+   "hoursAgo": 20,
+   "operation": "FileSensitivityLabelChanged"
+  },
+  {
+   "hoursAgo": 30,
+   "operation": "SensitivityLabelRemoved"
+  },
+  {
+   "hoursAgo": 31,
+   "operation": "SensitivityLabelRemoved"
+  },
+  {
+   "hoursAgo": 40,
+   "operation": "FileDeleted"
+  },
+  {
+   "hoursAgo": 240,
+   "operation": "SensitivityLabelApplied"
+  }
+ ],
+ "incidents": [
+  {
+   "createdHoursAgo": 120,
+   "updatedHoursAgo": 96,
+   "status": "resolved",
+   "severity": "low",
+   "name": "Geloest-1"
+  },
+  {
+   "createdHoursAgo": 240,
+   "updatedHoursAgo": 192,
+   "status": "resolved",
+   "severity": "medium",
+   "name": "Geloest-2"
+  },
+  {
+   "createdHoursAgo": 700,
+   "updatedHoursAgo": 699,
+   "status": "active",
+   "severity": "high",
+   "name": "Offen-1"
+  },
+  {
+   "createdHoursAgo": 600,
+   "updatedHoursAgo": 599,
+   "status": "inProgress",
+   "severity": "high",
+   "name": "Offen-2"
+  },
+  {
+   "createdHoursAgo": 500,
+   "updatedHoursAgo": 499,
+   "status": "active",
+   "severity": "high",
+   "name": "Offen-3"
+  },
+  {
+   "createdHoursAgo": 400,
+   "updatedHoursAgo": 399,
+   "status": "active",
+   "severity": "high",
+   "name": "Offen-4"
+  },
+  {
+   "createdHoursAgo": 300,
+   "updatedHoursAgo": 299,
+   "status": "inProgress",
+   "severity": "high",
+   "name": "Offen-5"
+  },
+  {
+   "createdHoursAgo": 200,
+   "updatedHoursAgo": 199,
+   "status": "active",
+   "severity": "high",
+   "name": "Offen-6"
+  },
+  {
+   "createdHoursAgo": 800,
+   "updatedHoursAgo": 790,
+   "status": "active",
+   "severity": "low",
+   "name": "Zu-alt"
+  }
+ ],
+ "serviceIssues": [
+  {
+   "id": "EX1",
+   "service": "Exchange Online",
+   "classification": "incident",
+   "status": "serviceDegradation",
+   "hoursAgo": 5,
+   "title": "Verzoegerte Mails",
+   "resolved": false
+  },
+  {
+   "id": "TM2",
+   "service": "Microsoft Teams",
+   "classification": "advisory",
+   "status": "investigating",
+   "hoursAgo": 50,
+   "title": "Anrufe schlagen fehl",
+   "resolved": false
+  },
+  {
+   "id": "SP3",
+   "service": "SharePoint Online",
+   "classification": "incident",
+   "status": "extendedRecovery",
+   "hoursAgo": 2,
+   "title": "Suche nicht verfuegbar",
+   "resolved": false
+  },
+  {
+   "id": "EX0",
+   "service": "Exchange Online",
+   "classification": "incident",
+   "status": "serviceRestored",
+   "hoursAgo": 100,
+   "title": "Behoben",
+   "resolved": true
+  }
+ ],
+ "serviceHealth": [
+  {
+   "service": "Teams",
+   "status": "serviceDegradation"
+  },
+  {
+   "service": "Exchange Online",
+   "status": "serviceOperational"
+  },
+  {
+   "service": "SharePoint Online",
+   "status": "serviceOperational"
+  }
+ ],
+ "serviceMessages": [
+  {
+   "id": "MC1",
+   "title": "Neue Funktion A",
+   "major": true,
+   "hoursAgo": 10,
+   "due": "2026-12-01T00:00:00Z"
+  },
+  {
+   "id": "MC2",
+   "title": "Kleine Aenderung B",
+   "major": false,
+   "hoursAgo": 50,
+   "due": null
+  },
+  {
+   "id": "MC3",
+   "title": "Neue Funktion C",
+   "major": true,
+   "hoursAgo": 100,
+   "due": null
+  },
+  {
+   "id": "MC4",
+   "title": "Info D",
+   "major": false,
+   "hoursAgo": 160,
+   "due": null
+  },
+  {
+   "id": "MC5",
+   "title": "Alte Meldung E",
+   "major": true,
+   "hoursAgo": 400,
+   "due": null
+  }
+ ],
+ "signInLogs": [
+  {
+   "hoursAgo": 1
+  }
+ ],
+ "directoryAudits": [
+  {
+   "hoursAgo": 2
+  }
+ ],
+ "riskyUsers": [
+  {
+   "upn": "risiko1@example.com"
+  },
+  {
+   "upn": "risiko2@example.com"
+  }
+ ]
+}

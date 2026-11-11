@@ -1,0 +1,321 @@
+{
+  "_hinweis": "Erfundene Beispieldaten für Offline-Tests. Keine echten Personen, Domains oder Tenants.",
+  "organization": {
+    "displayName": "Beispiel GmbH (fiktiv)"
+  },
+  "userCount": 50,
+  "guestCount": 12,
+  "groups": [
+    {
+      "id": "g-001",
+      "displayName": "Team Vertrieb",
+      "types": [
+        "Unified"
+      ],
+      "securityEnabled": false,
+      "mailEnabled": true,
+      "membershipRule": null,
+      "ownerCount": 2,
+      "createdDaysAgo": 400
+    },
+    {
+      "id": "g-002",
+      "displayName": "Projekt Alpha",
+      "types": [
+        "Unified"
+      ],
+      "securityEnabled": false,
+      "mailEnabled": true,
+      "membershipRule": null,
+      "ownerCount": 1,
+      "createdDaysAgo": 10
+    },
+    {
+      "id": "g-003",
+      "displayName": "Team Marketing",
+      "types": [
+        "Unified"
+      ],
+      "securityEnabled": false,
+      "mailEnabled": true,
+      "membershipRule": null,
+      "ownerCount": 0,
+      "createdDaysAgo": 100
+    },
+    {
+      "id": "g-004",
+      "displayName": "Team Einkauf",
+      "types": [
+        "Unified"
+      ],
+      "securityEnabled": false,
+      "mailEnabled": true,
+      "membershipRule": null,
+      "ownerCount": 3,
+      "createdDaysAgo": 5
+    },
+    {
+      "id": "g-005",
+      "displayName": "Team Finanzen",
+      "types": [
+        "Unified"
+      ],
+      "securityEnabled": false,
+      "mailEnabled": true,
+      "membershipRule": "user.department -eq \"Finanzen\"",
+      "ownerCount": 1,
+      "createdDaysAgo": 200
+    },
+    {
+      "id": "g-006",
+      "displayName": "SG-Administration",
+      "types": [],
+      "securityEnabled": true,
+      "mailEnabled": false,
+      "membershipRule": null,
+      "ownerCount": 2,
+      "createdDaysAgo": 300
+    },
+    {
+      "id": "g-007",
+      "displayName": "VL-Alle-Mitarbeiter",
+      "types": [],
+      "securityEnabled": false,
+      "mailEnabled": true,
+      "membershipRule": null,
+      "ownerCount": 1,
+      "createdDaysAgo": 500
+    },
+    {
+      "id": "g-008",
+      "displayName": "SG-IT-Dynamisch",
+      "types": [],
+      "securityEnabled": true,
+      "mailEnabled": false,
+      "membershipRule": "user.department -eq \"IT\"",
+      "ownerCount": 1,
+      "createdDaysAgo": 60
+    }
+  ],
+  "skus": [
+    {
+      "skuPartNumber": "O365_BUSINESS_ESSENTIALS",
+      "enabled": 25,
+      "consumed": 22,
+      "servicePlans": 9
+    },
+    {
+      "skuPartNumber": "FLOW_FREE",
+      "enabled": 10000,
+      "consumed": 3,
+      "servicePlans": 2
+    },
+    {
+      "skuPartNumber": "AAD_PREMIUM",
+      "enabled": 5,
+      "consumed": 5,
+      "servicePlans": 4
+    }
+  ],
+  "globalAdminRoleId": "62e90394-69f5-4237-9190-012177145e10",
+  "activeGlobalAdmins": [
+    {
+      "upn": "admin.eins@example.com",
+      "name": "Admin Eins"
+    },
+    {
+      "upn": "admin.zwei@example.com",
+      "name": "Admin Zwei"
+    },
+    {
+      "upn": "notfall.a@example.com",
+      "name": "Notfallkonto A"
+    }
+  ],
+  "eligibleGlobalAdmins": [
+    {
+      "upn": "admin.drei@example.com",
+      "name": "Admin Drei"
+    }
+  ],
+  "securityDefaultsEnabled": false,
+  "conditionalAccessPolicies": [
+    {
+      "name": "MFA für alle Benutzer",
+      "state": "enabled"
+    },
+    {
+      "name": "Legacy-Authentifizierung blockieren",
+      "state": "disabled"
+    },
+    {
+      "name": "MFA für Administratoren",
+      "state": "enabledForReportingButNotEnforced"
+    }
+  ],
+  "users": [
+    {
+      "id": "u-g1",
+      "upn": "gast.aktiv_fabrikam.example#EXT#@example.com",
+      "displayName": "Gast Aktiv",
+      "mail": "gast.aktiv@fabrikam.example",
+      "userType": "Guest",
+      "externalUserState": "Accepted",
+      "createdDaysAgo": 400,
+      "lastSignInDaysAgo": 10
+    },
+    {
+      "id": "u-g2",
+      "upn": "gast.100_fabrikam.example#EXT#@example.com",
+      "displayName": "Gast Inaktiv 100 Tage",
+      "mail": "gast.100@fabrikam.example",
+      "userType": "Guest",
+      "externalUserState": "Accepted",
+      "createdDaysAgo": 300,
+      "lastSignInDaysAgo": 100
+    },
+    {
+      "id": "u-g3",
+      "upn": "gast.200_fabrikam.example#EXT#@example.com",
+      "displayName": "Gast Inaktiv 200 Tage",
+      "mail": "gast.200@fabrikam.example",
+      "userType": "Guest",
+      "externalUserState": "Accepted",
+      "createdDaysAgo": 350,
+      "lastSignInDaysAgo": 200
+    },
+    {
+      "id": "u-g4",
+      "upn": "gast.nie_fabrikam.example#EXT#@example.com",
+      "displayName": "Gast ohne Anmeldung",
+      "mail": "gast.nie@fabrikam.example",
+      "userType": "Guest",
+      "externalUserState": "Accepted",
+      "createdDaysAgo": 250,
+      "lastSignInDaysAgo": null
+    },
+    {
+      "id": "u-g5",
+      "upn": "gast.offen60_fabrikam.example#EXT#@example.com",
+      "displayName": "Gast Einladung offen 60 Tage",
+      "mail": "gast.offen60@fabrikam.example",
+      "userType": "Guest",
+      "externalUserState": "PendingAcceptance",
+      "createdDaysAgo": 60,
+      "lastSignInDaysAgo": null
+    },
+    {
+      "id": "u-g6",
+      "upn": "gast.offen40_fabrikam.example#EXT#@example.com",
+      "displayName": "Gast Einladung offen 40 Tage",
+      "mail": "gast.offen40@fabrikam.example",
+      "userType": "Guest",
+      "externalUserState": "PendingAcceptance",
+      "createdDaysAgo": 40,
+      "lastSignInDaysAgo": null
+    },
+    {
+      "id": "u-g7",
+      "upn": "gast.offen10_fabrikam.example#EXT#@example.com",
+      "displayName": "Gast Einladung offen 10 Tage",
+      "mail": "gast.offen10@fabrikam.example",
+      "userType": "Guest",
+      "externalUserState": "PendingAcceptance",
+      "createdDaysAgo": 10,
+      "lastSignInDaysAgo": null
+    },
+    {
+      "id": "u-m1",
+      "upn": "mitarbeiter.eins@example.com",
+      "displayName": "Mitarbeiter Eins",
+      "mail": "mitarbeiter.eins@example.com",
+      "userType": "Member",
+      "externalUserState": null,
+      "createdDaysAgo": 900,
+      "lastSignInDaysAgo": 0
+    },
+    {
+      "id": "u-g6-b",
+      "upn": "gast.offen40_fabrikam.example#EXT#@example.com",
+      "displayName": "Gast Einladung offen 25 Tage",
+      "mail": "gast.offen25@fabrikam.example",
+      "userType": "Guest",
+      "externalUserState": "PendingAcceptance",
+      "createdDaysAgo": 25,
+      "lastSignInDaysAgo": null
+    },
+    {
+      "id": "u-g2-b",
+      "upn": "gast.100_fabrikam.example#EXT#@example.com",
+      "displayName": "Gast Inaktiv 75 Tage",
+      "mail": "gast.75@fabrikam.example",
+      "userType": "Guest",
+      "externalUserState": "Accepted",
+      "createdDaysAgo": 300,
+      "lastSignInDaysAgo": 75
+    }
+  ],
+  "pimEligible": [
+    {
+      "role": "Exchange Administrator",
+      "upn": "admin.drei@example.com",
+      "expiresInDays": 200
+    }
+  ],
+  "signIns": [
+    {
+      "hoursAgo": 1,
+      "app": "Microsoft Teams",
+      "errorCode": 0,
+      "reason": null,
+      "ca": "success"
+    },
+    {
+      "hoursAgo": 5,
+      "app": "Outlook",
+      "errorCode": 50074,
+      "reason": "Strong Authentication required",
+      "ca": "failure"
+    }
+  ],
+  "directoryAudits": [
+    {
+      "hoursAgo": 30,
+      "activity": "Reset password (by admin)",
+      "result": "success",
+      "by": "admin.eins@example.com"
+    }
+  ],
+  "accessPackages": [
+    {
+      "id": "ap-1",
+      "displayName": "Marketing Kampagne"
+    },
+    {
+      "id": "ap-2",
+      "displayName": "Vertrieb Standard"
+    },
+    {
+      "id": "ap-3",
+      "displayName": "Projekt Beta"
+    }
+  ],
+  "assignments": [
+    {
+      "id": "as-1",
+      "name": "Mitarbeiter Eins",
+      "upn": "mitarbeiter.eins@example.com"
+    },
+    {
+      "id": "as-2",
+      "name": "Mitarbeiter Zwei",
+      "upn": "mitarbeiter.zwei@example.com"
+    }
+  ],
+  "anzahl": {
+    "kataloge": 2,
+    "ueberpruefungen": 1,
+    "workflows": 0
+  },
+  "fehlendeLizenz": []
+}

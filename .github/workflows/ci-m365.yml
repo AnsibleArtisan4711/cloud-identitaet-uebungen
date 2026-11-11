@@ -1,0 +1,32 @@
+# Dieser Workflow lag im Einzel-Repo m365-governance-uebungen und liegt jetzt im Wurzelordner des Themen-Repos (GitHub liest Workflows nur dort).
+# Alle Pfade zeigen auf den Kursordner m365-governance/. Er läuft nur, wenn sich dort etwas ändert.
+# Continuous Integration: Syntaxprüfung und Offline-Tests.
+# Läuft bei jedem Push und jedem Pull Request. Es wird kein Microsoft-365-Konto und kein Geheimnis gebraucht.
+# Hinweis: Die Versionsnummer der Action (@v5) ist nicht gegen die aktuelle Veröffentlichung geprüft.
+name: CI M365 Governance
+
+on:
+  push:
+    branches: [main]
+    paths: ['m365-governance/**']
+  pull_request:
+    paths: ['m365-governance/**']
+
+permissions:
+  contents: read
+
+jobs:
+  pruefen:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        working-directory: m365-governance
+    steps:
+      - uses: actions/checkout@v5
+      - name: Syntaxprüfung und Tests (PowerShell 7)
+        shell: pwsh
+        run: ./tools/Invoke-Tests.ps1

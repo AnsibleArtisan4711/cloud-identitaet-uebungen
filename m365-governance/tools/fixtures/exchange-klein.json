@@ -1,0 +1,441 @@
+{
+  "_hinweis": "Erfundene Beispieldaten für Offline-Tests. Keine echten Personen, Domains oder Tenants.",
+  "organization": {
+    "displayName": "Beispiel GmbH (fiktiv)"
+  },
+  "mailboxes": [
+    {
+      "displayName": "Postfach Eins",
+      "address": "mitarbeiter.eins@beispiel.example",
+      "type": "UserMailbox",
+      "guid": "00000000-0000-0000-0000-000000001000",
+      "archiveStatus": "None",
+      "litigationHold": false,
+      "forwardingAddress": null,
+      "forwardingSmtp": null,
+      "retainDays": 14,
+      "sizeMB": 1500,
+      "lastLogonDaysAgo": 1,
+      "inactive": false,
+      "permissions": [],
+      "holdDuration": null,
+      "holdDaysAgo": null,
+      "softDeletedDaysAgo": null
+    },
+    {
+      "displayName": "Postfach Zwei",
+      "address": "mitarbeiter.zwei@beispiel.example",
+      "type": "UserMailbox",
+      "guid": "00000000-0000-0000-0000-000000001001",
+      "archiveStatus": "None",
+      "litigationHold": true,
+      "forwardingAddress": null,
+      "forwardingSmtp": "smtp:privat@mail.example",
+      "retainDays": 14,
+      "sizeMB": 20480,
+      "lastLogonDaysAgo": 3,
+      "inactive": false,
+      "permissions": [],
+      "holdDuration": "2555.00:00:00",
+      "holdDaysAgo": 400,
+      "softDeletedDaysAgo": null
+    },
+    {
+      "displayName": "Postfach Drei",
+      "address": "mitarbeiter.drei@beispiel.example",
+      "type": "UserMailbox",
+      "guid": "00000000-0000-0000-0000-000000001002",
+      "archiveStatus": "None",
+      "litigationHold": false,
+      "forwardingAddress": null,
+      "forwardingSmtp": "smtp:kollege@alias.example",
+      "retainDays": 30,
+      "sizeMB": 300,
+      "lastLogonDaysAgo": 10,
+      "inactive": false,
+      "permissions": [],
+      "holdDuration": null,
+      "holdDaysAgo": null,
+      "softDeletedDaysAgo": null
+    },
+    {
+      "displayName": "Postfach Vier",
+      "address": "mitarbeiter.vier@beispiel.example",
+      "type": "UserMailbox",
+      "guid": "00000000-0000-0000-0000-000000001003",
+      "archiveStatus": "None",
+      "litigationHold": false,
+      "forwardingAddress": null,
+      "forwardingSmtp": "SMTP:Extern@Partner.Example",
+      "retainDays": 14,
+      "sizeMB": 5,
+      "lastLogonDaysAgo": 2,
+      "inactive": false,
+      "permissions": [],
+      "holdDuration": null,
+      "holdDaysAgo": null,
+      "softDeletedDaysAgo": null
+    },
+    {
+      "displayName": "Postfach Fünf (ohne Statistik)",
+      "address": "mitarbeiter.fuenf@beispiel.example",
+      "type": "UserMailbox",
+      "guid": "00000000-0000-0000-0000-000000001004",
+      "archiveStatus": "None",
+      "litigationHold": false,
+      "forwardingAddress": null,
+      "forwardingSmtp": null,
+      "retainDays": 14,
+      "sizeMB": null,
+      "lastLogonDaysAgo": null,
+      "inactive": false,
+      "permissions": [],
+      "holdDuration": null,
+      "holdDaysAgo": null,
+      "softDeletedDaysAgo": null
+    },
+    {
+      "displayName": "Vertrieb",
+      "address": "vertrieb@beispiel.example",
+      "type": "SharedMailbox",
+      "guid": "00000000-0000-0000-0000-000000001005",
+      "archiveStatus": "None",
+      "litigationHold": false,
+      "forwardingAddress": null,
+      "forwardingSmtp": null,
+      "retainDays": 14,
+      "sizeMB": 800,
+      "lastLogonDaysAgo": 1,
+      "inactive": false,
+      "permissions": [
+        {
+          "user": "NT AUTHORITY\\SELF",
+          "rights": [
+            "FullAccess"
+          ],
+          "inherited": false,
+          "deny": false
+        },
+        {
+          "user": "mitarbeiter.eins@beispiel.example",
+          "rights": [
+            "FullAccess"
+          ],
+          "inherited": false,
+          "deny": false
+        },
+        {
+          "user": "GRP-Vertrieb",
+          "rights": [
+            "FullAccess"
+          ],
+          "inherited": false,
+          "deny": false
+        },
+        {
+          "user": "admin.drei@beispiel.example",
+          "rights": [
+            "FullAccess"
+          ],
+          "inherited": true,
+          "deny": false
+        },
+        {
+          "user": "mitarbeiter.zwei@beispiel.example",
+          "rights": [
+            "FullAccess"
+          ],
+          "inherited": false,
+          "deny": true
+        }
+      ],
+      "holdDuration": null,
+      "holdDaysAgo": null,
+      "softDeletedDaysAgo": null
+    },
+    {
+      "displayName": "Support",
+      "address": "support@beispiel.example",
+      "type": "SharedMailbox",
+      "guid": "00000000-0000-0000-0000-000000001006",
+      "archiveStatus": "None",
+      "litigationHold": false,
+      "forwardingAddress": null,
+      "forwardingSmtp": null,
+      "retainDays": 14,
+      "sizeMB": 120,
+      "lastLogonDaysAgo": 1,
+      "inactive": false,
+      "permissions": [
+        {
+          "user": "NT AUTHORITY\\SELF",
+          "rights": [
+            "FullAccess"
+          ],
+          "inherited": false,
+          "deny": false
+        },
+        {
+          "user": "GRP-Support",
+          "rights": [
+            "FullAccess"
+          ],
+          "inherited": false,
+          "deny": false
+        }
+      ],
+      "holdDuration": null,
+      "holdDaysAgo": null,
+      "softDeletedDaysAgo": null
+    },
+    {
+      "displayName": "Ehemaliger Mitarbeiter",
+      "address": "ehemalig@beispiel.example",
+      "type": "UserMailbox",
+      "guid": "00000000-0000-0000-0000-000000001007",
+      "archiveStatus": "None",
+      "litigationHold": false,
+      "forwardingAddress": null,
+      "forwardingSmtp": null,
+      "retainDays": 14,
+      "sizeMB": 50,
+      "lastLogonDaysAgo": null,
+      "inactive": true,
+      "permissions": [],
+      "softDeletedDaysAgo": 120,
+      "holdDuration": null,
+      "holdDaysAgo": null
+    }
+  ],
+  "distributionGroups": [
+    {
+      "name": "Alle-Mitarbeiter",
+      "address": "alle@beispiel.example",
+      "managedBy": [
+        "mitarbeiter.eins@beispiel.example"
+      ],
+      "requireAuth": true,
+      "members": [
+        {
+          "name": "A",
+          "type": "UserMailbox"
+        },
+        {
+          "name": "B",
+          "type": "UserMailbox"
+        },
+        {
+          "name": "C",
+          "type": "UserMailbox"
+        }
+      ]
+    },
+    {
+      "name": "Vertrieb-Liste",
+      "address": "vertrieb-liste@beispiel.example",
+      "managedBy": [],
+      "requireAuth": false,
+      "members": [
+        {
+          "name": "A",
+          "type": "UserMailbox"
+        },
+        {
+          "name": "B",
+          "type": "UserMailbox"
+        }
+      ]
+    },
+    {
+      "name": "Leer",
+      "address": "leer@beispiel.example",
+      "managedBy": [
+        "mitarbeiter.eins@beispiel.example"
+      ],
+      "requireAuth": true,
+      "members": []
+    },
+    {
+      "name": "Verschachtelt",
+      "address": "verschachtelt@beispiel.example",
+      "managedBy": [
+        "mitarbeiter.eins@beispiel.example"
+      ],
+      "requireAuth": true,
+      "members": [
+        {
+          "name": "A",
+          "type": "UserMailbox"
+        },
+        {
+          "name": "B",
+          "type": "UserMailbox"
+        },
+        {
+          "name": "Untergruppe",
+          "type": "MailUniversalDistributionGroup"
+        }
+      ]
+    }
+  ],
+  "transportRules": [
+    {
+      "name": "Bestehende Regel",
+      "state": "Enabled",
+      "mode": "Enforce",
+      "priority": 3
+    }
+  ],
+  "recipients": [
+    {
+      "identity": "mitarbeiter.eins@beispiel.example",
+      "type": "UserMailbox"
+    },
+    {
+      "identity": "mitarbeiter.zwei@beispiel.example",
+      "type": "UserMailbox"
+    },
+    {
+      "identity": "GRP-Vertrieb",
+      "type": "MailUniversalSecurityGroup"
+    },
+    {
+      "identity": "GRP-Support",
+      "type": "MailUniversalSecurityGroup"
+    },
+    {
+      "identity": "admin.drei@beispiel.example",
+      "type": "UserMailbox"
+    }
+  ],
+  "externalInOutlook": {
+    "enabled": false,
+    "allowList": []
+  },
+  "acceptedDomains": [
+    {
+      "name": "beispiel.example",
+      "type": "Authoritative"
+    },
+    {
+      "name": "alias.example",
+      "type": "Authoritative"
+    },
+    {
+      "name": "relay.example",
+      "type": "InternalRelay"
+    }
+  ],
+  "dns": [
+    {
+      "name": "beispiel.example",
+      "txt": [
+        "v=spf1 include:spf.example -all",
+        "google-site-verification=abc"
+      ]
+    },
+    {
+      "name": "_dmarc.beispiel.example",
+      "txt": [
+        "v=DMARC1; p=quarantine"
+      ]
+    },
+    {
+      "name": "alias.example",
+      "txt": [
+        "v=spf1 include:spf.example -all"
+      ]
+    }
+  ],
+  "messages": [
+    {
+      "id": "mt1",
+      "daysAgo": 1,
+      "sender": "kunde@fabrikam.example",
+      "recipient": "mitarbeiter.eins@beispiel.example",
+      "subject": "Angebot",
+      "status": "Delivered",
+      "events": [
+        {
+          "event": "Receive",
+          "detail": "Nachricht empfangen"
+        },
+        {
+          "event": "Deliver",
+          "detail": "Zugestellt"
+        }
+      ]
+    },
+    {
+      "id": "mt2",
+      "daysAgo": 1,
+      "sender": "kunde@fabrikam.example",
+      "recipient": "mitarbeiter.eins@beispiel.example",
+      "subject": "Rechnung",
+      "status": "Failed",
+      "events": [
+        {
+          "event": "Receive",
+          "detail": "Nachricht empfangen"
+        },
+        {
+          "event": "Fail",
+          "detail": "Zustellung abgelehnt (Beispieltext)"
+        }
+      ]
+    },
+    {
+      "id": "mt3",
+      "daysAgo": 5,
+      "sender": "kunde@fabrikam.example",
+      "recipient": "mitarbeiter.eins@beispiel.example",
+      "subject": "Altes Angebot",
+      "status": "Quarantined",
+      "events": [
+        {
+          "event": "Quarantine",
+          "detail": "In Quarantäne (Beispieltext)"
+        }
+      ]
+    },
+    {
+      "id": "mt4",
+      "daysAgo": 1,
+      "sender": "anderer@contoso.example",
+      "recipient": "mitarbeiter.zwei@beispiel.example",
+      "subject": "Anderes",
+      "status": "Delivered",
+      "events": []
+    }
+  ],
+  "directorySettingTemplates": [
+    {
+      "id": "tpl-1",
+      "displayName": "Group.Unified"
+    },
+    {
+      "id": "tpl-2",
+      "displayName": "Anderes"
+    }
+  ],
+  "directorySettings": [
+    {
+      "id": "ds-1",
+      "templateId": "tpl-1",
+      "values": [
+        {
+          "name": "PrefixSuffixNamingRequirement",
+          "value": ""
+        },
+        {
+          "name": "CustomBlockedWordsList",
+          "value": ""
+        },
+        {
+          "name": "EnableGroupCreation",
+          "value": "true"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "_hinweis": "Erfundene Beispieldaten für Offline-Tests. Keine echten Personen, Domains oder Tenants.",
+  "labels": [
+    {
+      "name": "Intern",
+      "displayName": "Intern",
+      "guid": "11111111-1111-1111-1111-111111111111",
+      "priority": 0,
+      "contentType": "File, Email"
+    },
+    {
+      "name": "Vertraulich",
+      "displayName": "Vertraulich",
+      "guid": "22222222-2222-2222-2222-222222222222",
+      "priority": 1,
+      "contentType": "File, Email"
+    }
+  ],
+  "labelPolicies": [
+    {
+      "name": "Labelrichtlinie F",
+      "status": "Success"
+    },
+    {
+      "name": "Labelrichtlinie G",
+      "status": "Pending"
+    }
+  ],
+  "dlpPolicies": [
+    {
+      "name": "DLP Bestand A",
+      "mode": "Enable",
+      "status": "Success"
+    },
+    {
+      "name": "DLP Bestand B",
+      "mode": "TestWithNotifications",
+      "status": "Pending"
+    }
+  ],
+  "retentionPolicies": [
+    {
+      "name": "Aufbewahrung C",
+      "enabled": true,
+      "status": "Success"
+    },
+    {
+      "name": "Aufbewahrung D (aus)",
+      "enabled": false,
+      "status": "Success"
+    },
+    {
+      "name": "Aufbewahrung E",
+      "enabled": true,
+      "status": "Error"
+    }
+  ],
+  "complianceTags": [],
+  "adaptiveScopes": [],
+  "segments": [],
+  "infoBarrierPolicies": [
+    {
+      "identity": "ib-bestand",
+      "name": "Bestandsrichtlinie",
+      "state": "Inactive"
+    }
+  ]
+}

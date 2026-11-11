@@ -1,0 +1,163 @@
+{
+  "options": {
+    "clearLocationWhenNameHasSpacesAndCase": true,
+    "searchOutcome": "Completed"
+  },
+  "auditConfig": {
+    "unifiedAuditLogIngestionEnabled": true
+  },
+  "auditLog": [
+    {
+      "hoursAgo": 48,
+      "user": "anna@example.com",
+      "operation": "FileDeleted",
+      "file": "Vertrag.docx",
+      "site": "https://example.sharepoint.com/sites/PRJ-Messe",
+      "ip": "203.0.113.10"
+    },
+    {
+      "hoursAgo": 10,
+      "user": "anna@example.com",
+      "operation": "FileRecycled",
+      "file": "Angebot.xlsx",
+      "site": "https://example.sharepoint.com/sites/PRJ-Messe",
+      "ip": "203.0.113.10"
+    },
+    {
+      "hoursAgo": 192,
+      "user": "anna@example.com",
+      "operation": "FileDeleted",
+      "file": "Altlast.docx",
+      "site": "https://example.sharepoint.com/sites/ABT-Finanzen",
+      "ip": "203.0.113.11"
+    },
+    {
+      "hoursAgo": 5,
+      "user": "anna@example.com",
+      "operation": "FileAccessed",
+      "file": "Budget.xlsx",
+      "site": "https://example.sharepoint.com/sites/ABT-Finanzen",
+      "ip": "203.0.113.10"
+    },
+    {
+      "hoursAgo": 20,
+      "user": "ben@example.com",
+      "operation": "FileDeleted",
+      "file": "Notizen.txt",
+      "site": "https://example-my.sharepoint.com/personal/ben_example_com",
+      "ip": "198.51.100.7"
+    },
+    {
+      "hoursAgo": 30,
+      "user": "anna@example.com",
+      "operation": "SharingLinkCreated",
+      "file": "Aktionsplan.pdf",
+      "site": "https://example.sharepoint.com/sites/PRJ-Messe",
+      "ip": "203.0.113.10"
+    },
+    {
+      "hoursAgo": 60,
+      "user": "ben@example.com",
+      "operation": "SharingLinkCreated",
+      "file": "Konzept.docx",
+      "site": "https://example.sharepoint.com/sites/PRJ-Relaunch",
+      "ip": "198.51.100.7"
+    },
+    {
+      "hoursAgo": 100,
+      "user": "ben@example.com",
+      "operation": "SharingLinkCreated",
+      "file": "Altentwurf.docx",
+      "site": "https://example.sharepoint.com/sites/PRJ-Relaunch",
+      "ip": "198.51.100.7"
+    }
+  ],
+  "cases": [
+    {
+      "name": "F-2025-07",
+      "status": "Closed"
+    },
+    {
+      "name": "F-2026-01",
+      "status": "Active"
+    },
+    {
+      "name": "F-2026-03",
+      "status": "Active"
+    }
+  ],
+  "searchResults": [
+    {
+      "location": "anna@example.com",
+      "items": 42,
+      "size": 1048576
+    },
+    {
+      "location": "ben@example.com",
+      "items": 7,
+      "size": 20480
+    }
+  ],
+  "searches": [],
+  "holdPolicies": [
+    {
+      "name": "Sperre F-2025-07",
+      "case": "F-2025-07",
+      "enabled": false,
+      "status": "Success",
+      "exchange": [
+        "ben@example.com"
+      ],
+      "sharepoint": []
+    },
+    {
+      "name": "Sperre F-2026-01",
+      "case": "F-2026-01",
+      "enabled": true,
+      "status": "Success",
+      "exchange": [
+        "anna@example.com"
+      ],
+      "sharepoint": [
+        "https://example-my.sharepoint.com/personal/anna_example_com"
+      ]
+    },
+    {
+      "name": "Sperre F-2026-03",
+      "case": "F-2026-03",
+      "enabled": true,
+      "status": "Error",
+      "exchange": [
+        "ben@example.com"
+      ],
+      "sharepoint": []
+    }
+  ],
+  "holdRules": [],
+  "roleGroups": [
+    {
+      "name": "Communication Compliance Admins",
+      "members": [
+        "Ida Admin",
+        "Anna Beispiel"
+      ]
+    },
+    {
+      "name": "Communication Compliance Analysts",
+      "members": [
+        "Ben Muster"
+      ]
+    },
+    {
+      "name": "Communication Compliance Investigators",
+      "members": [
+        "Anna Beispiel",
+        "Rita Recht"
+      ]
+    },
+    {
+      "name": "Communication Compliance Viewers",
+      "members": []
+    }
+  ]
+}

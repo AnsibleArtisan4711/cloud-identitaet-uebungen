@@ -1,0 +1,216 @@
+{
+  "_hinweis": "Erfundene Beispieldaten für Offline-Tests. Keine echten Personen, Domains oder Tenants. 'contoso' und 'fabrikam' sind von Microsoft für Beispiele vorgesehene Fantasienamen.",
+  "tenant": {
+    "sharingCapability": "ExternalUserAndGuestSharing"
+  },
+  "hubs": [],
+  "sites": [
+    {
+      "url": "https://contoso.sharepoint.com/sites/PRJ-Messe",
+      "title": "Projekt Messe",
+      "owner": "mitarbeiter.eins@example.com",
+      "template": "SITEPAGEPUBLISHING#0",
+      "storageQuotaMB": 1024,
+      "storageUsageMB": 950,
+      "sharingCapability": "ExternalUserSharingOnly",
+      "sensitivityLabel": "11111111-1111-1111-1111-111111111111",
+      "lockState": "Unlock",
+      "lastModifiedDaysAgo": 10,
+      "isPersonal": false,
+      "groups": [
+        {
+          "title": "Messe-Besitzer",
+          "roles": [
+            "Full Control"
+          ],
+          "users": [
+            "c:0t.c|tenant|aaaaaaaa-0000-0000-0000-000000000001",
+            "mitarbeiter.eins@example.com"
+          ]
+        },
+        {
+          "title": "Messe-Mitglieder",
+          "roles": [
+            "Edit"
+          ],
+          "users": [
+            "c:0o.c|federateddirectoryclaimprovider|aaaaaaaa-0000-0000-0000-000000000002",
+            "mitarbeiter.zwei@example.com",
+            "gast.eins_fabrikam.example#ext#@beispiel.onmicrosoft.com"
+          ]
+        },
+        {
+          "title": "Messe-Besucher",
+          "roles": [
+            "Read",
+            "Limited Access"
+          ],
+          "users": [
+            "gast.zwei_fabrikam.example#ext#@beispiel.onmicrosoft.com"
+          ]
+        },
+        {
+          "title": "Messe-Leer",
+          "roles": [
+            "Read"
+          ],
+          "users": []
+        }
+      ]
+    },
+    {
+      "url": "https://contoso.sharepoint.com/sites/PRJ-Relaunch",
+      "title": "Projekt Relaunch",
+      "owner": "mitarbeiter.eins@example.com",
+      "template": "SITEPAGEPUBLISHING#0",
+      "storageQuotaMB": 5120,
+      "storageUsageMB": 4300,
+      "sharingCapability": "Disabled",
+      "sensitivityLabel": null,
+      "lockState": "Unlock",
+      "lastModifiedDaysAgo": 20,
+      "isPersonal": false,
+      "groups": []
+    },
+    {
+      "url": "https://contoso.sharepoint.com/sites/PRJ-Archiv-2019",
+      "title": "Projekt Archiv 2019",
+      "owner": "mitarbeiter.eins@example.com",
+      "template": "SITEPAGEPUBLISHING#0",
+      "storageQuotaMB": 2048,
+      "storageUsageMB": 100,
+      "sharingCapability": "Disabled",
+      "sensitivityLabel": null,
+      "lockState": "Unlock",
+      "lastModifiedDaysAgo": 700,
+      "isPersonal": false,
+      "groups": []
+    },
+    {
+      "url": "https://contoso.sharepoint.com/sites/PRJ-Alt-ReadOnly",
+      "title": "Projekt Alt (schreibgeschützt)",
+      "owner": "mitarbeiter.eins@example.com",
+      "template": "SITEPAGEPUBLISHING#0",
+      "storageQuotaMB": 1024,
+      "storageUsageMB": 50,
+      "sharingCapability": "ExistingExternalUserSharingOnly",
+      "sensitivityLabel": null,
+      "lockState": "ReadOnly",
+      "lastModifiedDaysAgo": 800,
+      "isPersonal": false,
+      "groups": []
+    },
+    {
+      "url": "https://contoso.sharepoint.com/sites/ABT-Personal-Intranet",
+      "title": "Intranet Personal",
+      "owner": "mitarbeiter.eins@example.com",
+      "template": "SITEPAGEPUBLISHING#0",
+      "storageQuotaMB": 1000,
+      "storageUsageMB": 900,
+      "sharingCapability": "Disabled",
+      "sensitivityLabel": null,
+      "lockState": "Unlock",
+      "lastModifiedDaysAgo": 30,
+      "isPersonal": false,
+      "groups": []
+    },
+    {
+      "url": "https://contoso.sharepoint.com/sites/ABT-Finanzen",
+      "title": "Abteilung Finanzen",
+      "owner": "mitarbeiter.eins@example.com",
+      "template": "SITEPAGEPUBLISHING#0",
+      "storageQuotaMB": 1000,
+      "storageUsageMB": 800,
+      "sharingCapability": "Disabled",
+      "sensitivityLabel": "22222222-2222-2222-2222-222222222222",
+      "lockState": "Unlock",
+      "lastModifiedDaysAgo": 5,
+      "isPersonal": false,
+      "groups": []
+    },
+    {
+      "url": "https://contoso.sharepoint.com/sites/ABT-Vertrieb",
+      "title": "Abteilung Vertrieb",
+      "owner": "mitarbeiter.eins@example.com",
+      "template": "SITEPAGEPUBLISHING#0",
+      "storageQuotaMB": 5120,
+      "storageUsageMB": 1000,
+      "sharingCapability": "ExternalUserAndGuestSharing",
+      "sensitivityLabel": null,
+      "lockState": "Unlock",
+      "lastModifiedDaysAgo": 366,
+      "isPersonal": false,
+      "groups": []
+    },
+    {
+      "url": "https://contoso.sharepoint.com/sites/ABT-Marketing",
+      "title": "Abteilung Marketing",
+      "owner": "mitarbeiter.eins@example.com",
+      "template": "SITEPAGEPUBLISHING#0",
+      "storageQuotaMB": 5120,
+      "storageUsageMB": 1000,
+      "sharingCapability": "ExternalUserAndGuestSharing",
+      "sensitivityLabel": null,
+      "lockState": "Unlock",
+      "lastModifiedDaysAgo": 364,
+      "isPersonal": false,
+      "groups": []
+    },
+    {
+      "url": "https://contoso.sharepoint.com/sites/KND-Fabrikam",
+      "title": "Kunde Fabrikam",
+      "owner": "mitarbeiter.eins@example.com",
+      "template": "SITEPAGEPUBLISHING#0",
+      "storageQuotaMB": 0,
+      "storageUsageMB": 50,
+      "sharingCapability": "ExternalUserSharingOnly",
+      "sensitivityLabel": null,
+      "lockState": "Unlock",
+      "lastModifiedDaysAgo": 15,
+      "isPersonal": false,
+      "groups": []
+    },
+    {
+      "url": "https://contoso.sharepoint.com/sites/ABT-Voll",
+      "title": "Abteilung Voll",
+      "owner": "mitarbeiter.eins@example.com",
+      "template": "SITEPAGEPUBLISHING#0",
+      "storageQuotaMB": 2048,
+      "storageUsageMB": 2000,
+      "sharingCapability": "ExternalUserSharingOnly",
+      "sensitivityLabel": null,
+      "lockState": "Unlock",
+      "lastModifiedDaysAgo": 3,
+      "isPersonal": false,
+      "groups": []
+    },
+    {
+      "url": "https://contoso.sharepoint.com/sites/HUB-Projekte",
+      "title": "Hub Projekte",
+      "owner": "mitarbeiter.eins@example.com",
+      "template": "SITEPAGEPUBLISHING#0",
+      "storageQuotaMB": 1024,
+      "storageUsageMB": 10,
+      "sharingCapability": "Disabled",
+      "sensitivityLabel": null,
+      "lockState": "Unlock",
+      "lastModifiedDaysAgo": 2,
+      "isPersonal": false,
+      "groups": []
+    },
+    {
+      "url": "https://contoso-my.sharepoint.com/personal/mitarbeiter_eins_example_com",
+      "title": "Persönliche Website",
+      "owner": "mitarbeiter.eins@example.com",
+      "template": "SPSPERS#10",
+      "storageQuotaMB": 1048576,
+      "storageUsageMB": 10,
+      "sharingCapability": "Disabled",
+      "sensitivityLabel": null,
+      "lockState": "Unlock",
+      "lastModifiedDaysAgo": 900,
+      "isPersonal": true,
+      "groups": []
+    }
+  ]
+}

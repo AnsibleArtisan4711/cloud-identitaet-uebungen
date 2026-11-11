@@ -1,0 +1,25 @@
+# Ausgabedateien der Skripte (können Tenant-Daten enthalten)
+*.csv
+!**/tests/fixtures/*.csv
+# Lösungsdateien der Aufgaben, die die Tests brauchen
+!**/loesungen-skripte/*.csv
+ist-architektur-gruppen.md
+*-export-*.json
+reports/
+exports/
+
+# Lokale Konfiguration und Geheimnisse (nie committen)
+.env
+.env.*
+!.env.example
+*.pem
+*.pfx
+*.key
+*.secret
+tenant.local.json
+
+# Editor/System
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store

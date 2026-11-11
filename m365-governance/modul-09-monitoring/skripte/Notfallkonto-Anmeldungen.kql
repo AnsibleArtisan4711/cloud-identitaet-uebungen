@@ -1,0 +1,10 @@
+// Quelle: Skript „M365 Governance“, Modul 09, Listing 106 (Code unverändert übernommen, nur dieser Kopf ergänzt).
+// Status: nicht ausgeführt (KQL, Log Analytics). Siehe docs/kennzeichnung.md.
+let notfallkonten = dynamic(["breakglass1@contoso.onmicrosoft.com",
+                             "breakglass2@contoso.onmicrosoft.com"]);
+SigninLogs
+| where TimeGenerated > ago(24h)
+| where UserPrincipalName in~ (notfallkonten)
+| project TimeGenerated, UserPrincipalName, AppDisplayName,
+          IPAddress, Location, ResultType, ConditionalAccessStatus
+| order by TimeGenerated desc

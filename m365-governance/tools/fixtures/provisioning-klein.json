@@ -1,0 +1,210 @@
+{
+ "_hinweis": "Erfundene Beispieldaten fuer Offline-Tests (Modul 10). Keine echten Personen, Domains oder Tenant-Daten.",
+ "options": {
+  "teamFailures": 0,
+  "teamFailureStatus": 404,
+  "teamFailureRetryAfter": null,
+  "archiveFailIds": []
+ },
+ "users": [
+  {
+   "id": "u1",
+   "upn": "anna@example.com",
+   "enabled": true,
+   "department": "Vertrieb"
+  },
+  {
+   "id": "u2",
+   "upn": "ben@example.com",
+   "enabled": true,
+   "department": "IT"
+  },
+  {
+   "id": "u3",
+   "upn": "carla@example.com",
+   "enabled": false,
+   "department": "Personal"
+  },
+  {
+   "id": "u4",
+   "upn": "dora@example.com",
+   "enabled": false,
+   "department": "IT"
+  },
+  {
+   "id": "u5",
+   "upn": "emil@example.com",
+   "enabled": true,
+   "department": null
+  }
+ ],
+ "groups": [
+  {
+   "id": "g1",
+   "name": "PRJ-VER-Messe",
+   "nickname": "prj-ver-messe",
+   "description": "Messeplanung",
+   "unified": true,
+   "owners": [
+    "u1",
+    "u2"
+   ],
+   "members": [
+    "u1"
+   ],
+   "deleted": false,
+   "deletedDaysAgo": null,
+   "visibility": "Private"
+  },
+  {
+   "id": "g2",
+   "name": "ABT-HR-Team",
+   "nickname": "abt-hr-team",
+   "description": "Abteilung Personal",
+   "unified": true,
+   "owners": [
+    "u1",
+    "u2",
+    "u5"
+   ],
+   "members": [
+    "u1",
+    "u2",
+    "u5"
+   ],
+   "deleted": false,
+   "deletedDaysAgo": null,
+   "visibility": "Private"
+  },
+  {
+   "id": "g3",
+   "name": "Marketing Team",
+   "nickname": "marketing-team",
+   "description": "Marketing",
+   "unified": true,
+   "owners": [
+    "u2",
+    "u1"
+   ],
+   "members": [
+    "u2",
+    "u1"
+   ],
+   "deleted": false,
+   "deletedDaysAgo": null,
+   "visibility": "Private"
+  },
+  {
+   "id": "g4",
+   "name": "PRJ-IT-Server",
+   "nickname": "prj-it-server",
+   "description": "",
+   "unified": true,
+   "owners": [
+    "u1",
+    "u2"
+   ],
+   "members": [
+    "u1",
+    "u2"
+   ],
+   "deleted": false,
+   "deletedDaysAgo": null,
+   "visibility": "Private"
+  },
+  {
+   "id": "g5",
+   "name": "GRM-BR-Rat",
+   "nickname": "grm-br-rat",
+   "description": "Gremium",
+   "unified": true,
+   "owners": [
+    "u3"
+   ],
+   "members": [
+    "u3",
+    "u1"
+   ],
+   "deleted": false,
+   "deletedDaysAgo": null,
+   "visibility": "Private"
+  },
+  {
+   "id": "g6",
+   "name": "KND-XY-Alt",
+   "nickname": "knd-xy-alt",
+   "description": "Kunde",
+   "unified": true,
+   "owners": [],
+   "members": [
+    "u4"
+   ],
+   "deleted": false,
+   "deletedDaysAgo": null,
+   "visibility": "Private"
+  },
+  {
+   "id": "g7",
+   "name": "xyz",
+   "nickname": "xyz",
+   "description": "",
+   "unified": true,
+   "owners": [],
+   "members": [],
+   "deleted": false,
+   "deletedDaysAgo": null,
+   "visibility": "Private"
+  },
+  {
+   "id": "g8",
+   "name": "SEC-Sicherheit",
+   "nickname": "sec-sicherheit",
+   "description": "Sicherheitsgruppe",
+   "unified": false,
+   "owners": [
+    "u1",
+    "u2"
+   ],
+   "members": [
+    "u1",
+    "u2"
+   ],
+   "deleted": false,
+   "deletedDaysAgo": null,
+   "visibility": "Private"
+  },
+  {
+   "id": "g9",
+   "name": "PRJ-OLD-Alt",
+   "nickname": "prj-old-alt",
+   "description": "Alt",
+   "unified": true,
+   "owners": [
+    "u1",
+    "u2"
+   ],
+   "members": [
+    "u1",
+    "u2"
+   ],
+   "deleted": true,
+   "deletedDaysAgo": 5,
+   "visibility": "Private"
+  }
+ ],
+ "teams": {
+  "g1": [
+   "Allgemein",
+   "Planung"
+  ],
+  "g2": [
+   "Allgemein"
+  ],
+  "g3": [],
+  "g4": [
+   "Allgemein"
+  ]
+ },
+ "archived": [],
+ "lifecyclePolicies": []
+}

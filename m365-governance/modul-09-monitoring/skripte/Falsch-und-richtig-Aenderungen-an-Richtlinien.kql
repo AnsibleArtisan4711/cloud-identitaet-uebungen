@@ -1,0 +1,11 @@
+// Quelle: Skript „M365 Governance“, Modul 09, Listing 108 (Code unverändert übernommen, nur dieser Kopf ergänzt).
+// Status: nicht ausgeführt (KQL, Log Analytics). Siehe docs/kennzeichnung.md.
+// FALSCH: Alle Audit-Eintraege der Woche ansehen und nach Bauchgefuehl suchen
+AuditLogs | where TimeGenerated > ago(7d)
+
+// RICHTIG: gezielt auf Aenderungen an Conditional Access eingrenzen
+AuditLogs
+| where TimeGenerated > ago(7d)
+| where Category == "Policy" and OperationName has "conditional access"
+| project TimeGenerated, OperationName, InitiatedBy, TargetResources, Result
+| order by TimeGenerated desc

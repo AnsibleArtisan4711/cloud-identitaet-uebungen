@@ -1,0 +1,118 @@
+{
+  "options": {
+    "deletedAsDateTime": true
+  },
+  "users": [
+    {
+      "upn": "anna@example.com",
+      "dept": "Vertrieb",
+      "enabled": true,
+      "type": "Member"
+    },
+    {
+      "upn": "ben@example.com",
+      "dept": "Vertrieb",
+      "enabled": true,
+      "type": "Member"
+    },
+    {
+      "upn": "hans@example.com",
+      "dept": "Vertrieb",
+      "enabled": true,
+      "type": "Member"
+    },
+    {
+      "upn": "fritz@fremd.example.org",
+      "dept": "Vertrieb",
+      "enabled": true,
+      "type": "Guest"
+    },
+    {
+      "upn": "carla@example.com",
+      "dept": "IT",
+      "enabled": true,
+      "type": "Member"
+    },
+    {
+      "upn": "dora@example.com",
+      "dept": "IT",
+      "enabled": false,
+      "type": "Member"
+    },
+    {
+      "upn": "emil@example.com",
+      "dept": null,
+      "enabled": true,
+      "type": "Member"
+    },
+    {
+      "upn": "gina@example.com",
+      "dept": "HR",
+      "enabled": true,
+      "type": "Member"
+    }
+  ],
+  "groups": [
+    {
+      "id": "g1",
+      "name": "PRJ-VER-Messe",
+      "unified": true,
+      "owners": [
+        "u1",
+        "u2"
+      ]
+    },
+    {
+      "id": "g2",
+      "name": "ABT-HR-Team",
+      "unified": true,
+      "owners": []
+    },
+    {
+      "id": "g3",
+      "name": "Marketing Team",
+      "unified": true,
+      "owners": [
+        "u1"
+      ]
+    },
+    {
+      "id": "g4",
+      "name": "PRJ-IT-Server",
+      "unified": true,
+      "owners": []
+    },
+    {
+      "id": "g5",
+      "name": "GRM-BR-Rat",
+      "unified": true,
+      "owners": [
+        "u3"
+      ]
+    },
+    {
+      "id": "g6",
+      "name": "SEC-Sicherheit",
+      "unified": false,
+      "owners": [
+        "u1"
+      ]
+    }
+  ],
+  "deletedUsers": [
+    {
+      "name": "Alt Benutzer",
+      "daysAgo": 3.2
+    },
+    {
+      "name": "Aelterer Benutzer",
+      "daysAgo": 25.2
+    }
+  ],
+  "deletedGroups": [
+    {
+      "name": "PRJ-Alt",
+      "daysAgo": 10.2
+    }
+  ]
+}

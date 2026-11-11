@@ -1,0 +1,543 @@
+{
+  "_hinweis": "Erfundene Beispieldaten für Offline-Tests. Keine echten Personen, Domains oder Tenants.",
+  "organization": {
+    "displayName": "Beispiel GmbH (fiktiv)"
+  },
+  "userCount": 50,
+  "guestCount": 12,
+  "groups": [
+    {
+      "id": "t1",
+      "displayName": "ABT-Vertrieb-Allgemein",
+      "types": [
+        "Unified"
+      ],
+      "securityEnabled": false,
+      "mailEnabled": true,
+      "membershipRule": null,
+      "ownerCount": 2,
+      "createdDaysAgo": 400,
+      "renewedDaysAgo": 30,
+      "visibility": "Private",
+      "isTeam": true,
+      "archived": false,
+      "members": [
+        {
+          "id": "t1-m1",
+          "userType": "Member",
+          "displayName": "Mitarbeiter t11",
+          "mail": "m1.t1@example.com"
+        },
+        {
+          "id": "t1-m2",
+          "userType": "Member",
+          "displayName": "Mitarbeiter t12",
+          "mail": "m2.t1@example.com"
+        },
+        {
+          "id": "t1-m3",
+          "userType": "Member",
+          "displayName": "Mitarbeiter t13",
+          "mail": "m3.t1@example.com"
+        },
+        {
+          "id": "t1-m4",
+          "userType": "Member",
+          "displayName": "Mitarbeiter t14",
+          "mail": "m4.t1@example.com"
+        },
+        {
+          "id": "t1-m5",
+          "userType": "Member",
+          "displayName": "Mitarbeiter t15",
+          "mail": "m5.t1@example.com"
+        }
+      ],
+      "channels": [
+        {
+          "name": "s0",
+          "membershipType": "standard"
+        },
+        {
+          "name": "s1",
+          "membershipType": "standard"
+        },
+        {
+          "name": "s2",
+          "membershipType": "standard"
+        }
+      ]
+    },
+    {
+      "id": "t2",
+      "displayName": "PRJ-Alpha-Marktstart",
+      "types": [
+        "Unified"
+      ],
+      "securityEnabled": false,
+      "mailEnabled": true,
+      "membershipRule": null,
+      "ownerCount": 1,
+      "createdDaysAgo": 100,
+      "renewedDaysAgo": 100,
+      "visibility": "Private",
+      "isTeam": true,
+      "archived": false,
+      "members": [
+        {
+          "id": "t2-m1",
+          "userType": "Member",
+          "displayName": "Mitarbeiter t21",
+          "mail": "m1.t2@example.com"
+        },
+        {
+          "id": "t2-m2",
+          "userType": "Member",
+          "displayName": "Mitarbeiter t22",
+          "mail": "m2.t2@example.com"
+        },
+        {
+          "id": "t2-m3",
+          "userType": "Member",
+          "displayName": "Mitarbeiter t23",
+          "mail": "m3.t2@example.com"
+        },
+        {
+          "id": "t2-m4",
+          "userType": "Member",
+          "displayName": "Mitarbeiter t24",
+          "mail": "m4.t2@example.com"
+        },
+        {
+          "id": "gx",
+          "userType": "Guest",
+          "displayName": "Gast gx",
+          "mail": "gx@fabrikam.example"
+        },
+        {
+          "id": "gy",
+          "userType": "Guest",
+          "displayName": "Gast gy",
+          "mail": "gy@fabrikam.example"
+        }
+      ],
+      "channels": [
+        {
+          "name": "s0",
+          "membershipType": "standard"
+        },
+        {
+          "name": "s1",
+          "membershipType": "standard"
+        },
+        {
+          "name": "p0",
+          "membershipType": "private"
+        }
+      ]
+    },
+    {
+      "id": "t3",
+      "displayName": "Marketing intern",
+      "types": [
+        "Unified"
+      ],
+      "securityEnabled": false,
+      "mailEnabled": true,
+      "membershipRule": null,
+      "ownerCount": 0,
+      "createdDaysAgo": 500,
+      "renewedDaysAgo": 400,
+      "visibility": "Public",
+      "isTeam": true,
+      "archived": false,
+      "members": [
+        {
+          "id": "t3-m1",
+          "userType": "Member",
+          "displayName": "Mitarbeiter t31",
+          "mail": "m1.t3@example.com"
+        },
+        {
+          "id": "t3-m2",
+          "userType": "Member",
+          "displayName": "Mitarbeiter t32",
+          "mail": "m2.t3@example.com"
+        },
+        {
+          "id": "t3-m3",
+          "userType": "Member",
+          "displayName": "Mitarbeiter t33",
+          "mail": "m3.t3@example.com"
+        },
+        {
+          "id": "gx",
+          "userType": "Guest",
+          "displayName": "Gast gx",
+          "mail": "gx@fabrikam.example"
+        }
+      ],
+      "channels": [
+        {
+          "name": "s0",
+          "membershipType": "standard"
+        },
+        {
+          "name": "f0",
+          "membershipType": "shared"
+        }
+      ]
+    },
+    {
+      "id": "t4",
+      "displayName": "KND-Fabrikam-Zusammenarbeit",
+      "types": [
+        "Unified"
+      ],
+      "securityEnabled": false,
+      "mailEnabled": true,
+      "membershipRule": null,
+      "ownerCount": 1,
+      "createdDaysAgo": 300,
+      "renewedDaysAgo": 20,
+      "visibility": "Private",
+      "isTeam": true,
+      "archived": false,
+      "members": [
+        {
+          "id": "t4-m1",
+          "userType": "Member",
+          "displayName": "Mitarbeiter t41",
+          "mail": "m1.t4@example.com"
+        },
+        {
+          "id": "t4-m2",
+          "userType": "Member",
+          "displayName": "Mitarbeiter t42",
+          "mail": "m2.t4@example.com"
+        },
+        {
+          "id": "gx",
+          "userType": "Guest",
+          "displayName": "Gast gx",
+          "mail": "gx@fabrikam.example"
+        },
+        {
+          "id": "gf1",
+          "userType": "Guest",
+          "displayName": "Gast gf1",
+          "mail": "gf1@fabrikam.example"
+        },
+        {
+          "id": "gf2",
+          "userType": "Guest",
+          "displayName": "Gast gf2",
+          "mail": "gf2@fabrikam.example"
+        }
+      ],
+      "channels": [
+        {
+          "name": "s0",
+          "membershipType": "standard"
+        },
+        {
+          "name": "s1",
+          "membershipType": "standard"
+        }
+      ]
+    },
+    {
+      "id": "t5",
+      "displayName": "GRM-Betriebsrat-Intern",
+      "types": [
+        "Unified"
+      ],
+      "securityEnabled": false,
+      "mailEnabled": true,
+      "membershipRule": null,
+      "ownerCount": 3,
+      "createdDaysAgo": 200,
+      "renewedDaysAgo": 10,
+      "visibility": "Private",
+      "isTeam": true,
+      "archived": false,
+      "members": [
+        {
+          "id": "t5-m1",
+          "userType": "Member",
+          "displayName": "Mitarbeiter t51",
+          "mail": "m1.t5@example.com"
+        },
+        {
+          "id": "t5-m2",
+          "userType": "Member",
+          "displayName": "Mitarbeiter t52",
+          "mail": "m2.t5@example.com"
+        },
+        {
+          "id": "t5-m3",
+          "userType": "Member",
+          "displayName": "Mitarbeiter t53",
+          "mail": "m3.t5@example.com"
+        },
+        {
+          "id": "t5-m4",
+          "userType": "Member",
+          "displayName": "Mitarbeiter t54",
+          "mail": "m4.t5@example.com"
+        },
+        {
+          "id": "t5-m5",
+          "userType": "Member",
+          "displayName": "Mitarbeiter t55",
+          "mail": "m5.t5@example.com"
+        },
+        {
+          "id": "t5-m6",
+          "userType": "Member",
+          "displayName": "Mitarbeiter t56",
+          "mail": "m6.t5@example.com"
+        },
+        {
+          "id": "gx",
+          "userType": "Guest",
+          "displayName": "Gast gx",
+          "mail": "gx@fabrikam.example"
+        }
+      ],
+      "channels": [
+        {
+          "name": "s0",
+          "membershipType": "standard"
+        },
+        {
+          "name": "p0",
+          "membershipType": "private"
+        },
+        {
+          "name": "p1",
+          "membershipType": "private"
+        }
+      ]
+    },
+    {
+      "id": "t6",
+      "displayName": "ABT-Einkauf-Lieferanten",
+      "types": [
+        "Unified"
+      ],
+      "securityEnabled": false,
+      "mailEnabled": true,
+      "membershipRule": null,
+      "ownerCount": 2,
+      "createdDaysAgo": 150,
+      "renewedDaysAgo": 150,
+      "visibility": "Private",
+      "isTeam": true,
+      "archived": false,
+      "members": [
+        {
+          "id": "t6-m1",
+          "userType": "Member",
+          "displayName": "Mitarbeiter t61",
+          "mail": "m1.t6@example.com"
+        },
+        {
+          "id": "t6-m2",
+          "userType": "Member",
+          "displayName": "Mitarbeiter t62",
+          "mail": "m2.t6@example.com"
+        },
+        {
+          "id": "t6-m3",
+          "userType": "Member",
+          "displayName": "Mitarbeiter t63",
+          "mail": "m3.t6@example.com"
+        },
+        {
+          "id": "gx",
+          "userType": "Guest",
+          "displayName": "Gast gx",
+          "mail": "gx@fabrikam.example"
+        }
+      ],
+      "channels": [
+        {
+          "name": "s0",
+          "membershipType": "standard"
+        },
+        {
+          "name": "s1",
+          "membershipType": "standard"
+        }
+      ]
+    },
+    {
+      "id": "t7",
+      "displayName": "PRJ-Beta-Pilot",
+      "types": [
+        "Unified"
+      ],
+      "securityEnabled": false,
+      "mailEnabled": true,
+      "membershipRule": null,
+      "ownerCount": 1,
+      "createdDaysAgo": 50,
+      "renewedDaysAgo": 50,
+      "visibility": "Private",
+      "isTeam": true,
+      "archived": false,
+      "members": [
+        {
+          "id": "t7-m1",
+          "userType": "Member",
+          "displayName": "Mitarbeiter t71",
+          "mail": "m1.t7@example.com"
+        },
+        {
+          "id": "t7-m2",
+          "userType": "Member",
+          "displayName": "Mitarbeiter t72",
+          "mail": "m2.t7@example.com"
+        },
+        {
+          "id": "gx",
+          "userType": "Guest",
+          "displayName": "Gast gx",
+          "mail": "gx@fabrikam.example"
+        }
+      ],
+      "channels": [],
+      "channelError": "Forbidden: Zugriff verweigert\nweitere Details"
+    },
+    {
+      "id": "g-wiki",
+      "displayName": "Projekt Wiki",
+      "types": [
+        "Unified"
+      ],
+      "securityEnabled": false,
+      "mailEnabled": true,
+      "membershipRule": null,
+      "ownerCount": 1,
+      "createdDaysAgo": 20,
+      "renewedDaysAgo": 20,
+      "visibility": "Public",
+      "isTeam": false,
+      "members": [],
+      "channels": []
+    },
+    {
+      "id": "g-sec",
+      "displayName": "SEC-Team-Ersteller",
+      "types": [],
+      "securityEnabled": true,
+      "mailEnabled": false,
+      "membershipRule": null,
+      "ownerCount": 1,
+      "createdDaysAgo": 10,
+      "visibility": null,
+      "isTeam": false,
+      "members": [],
+      "channels": []
+    }
+  ],
+  "skus": [
+    {
+      "skuPartNumber": "O365_BUSINESS_ESSENTIALS",
+      "enabled": 25,
+      "consumed": 22,
+      "servicePlans": 9
+    },
+    {
+      "skuPartNumber": "FLOW_FREE",
+      "enabled": 10000,
+      "consumed": 3,
+      "servicePlans": 2
+    },
+    {
+      "skuPartNumber": "AAD_PREMIUM",
+      "enabled": 5,
+      "consumed": 5,
+      "servicePlans": 4
+    }
+  ],
+  "globalAdminRoleId": "62e90394-69f5-4237-9190-012177145e10",
+  "activeGlobalAdmins": [
+    {
+      "upn": "admin.eins@example.com",
+      "name": "Admin Eins"
+    },
+    {
+      "upn": "admin.zwei@example.com",
+      "name": "Admin Zwei"
+    },
+    {
+      "upn": "notfall.a@example.com",
+      "name": "Notfallkonto A"
+    }
+  ],
+  "eligibleGlobalAdmins": [
+    {
+      "upn": "admin.drei@example.com",
+      "name": "Admin Drei"
+    }
+  ],
+  "securityDefaultsEnabled": false,
+  "conditionalAccessPolicies": [
+    {
+      "name": "MFA für alle Benutzer",
+      "state": "enabled"
+    },
+    {
+      "name": "Legacy-Authentifizierung blockieren",
+      "state": "disabled"
+    },
+    {
+      "name": "MFA für Administratoren",
+      "state": "enabledForReportingButNotEnforced"
+    }
+  ],
+  "servicePrincipals": [
+    {
+      "id": "sp1",
+      "displayName": "Kalender-App"
+    },
+    {
+      "id": "sp2",
+      "displayName": "Notiz-App"
+    },
+    {
+      "id": "sp3",
+      "displayName": "Archiv-Tool"
+    }
+  ],
+  "permissionGrants": [
+    {
+      "clientId": "sp1",
+      "consentType": "AllPrincipals",
+      "scope": " Mail.Send User.Read"
+    },
+    {
+      "clientId": "sp2",
+      "consentType": "Principal",
+      "scope": "Files.Read User.Read"
+    },
+    {
+      "clientId": "sp3",
+      "consentType": "AllPrincipals",
+      "scope": "Sites.ReadWrite.All Mail.ReadWrite Calendars.Read"
+    }
+  ],
+  "directorySettingTemplates": [
+    {
+      "id": "tpl-1",
+      "displayName": "Group.Unified"
+    },
+    {
+      "id": "tpl-2",
+      "displayName": "Anderes"
+    }
+  ],
+  "directorySettings": []
+}

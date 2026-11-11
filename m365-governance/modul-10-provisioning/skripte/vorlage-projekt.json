@@ -1,0 +1,10 @@
+{
+  "name": "Projekt",
+  "beschreibung": "Standardvorlage fuer Projektteams",
+  "kanaele": [
+    { "name": "Planung",      "beschreibung": "Zeitplan und Meilensteine" },
+    { "name": "Dokumentation", "beschreibung": "Ergebnisse und Protokolle" },
+    { "name": "Abstimmung",   "beschreibung": "Fragen und Entscheidungen" }
+  ],
+  "sensitivityLabel": "Intern"
+}

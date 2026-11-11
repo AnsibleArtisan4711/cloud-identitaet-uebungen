@@ -1,0 +1,246 @@
+{
+  "options": {
+    "pageSize": 3,
+    "throttleBatchIds": [],
+    "updateFailIds": [],
+    "lifecycleUpdateIgnored": false,
+    "lifecycleUpdateFailures": 0,
+    "requestFailures": 0
+  },
+  "users": [
+    {
+      "id": "u9",
+      "upn": "ersatz@example.com"
+    }
+  ],
+  "groups": [
+    {
+      "id": "g1",
+      "name": "PRJ-VER-Messe",
+      "description": "Messeauftritt",
+      "unified": true,
+      "owners": [
+        "u1",
+        "u2"
+      ]
+    },
+    {
+      "id": "g2",
+      "name": "ABT-HR-Team",
+      "description": "",
+      "unified": true,
+      "owners": [
+        "u1"
+      ]
+    },
+    {
+      "id": "g3",
+      "name": "Marketing Team",
+      "description": null,
+      "unified": true,
+      "owners": []
+    },
+    {
+      "id": "g4",
+      "name": "PRJ-IT-Server",
+      "description": "   ",
+      "unified": true,
+      "owners": [
+        "u1",
+        "u2"
+      ]
+    },
+    {
+      "id": "g5",
+      "name": "GRM-BR-Rat",
+      "description": "Betriebsrat",
+      "unified": true,
+      "owners": []
+    },
+    {
+      "id": "g6",
+      "name": "SEC-Sicherheit",
+      "description": "",
+      "unified": false,
+      "owners": [
+        "u1"
+      ]
+    },
+    {
+      "id": "g7",
+      "name": "KND-XY-Alt",
+      "description": "",
+      "unified": true,
+      "owners": [
+        "u2"
+      ]
+    }
+  ],
+  "lifecyclePolicies": [
+    {
+      "id": "lp-1",
+      "days": 365,
+      "types": "Selected",
+      "emails": "it-betrieb@example.com"
+    }
+  ],
+  "caPolicies": [
+    {
+      "Id": "p2",
+      "DisplayName": "CA-02 MFA fuer alle",
+      "State": "enabled",
+      "ModifiedDateTime": "2026-10-01T10:00:00Z",
+      "Grant": "mfa"
+    },
+    {
+      "Id": "p1",
+      "DisplayName": "CA-01 Administratoren",
+      "State": "enabledForReportingButNotEnforced",
+      "ModifiedDateTime": "2026-09-15T08:30:00Z",
+      "Grant": "mfa"
+    }
+  ],
+  "transportRules": [
+    {
+      "Name": "Zeta Externe Kennzeichnung",
+      "Priority": 1,
+      "State": "Enabled",
+      "Mode": "Enforce",
+      "Comments": "Kennzeichnung",
+      "Description": "Beschreibung Z",
+      "WhenChanged": "2026-10-02T09:00:00Z"
+    },
+    {
+      "Name": "Alpha Archivierung",
+      "Priority": 0,
+      "State": "Enabled",
+      "Mode": "Audit",
+      "Comments": "",
+      "Description": "Beschreibung A",
+      "WhenChanged": "2026-10-03T09:00:00Z"
+    }
+  ],
+  "graphServicePrincipal": {
+    "id": "sp-graph",
+    "appId": "00000003-0000-0000-c000-000000000000",
+    "name": "Microsoft Graph",
+    "appRoles": [
+      {
+        "id": "r1",
+        "value": "User.Read.All"
+      },
+      {
+        "id": "r2",
+        "value": "Group.ReadWrite.All"
+      },
+      {
+        "id": "r3",
+        "value": "Directory.ReadWrite.All"
+      },
+      {
+        "id": "r4",
+        "value": "Mail.ReadWrite"
+      },
+      {
+        "id": "r5",
+        "value": "Sites.FullControl.All"
+      },
+      {
+        "id": "r6",
+        "value": "Files.Write.All"
+      }
+    ]
+  },
+  "servicePrincipals": [
+    {
+      "id": "sp1",
+      "name": "Berichtsdienst",
+      "appId": "app-1",
+      "assignments": [
+        {
+          "role": "r1",
+          "resource": "sp-graph"
+        },
+        {
+          "role": "r2",
+          "resource": "sp-graph"
+        },
+        {
+          "role": "r3",
+          "resource": "sp-graph"
+        }
+      ]
+    },
+    {
+      "id": "sp2",
+      "name": "Archivierer",
+      "appId": "app-2",
+      "assignments": [
+        {
+          "role": "r3",
+          "resource": "sp-graph"
+        }
+      ]
+    },
+    {
+      "id": "sp3",
+      "name": "Fremdressource",
+      "appId": "app-3",
+      "assignments": [
+        {
+          "role": "r2",
+          "resource": "sp-other"
+        }
+      ]
+    },
+    {
+      "id": "sp4",
+      "name": "Postfachwerkzeug",
+      "appId": "app-4",
+      "assignments": [
+        {
+          "role": "r4",
+          "resource": "sp-graph"
+        },
+        {
+          "role": "r5",
+          "resource": "sp-graph"
+        },
+        {
+          "role": "r6",
+          "resource": "sp-graph"
+        }
+      ]
+    },
+    {
+      "id": "sp5",
+      "name": "Ohne Rechte",
+      "appId": "app-5",
+      "assignments": []
+    },
+    {
+      "id": "sp-err",
+      "name": "Nicht lesbar",
+      "appId": "app-6",
+      "assignments": [],
+      "readFails": true
+    }
+  ],
+  "itsm": {
+    "tickets": [],
+    "changes": [
+      {
+        "number": "CHG0001",
+        "state": "approved"
+      },
+      {
+        "number": "CHG0002",
+        "state": "new"
+      },
+      {
+        "number": "CHG0003",
+        "state": "Approved"
+      }
+    ]
+  }
+}

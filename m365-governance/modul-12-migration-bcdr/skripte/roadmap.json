@@ -1,0 +1,11 @@
+{
+  "start": "2026-11-02",
+  "stundenProPersonUndPhase": 40,
+  "aufgaben": [
+    { "id": "A1", "name": "Ist-Analyse", "von": 1,  "bis": 20, "wer": "Anna", "stunden": 30, "nach": [] },
+    { "id": "A2", "name": "Gremium und Rollen", "von": 5,  "bis": 25, "wer": "Ben",  "stunden": 16, "nach": [] },
+    { "id": "B1", "name": "Namens- und Metadatenstandard", "von": 31, "bis": 45, "wer": "Anna", "stunden": 20, "nach": ["A1","A2"] },
+    { "id": "B2", "name": "Pilot Bereitstellungsfabrik", "von": 40, "bis": 60, "wer": "Cem",  "stunden": 30, "nach": ["B1"] },
+    { "id": "C1", "name": "Lebenszyklus aktivieren", "von": 61, "bis": 75, "wer": "Cem",  "stunden": 12, "nach": ["B2"] }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "version": "1.3.0",
+  "gueltigAb": "2026-11-01",
+  "gruppen": {
+    "namensmuster": "^(PRJ|ABT|GRM|KND)-[A-Z]{2,5}-[a-z0-9-]{3,40}$",
+    "mindestBesitzer": 2,
+    "lebensdauerTage": 365,
+    "pflichtMetadaten": ["Zweck", "Abteilung", "Vertraulichkeit"]
+  },
+  "freigabestufen": {
+    "gaeste": 3,
+    "vertraulich": 3,
+    "grosserBereichAbMitgliedern": 200
+  }
+}

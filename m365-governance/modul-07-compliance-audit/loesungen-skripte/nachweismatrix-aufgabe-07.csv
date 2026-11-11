@@ -1,0 +1,7 @@
+Anforderung;Kontrollziel;Massnahme;Verantwortlich;Nachweis;Status
+Zugriff auf personenbezogene Daten nur fuer Berechtigte;Rollenbasierter Zugriff;Zugriff ueber Gruppen und regelmaessige Zugriffsueberpruefung (Modul 2);IT-Governance;Bericht der Zugriffsueberpruefung;Entwurf
+Zugriff auf personenbezogene Daten nur fuer Berechtigte;Eingeschraenkte Freigabe;Externe Freigabe fuer Websites begrenzen (Modul 4);SharePoint-Betrieb;Einstellungen und Bericht der Freigabe;Entwurf
+Zugriff auf personenbezogene Daten nur fuer Berechtigte;Klassifizierung;Vertraulichkeitslabels mit Labelrichtlinie (Modul 6);Compliance;Labelrichtlinie;Entwurf
+Zugriff auf personenbezogene Daten nur fuer Berechtigte;Schutz gegen unbefugten Versand;DLP-Richtlinie (Modul 6);Compliance;Richtlinie und Trefferbericht;Entwurf
+Zugriff auf personenbezogene Daten nur fuer Berechtigte;Protokollierung von Zugriffen;Audit-Erfassung einschalten und pruefen (Lerneinheit 7.1);Security;Audit-Konfiguration;Entwurf
+Zugriff auf personenbezogene Daten nur fuer Berechtigte;Nachvollziehbare Administration;Privileged Access Management (Modul 8);Security;PIM-Protokolle;Entwurf
