@@ -1,0 +1,3 @@
+# gcloud CLI (Textdatei, NICHT ausgeführt: es gab kein Google-Cloud-Konto; Fachwissen, Befehle und Parameter nicht gegen die Dokumentation geprüft)
+gcloud sql instances create db1 --database-version=VERSION --tier=TYP --region=REGION
+gcloud sql backups list --instance=db1

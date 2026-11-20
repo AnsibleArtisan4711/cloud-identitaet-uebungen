@@ -1,0 +1,4 @@
+# gcloud CLI (Textdatei, NICHT ausgeführt: es gab kein Google-Cloud-Konto; Fachwissen, Befehle und Parameter nicht gegen die Dokumentation geprüft)
+gcloud projects list
+gcloud projects create projekt-web-4711 --folder=ORDNER-ID
+gcloud billing projects link projekt-web-4711 --billing-account=KONTO-ID

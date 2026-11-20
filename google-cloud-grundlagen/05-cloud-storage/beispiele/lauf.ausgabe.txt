@@ -1,0 +1,7 @@
+Klasse     Preis/GB (erfunden)  Mindestlaufzeit Tage  Kosten pro Monat
+Standard       0.0200                    0             10.00
+Nearline       0.0100                   30              5.00
+Coldline       0.0040                   90              2.00
+Archive        0.0012                  365              0.60
+
+Kurze Mindestlaufzeit lohnt bei häufigem Zugriff; Archivklassen sind für selten gelesene Daten gedacht (Fachwissen, nicht bestätigt).

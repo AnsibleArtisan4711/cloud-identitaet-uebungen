@@ -1,0 +1,4 @@
+# gcloud CLI (Textdatei, NICHT ausgeführt: es gab kein Google-Cloud-Konto; Fachwissen, Befehle und Parameter nicht gegen die Dokumentation geprüft)
+gcloud storage buckets create gs://berichte-4711 --location=REGION
+gcloud storage cp datei.txt gs://berichte-4711/
+gcloud storage buckets update gs://berichte-4711 --lifecycle-file=regel.json

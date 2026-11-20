@@ -1,0 +1,3 @@
+# gcloud CLI (Textdatei, NICHT ausgeführt: es gab kein Google-Cloud-Konto; Fachwissen, Befehle und Parameter nicht gegen die Dokumentation geprüft)
+gcloud billing budgets create --billing-account=KONTO-ID --display-name=lab-budget --budget-amount=30
+gcloud logging read "severity>=ERROR" --limit=10

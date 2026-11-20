@@ -1,0 +1,2 @@
+eine Zone:     99.9000 %  -> bis zu 526 Minuten Ausfall pro Jahr
+zwei Zonen:    99.9999 %  -> bis zu 0.53 Minuten Ausfall pro Jahr (Rechenmodell, Umschaltzeit nicht berücksichtigt)

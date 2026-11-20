@@ -1,0 +1,4 @@
+# gcloud CLI (Textdatei, NICHT ausgeführt: es gab kein Google-Cloud-Konto; Fachwissen, Befehle und Parameter nicht gegen die Dokumentation geprüft)
+gcloud compute networks create lab-netz --subnet-mode=custom
+gcloud compute networks subnets create lab-sub --network=lab-netz --range=10.58.0.0/24 --region=REGION
+gcloud compute firewall-rules create erlaube-https --network=lab-netz --allow=tcp:443 --priority=1000

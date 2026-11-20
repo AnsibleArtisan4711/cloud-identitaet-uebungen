@@ -1,0 +1,4 @@
+Quelle 203.0.113.5  Port 443  -> allow (erlaube-https)
+Quelle 10.58.1.1    Port 22   -> allow (erlaube-ssh-intern)
+Quelle 203.0.113.5  Port 22   -> deny  (implizites Verbot eingehend)
+Quelle 203.0.113.5  Port 23   -> deny  (verbiete-telnet)

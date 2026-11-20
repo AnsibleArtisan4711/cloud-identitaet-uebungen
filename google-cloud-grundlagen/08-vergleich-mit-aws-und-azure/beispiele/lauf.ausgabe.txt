@@ -1,0 +1,8 @@
+Konzept            AWS         Azure               Google Cloud      Status
+Privates Netzwerk  VPC         VNet                VPC-Netzwerk      F
+Rechner            EC2         Virtuelle Maschine  Compute Engine    F
+Objektspeicher     S3          Blob Storage        Cloud Storage     F
+Rechteverwaltung   IAM         RBAC (Entra ID)     IAM               F
+Überwachung        CloudWatch  Azure Monitor       Cloud Monitoring  F
+
+Alle 5 Zeilen: F (nicht bestätigt). Die Dienste unterscheiden sich im Detail; Gleichsetzen ist nur eine grobe Orientierung.

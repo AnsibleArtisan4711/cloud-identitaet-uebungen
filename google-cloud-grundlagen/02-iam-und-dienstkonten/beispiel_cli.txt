@@ -1,0 +1,4 @@
+# gcloud CLI (Textdatei, NICHT ausgeführt: es gab kein Google-Cloud-Konto; Fachwissen, Befehle und Parameter nicht gegen die Dokumentation geprüft)
+gcloud iam service-accounts create sa-backup --display-name="Sicherung"
+gcloud projects add-iam-policy-binding projekt-web-4711 --member="serviceAccount:sa-backup@projekt-web-4711.iam.gserviceaccount.com" --role="ROLLE"
+gcloud iam service-accounts keys list --iam-account=sa-backup@projekt-web-4711.iam.gserviceaccount.com

@@ -1,0 +1,4 @@
+Tag  7: bisher  4.00 ( 13 %), Prognose  17.14, Schwellen: -
+Tag 14: bisher 11.00 ( 37 %), Prognose  23.57, Schwellen: -
+Tag 21: bisher 21.00 ( 70 %), Prognose  30.00, Schwellen: [50]
+Tag 28: bisher 31.50 (105 %), Prognose  33.75, Schwellen: [50, 90, 100]

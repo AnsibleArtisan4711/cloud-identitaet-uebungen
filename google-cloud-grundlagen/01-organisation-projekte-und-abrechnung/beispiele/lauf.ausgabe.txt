@@ -1,0 +1,7 @@
+anna  auf org/ordner-dev/projekt-web   -> ['Betrachter']
+ben   auf org/ordner-dev/projekt-web   -> ['Bearbeiter']
+cara  auf org/ordner-dev/projekt-test  -> keine
+cara  auf org/ordner-dev/projekt-web   -> ['Administrator']
+
+org/ordner-dev/projekt-web   Abrechnung: konto-1
+org/ordner-dev/projekt-test  Abrechnung: KEIN Abrechnungskonto -> kostenpflichtige Dienste nicht nutzbar

@@ -1,0 +1,3 @@
+sa-backup  1 Schlüssel vorhanden: wenn möglich ohne Schlüssel arbeiten
+sa-web     Rolle Projekt-Inhaber ist sehr weit
+sa-ci      Rolle Bearbeiter ist sehr weit; Schlüssel mit 200 Tagen älter als 90; 2 Schlüssel vorhanden: wenn möglich ohne Schlüssel arbeiten

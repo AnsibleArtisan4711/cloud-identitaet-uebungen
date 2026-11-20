@@ -1,0 +1,3 @@
+Webserver braucht 2 CPU / 3 GB -> Typ klein (2 CPU, 4 GB), 0.02 je Stunde (erfunden), 14.60 je Monat
+Datenbank braucht 4 CPU / 12 GB -> Typ gross (8 CPU, 16 GB), 0.08 je Stunde (erfunden), 58.40 je Monat
+Batch     braucht 6 CPU / 8 GB -> Typ gross (8 CPU, 16 GB), 0.08 je Stunde (erfunden), 58.40 je Monat

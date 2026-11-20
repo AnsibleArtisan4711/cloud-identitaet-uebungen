@@ -1,0 +1,4 @@
+# gcloud CLI (Textdatei, NICHT ausgeführt: es gab kein Google-Cloud-Konto; Fachwissen, Befehle und Parameter nicht gegen die Dokumentation geprüft)
+gcloud compute instances create web1 --zone=ZONE --machine-type=TYP --image-family=BILDFAMILIE --image-project=BILDPROJEKT
+gcloud compute instances list
+gcloud compute instances delete web1 --zone=ZONE
