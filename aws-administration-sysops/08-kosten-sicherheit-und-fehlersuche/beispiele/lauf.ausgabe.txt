@@ -1,0 +1,6 @@
+Budget 20.00 (Währung egal)
+Tag  5: bisher  2.00 ( 10 %), Prognose  12.00 im Rahmen, Schwellen erreicht: -
+Tag 10: bisher  5.50 ( 28 %), Prognose  16.50 im Rahmen, Schwellen erreicht: -
+Tag 15: bisher  9.50 ( 48 %), Prognose  19.00 im Rahmen, Schwellen erreicht: -
+Tag 20: bisher 15.00 ( 75 %), Prognose  22.50 ÜBER Budget, Schwellen erreicht: [50]
+Tag 25: bisher 19.00 ( 95 %), Prognose  22.80 ÜBER Budget, Schwellen erreicht: [50, 80]

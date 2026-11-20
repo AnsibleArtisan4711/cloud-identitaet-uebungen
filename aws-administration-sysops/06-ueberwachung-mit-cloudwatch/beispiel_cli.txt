@@ -1,0 +1,3 @@
+# AWS CLI (Textdatei, NICHT ausgeführt: es gab kein AWS-Konto; Fachwissen, Befehle und Parameter nicht gegen die Dokumentation geprüft)
+aws cloudwatch put-metric-alarm --alarm-name cpu-hoch --metric-name CPUUtilization --namespace AWS/EC2 --statistic Average --period 60 --evaluation-periods 3 --datapoints-to-alarm 2 --threshold 80 --comparison-operator GreaterThanThreshold
+aws cloudwatch describe-alarms --alarm-names cpu-hoch

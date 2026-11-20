@@ -1,0 +1,4 @@
+Vorlage gut: keine Befunde
+Vorlage schlecht: Befunde
+   - Ref auf unbekannten Namen: Umgebung
+   - Ref auf unbekannten Namen: Gibtesnicht

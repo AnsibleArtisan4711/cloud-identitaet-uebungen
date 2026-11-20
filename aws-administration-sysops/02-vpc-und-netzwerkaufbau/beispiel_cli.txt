@@ -1,0 +1,6 @@
+# AWS CLI (Textdatei, NICHT ausgeführt: es gab kein AWS-Konto; Fachwissen, Befehle und Parameter nicht gegen die Dokumentation geprüft)
+aws ec2 create-vpc --cidr-block 10.56.0.0/16
+aws ec2 create-subnet --vpc-id VPC-ID --cidr-block 10.56.0.0/24 --availability-zone ZONE
+aws ec2 create-internet-gateway
+aws ec2 create-route-table --vpc-id VPC-ID
+aws ec2 create-route --route-table-id RTB-ID --destination-cidr-block 0.0.0.0/0 --gateway-id IGW-ID

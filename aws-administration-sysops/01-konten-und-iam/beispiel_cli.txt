@@ -1,0 +1,4 @@
+# AWS CLI (Textdatei, NICHT ausgeführt: es gab kein AWS-Konto; Fachwissen, Befehle und Parameter nicht gegen die Dokumentation geprüft)
+aws sts get-caller-identity                                  # wer bin ich?
+aws iam create-policy --policy-name berichte-lesen --policy-document file://berichte.json
+aws iam simulate-principal-policy --policy-source-arn ARN --action-names s3:GetObject   # Richtlinie testen

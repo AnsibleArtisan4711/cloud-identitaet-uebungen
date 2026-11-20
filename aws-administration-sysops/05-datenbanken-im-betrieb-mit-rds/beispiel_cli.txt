@@ -1,0 +1,4 @@
+# AWS CLI (Textdatei, NICHT ausgeführt: es gab kein AWS-Konto; Fachwissen, Befehle und Parameter nicht gegen die Dokumentation geprüft)
+aws rds create-db-instance --db-instance-identifier db1 --engine postgres --allocated-storage 20 --db-instance-class db.t3.micro --backup-retention-period 7 --master-username USER --manage-master-user-password
+aws rds create-db-snapshot --db-instance-identifier db1 --db-snapshot-identifier db1-vorher
+aws rds restore-db-instance-to-point-in-time --source-db-instance-identifier db1 --target-db-instance-identifier db1-neu --use-latest-restorable-time

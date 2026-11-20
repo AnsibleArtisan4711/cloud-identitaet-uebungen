@@ -1,0 +1,6 @@
+Aufbewahrung: 7 Tage
+  Tabelle versehentlich gelöscht 2 Tagen -> Wiederherstellung möglich
+  Fehler entdeckt nach 9 Tagen -> außerhalb der Aufbewahrung: nur ein älterer Snapshot (falls vorhanden)
+  Datenfehler seit 5 Tagen -> Wiederherstellung möglich
+
+Speicher: 200 GB, Wachstum 5 GB/Monat -> in 12 Monaten 260 GB

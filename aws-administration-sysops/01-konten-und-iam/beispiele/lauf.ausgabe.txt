@@ -1,0 +1,5 @@
+anna   s3:GetObject           -> erlaubt
+anna   s3:DeleteObject        -> verboten (ausdrückliches Deny)
+ben    ec2:DescribeInstances  -> erlaubt
+ben    ec2:StartInstances     -> verboten (kein Allow, implizit)
+admin  iam:DeleteUser         -> erlaubt

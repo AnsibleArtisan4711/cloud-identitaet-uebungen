@@ -1,0 +1,9 @@
+Monat  Standard-GB  Selten-GB  Kosten ohne Regel  Kosten mit Regel (nach 1 Monat)
+    1         1000          0              23.00             23.00
+    2          100       1000              25.30             14.80
+    3          100       1100              27.60             16.05
+    4          100       1200              29.90             17.30
+    5          100       1300              32.20             18.55
+    6          100       1400              34.50             19.80
+
+Preise sind erfunden; echte Preise und Mindestlaufzeiten der Speicherklassen mit Stand prüfen.

@@ -1,0 +1,4 @@
+# AWS CLI (Textdatei, NICHT ausgeführt: es gab kein AWS-Konto; Fachwissen, Befehle und Parameter nicht gegen die Dokumentation geprüft)
+aws s3api put-bucket-lifecycle-configuration --bucket berichte-test --lifecycle-configuration file://regel.json
+aws ec2 create-volume --volume-type gp3 --size 20 --availability-zone ZONE
+aws ec2 create-snapshot --volume-id VOL-ID --description "Sicherung"

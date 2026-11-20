@@ -1,0 +1,4 @@
+# AWS CLI (Textdatei, NICHT ausgeführt: es gab kein AWS-Konto; Fachwissen, Befehle und Parameter nicht gegen die Dokumentation geprüft)
+aws cloudformation validate-template --template-body file://vorlage.json
+aws cloudformation create-stack --stack-name test --template-body file://vorlage.json --parameters ParameterKey=Umgebung,ParameterValue=test
+aws cloudformation describe-stack-events --stack-name test

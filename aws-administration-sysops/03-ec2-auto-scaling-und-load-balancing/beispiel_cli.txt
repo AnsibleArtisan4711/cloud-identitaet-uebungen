@@ -1,0 +1,4 @@
+# AWS CLI (Textdatei, NICHT ausgeführt: es gab kein AWS-Konto; Fachwissen, Befehle und Parameter nicht gegen die Dokumentation geprüft)
+aws ec2 run-instances --image-id AMI-ID --instance-type t3.micro --subnet-id SUBNET-ID
+aws autoscaling create-auto-scaling-group --auto-scaling-group-name web --min-size 2 --max-size 6 --launch-template LaunchTemplateName=web --vpc-zone-identifier "SUBNET-A,SUBNET-B"
+aws autoscaling put-scaling-policy --auto-scaling-group-name web --policy-name cpu50 --policy-type TargetTrackingScaling --target-tracking-configuration file://ziel.json

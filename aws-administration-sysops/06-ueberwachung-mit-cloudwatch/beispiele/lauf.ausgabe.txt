@@ -1,0 +1,11 @@
+Alarm, wenn in 3 aufeinanderfolgenden Datenpunkten mindestens 2 über 80 liegen
+Minute  0: Wert  30  Fenster [30]  über Schwelle 0  -> ok
+Minute  1: Wert  45  Fenster [30, 45]  über Schwelle 0  -> ok
+Minute  2: Wert  85  Fenster [30, 45, 85]  über Schwelle 1  -> ok
+Minute  3: Wert  90  Fenster [45, 85, 90]  über Schwelle 2  -> ALARM
+Minute  4: Wert  40  Fenster [85, 90, 40]  über Schwelle 2  -> ALARM
+Minute  5: Wert  88  Fenster [90, 40, 88]  über Schwelle 2  -> ALARM
+Minute  6: Wert  92  Fenster [40, 88, 92]  über Schwelle 2  -> ALARM
+Minute  7: Wert  95  Fenster [88, 92, 95]  über Schwelle 3  -> ALARM
+Minute  8: Wert  50  Fenster [92, 95, 50]  über Schwelle 2  -> ALARM
+Minute  9: Wert  30  Fenster [95, 50, 30]  über Schwelle 1  -> ok

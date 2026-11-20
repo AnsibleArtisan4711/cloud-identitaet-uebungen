@@ -1,0 +1,3 @@
+# AWS CLI (Textdatei, NICHT ausgeführt: es gab kein AWS-Konto; Fachwissen, Befehle und Parameter nicht gegen die Dokumentation geprüft)
+aws budgets create-budget --account-id KONTO --budget file://budget.json --notifications-with-subscribers file://warnung.json
+aws cloudtrail lookup-events --max-results 10

@@ -1,0 +1,10 @@
+VPC 10.56.0.0/16: 256 Subnetze der Größe /24 möglich
+  public-a   10.56.0.0/24  Adressen gesamt 256  nutzbar nach Abzug von 5 reservierten: 251
+  public-b   10.56.1.0/24  Adressen gesamt 256  nutzbar nach Abzug von 5 reservierten: 251
+  private-a  10.56.10.0/24  Adressen gesamt 256  nutzbar nach Abzug von 5 reservierten: 251
+  private-b  10.56.11.0/24  Adressen gesamt 256  nutzbar nach Abzug von 5 reservierten: 251
+
+Routen: {'10.56.0.0/16': 'local', '0.0.0.0/0': 'igw-1', '10.57.0.0/16': 'pcx-1'}
+  Ziel 10.56.10.5  -> local (Präfix 10.56.0.0/16)
+  Ziel 10.57.1.1   -> pcx-1 (Präfix 10.57.0.0/16)
+  Ziel 8.8.8.8     -> igw-1 (Präfix 0.0.0.0/0)
