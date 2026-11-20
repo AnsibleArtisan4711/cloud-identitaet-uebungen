@@ -1,0 +1,60 @@
+
+## 1. Befehle prüfen (echt gegen die installierte Azure CLI, offline)
+Azure CLI 2.93.0 (echt, nur Hilfetexte)
+az ad group create -> --display-name:ok --mail-nickname:ok
+az ad group member add -> --group:ok --member-id:ok
+az role assignment create -> --assignee:ok --role:ok --scope:ok
+
+## 2. Benutzer vorbereiten (Modell)
+$ entrasim user list
+ana@labmuster.onmicrosoft.com        Cloud  Abteilung=Vertrieb   Objekt dee53000
+ben@labmuster.onmicrosoft.com        Cloud  Abteilung=Technik    Objekt 765567a9
+cem@muster-lab.example               Cloud  Abteilung=Technik    Objekt 8b8805f4
+dora@muster-lab.example              Cloud  Abteilung=Vertrieb   Objekt 1e7fd30c
+
+## 3. Zugewiesene und dynamische Gruppe (Modell)
+$ entrasim group create technik-zugewiesen
+Gruppe technik-zugewiesen angelegt (zugewiesen)
+$ entrasim group add technik-zugewiesen ben@labmuster.onmicrosoft.com
+ben@labmuster.onmicrosoft.com zu technik-zugewiesen hinzugefügt
+$ entrasim group create vertrieb-dynamisch --dynamic 'user.department -eq "Vertrieb"'
+Gruppe vertrieb-dynamisch angelegt (dynamisch: user.department -eq "Vertrieb")
+$ entrasim group show vertrieb-dynamisch
+Gruppe vertrieb-dynamisch: 2 Mitglied(er)
+  ana@labmuster.onmicrosoft.com
+  dora@muster-lab.example
+$ entrasim group add vertrieb-dynamisch cem@muster-lab.example
+Fehler: vertrieb-dynamisch ist dynamisch; die Mitglieder bestimmt die Regel, manuelles Hinzufügen ist nicht möglich
+
+## 4. Attributänderung ändert die Mitgliedschaft der dynamischen Gruppe (Modell)
+$ entrasim group create nicht-vertrieb --dynamic 'user.department -ne "Vertrieb"'
+Gruppe nicht-vertrieb angelegt (dynamisch: user.department -ne "Vertrieb")
+$ entrasim group show nicht-vertrieb
+Gruppe nicht-vertrieb: 2 Mitglied(er)
+  ben@labmuster.onmicrosoft.com
+  cem@muster-lab.example
+$ entrasim group create ana-oder-technik --dynamic 'user.userPrincipalName -startsWith "ana" -or user.department -eq "Technik"'
+Gruppe ana-oder-technik angelegt (dynamisch: user.userPrincipalName -startsWith "ana" -or user.department -eq "Technik")
+$ entrasim group show ana-oder-technik
+Gruppe ana-oder-technik: 3 Mitglied(er)
+  ana@labmuster.onmicrosoft.com
+  ben@labmuster.onmicrosoft.com
+  cem@muster-lab.example
+Regel mit Tippfehler:
+$ entrasim group create falsch --dynamic 'user.department = Vertrieb'
+Regelfehler in „user.department = Vertrieb“ (Modell kennt: user.attribut -eq|-ne|-startsWith "wert")
+Dynamische Gruppen erfordern laut Microsoft Learn (Auszug, 20.11.2026) Entra ID P1 oder P2; das Modell prüft das nicht.
+
+## 5. Verwaltungsrollen: kleinste Berechtigung (Modell)
+$ entrasim role assign ben@labmuster.onmicrosoft.com 'Helpdesk Administrator'
+ben@labmuster.onmicrosoft.com hat jetzt die Rolle Helpdesk Administrator
+$ entrasim role assign cem@muster-lab.example 'Conditional Access Administrator'
+cem@muster-lab.example hat jetzt die Rolle Conditional Access Administrator
+$ entrasim role can ben@labmuster.onmicrosoft.com user.resetPassword
+ben@labmuster.onmicrosoft.com darf user.resetPassword: JA (Rolle Helpdesk Administrator)
+$ entrasim role can ben@labmuster.onmicrosoft.com user.create
+ben@labmuster.onmicrosoft.com darf user.create: NEIN
+$ entrasim role can cem@muster-lab.example ca.manage
+cem@muster-lab.example darf ca.manage: JA (Rolle Conditional Access Administrator)
+$ entrasim role can ana@labmuster.onmicrosoft.com ca.manage
+ana@labmuster.onmicrosoft.com darf ca.manage: NEIN

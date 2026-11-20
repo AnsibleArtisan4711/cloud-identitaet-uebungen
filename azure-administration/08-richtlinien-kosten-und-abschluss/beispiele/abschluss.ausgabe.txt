@@ -1,0 +1,52 @@
+
+## 1. Befehle prüfen (echt gegen die installierte Azure CLI, offline)
+Azure CLI 2.93.0 (echt, nur Hilfetexte)
+az policy definition create -> --name:ok --rules:ok --mode:ok
+az policy assignment create -> --name:ok --policy:ok --scope:ok --not-scopes:ok
+az consumption budget create -> --budget-name:ok --amount:ok --time-grain:ok
+az tag create -> --name:ok
+
+## 2. Richtlinie als JSON (echt gelesen): Standorte beschränken und Tag verlangen
+Alle Richtlinien sind gültiges JSON (echt)
+
+## 3. Richtlinien auf Ressourcen anwenden (Modell)
+$ azsim policy --def nur-westeuropa.json --resource r1.json
+vm-ok        nicht betroffen
+$ azsim policy --def nur-westeuropa.json --resource r2.json
+vm-usa       ABGELEHNT (deny)
+$ azsim policy --def nur-westeuropa.json --resource r3.json
+vm-notag     nicht betroffen
+$ azsim policy --def tag-pflicht.json --resource r1.json
+vm-ok        nicht betroffen
+$ azsim policy --def tag-pflicht.json --resource r3.json
+vm-notag     ABGELEHNT (deny)
+$ azsim policy --def tag-audit.json --resource r3.json
+vm-notag     erlaubt, als nicht konform vermerkt (audit)
+
+## 4. Ausnahme (notScopes): /rg-test ist ausgenommen (Modell)
+$ azsim policy --def nur-westeuropa.json --resource r4.json --notscope /rg-test
+vm-test: ausgenommen (notScopes /rg-test) -> keine Wirkung
+
+## 5. Budget: Schwellen 50, 80 und 100 Prozent (Modell, erfundene Beträge)
+$ azsim budget --amount 100 --alerts 50 80 100 --spent 20 25 10 30 12 8
+Tag  1:   20.00 von 100 EUR ( 20.0 %)
+Tag  2:   45.00 von 100 EUR ( 45.0 %)
+Tag  3:   55.00 von 100 EUR ( 55.0 %)  <- Warnung 50 %
+Tag  4:   85.00 von 100 EUR ( 85.0 %)  <- Warnung 80 %
+Tag  5:   97.00 von 100 EUR ( 97.0 %)
+Tag  6:  105.00 von 100 EUR (105.0 %)  <- Warnung 100 %
+Hinweis: Eine Budgetwarnung benachrichtigt nur; sie stoppt keine Ressourcen (Fachwissen).
+
+## 6. Kosten schätzen: 3 VMs, 30 Tage (Modell, erfundene Preise)
+$ azsim vm cost
+db1      Lab_S4    18 EUR/Tag
+web1     Lab_S2     9 EUR/Tag
+web2     Lab_S2     9 EUR/Tag
+Summe 36 EUR/Tag, 1080 EUR/30 Tage (erfundene Preise)
+
+## 7. Abschlussprojekt: Aufräumen (Modell): Ressourcengruppe löschen, nichts bleibt zurück
+$ azsim group delete rg-abschluss
+Ressourcengruppe rg-abschluss samt Inhalt gelöscht
+$ azsim group list
+(keine Ressourcengruppen)
+Im echten Azure nach jeder Übung Ressourcengruppen löschen und das Budget prüfen (Lehrplan).

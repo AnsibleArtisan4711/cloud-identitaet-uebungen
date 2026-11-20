@@ -1,0 +1,52 @@
+
+## 1. Befehle prüfen (echt gegen die installierte Azure CLI, offline)
+Azure CLI 2.93.0 (echt, nur Hilfetexte)
+az rest -> --method:ok --url:ok --body:ok
+Get-WindowsAutopilotInfo (PowerShell) erzeugt die Hash-Datei auf einem Windows-Gerät; es wurde NICHT ausgeführt und nicht geprüft.
+
+## 2. Gültige Hash-Datei prüfen (echt: Regeln nach Microsoft Learn; die Hashes sind ERFUNDEN)
+$ intunesim ap check-csv gut.csv
+gut.csv: 3 Gerät(e) geprüft (Regeln nach Microsoft Learn, Auszug)
+  Ergebnis: in Ordnung
+
+## 3. Typische Fehler (echt geprüft)
+$ intunesim ap check-csv falsch-kopf.csv
+falsch-kopf.csv: 1 Gerät(e) geprüft (Regeln nach Microsoft Learn, Auszug)
+  PROBLEM: Kopfzeile stimmt nicht (Groß-/Kleinschreibung zählt, keine zusätzlichen Spalten) [Learn]; erwartet: Device Serial Number,Windows Product ID,Hardware Hash,Group Tag,Assigned User
+  PROBLEM: Zeile 2: 4 statt 5 Spalten
+  Ergebnis: FEHLER
+$ intunesim ap check-csv falsch-gross.csv
+falsch-gross.csv: 1 Gerät(e) geprüft (Regeln nach Microsoft Learn, Auszug)
+  PROBLEM: Kopfzeile stimmt nicht (Groß-/Kleinschreibung zählt, keine zusätzlichen Spalten) [Learn]; erwartet: Device Serial Number,Windows Product ID,Hardware Hash,Group Tag,Assigned User
+  Ergebnis: FEHLER
+$ intunesim ap check-csv falsch-inhalt.csv
+falsch-inhalt.csv: 3 Gerät(e) geprüft (Regeln nach Microsoft Learn, Auszug)
+  PROBLEM: Anführungszeichen enthalten [Learn: keine Anführungszeichen]
+  PROBLEM: Zeile 3: Hardware-Hash fehlt [Learn: erforderlich]
+  PROBLEM: Zeile 4: zugewiesener Benutzer „kein-upn“ ist kein gültiger UPN [Learn: ungültiger UPN kann das Gerät unbrauchbar machen]
+  Ergebnis: FEHLER
+$ intunesim ap check-csv falsch-bom.csv
+falsch-bom.csv: 1 Gerät(e) geprüft (Regeln nach Microsoft Learn, Auszug)
+  PROBLEM: Datei hat eine Unicode-Markierung (BOM); erlaubt ist nur ANSI-Text [Learn]
+  PROBLEM: Kopfzeile stimmt nicht (Groß-/Kleinschreibung zählt, keine zusätzlichen Spalten) [Learn]; erwartet: Device Serial Number,Windows Product ID,Hardware Hash,Group Tag,Assigned User
+  Ergebnis: FEHLER
+
+## 4. Importieren, Profil erstellen und zuordnen (Modell)
+$ intunesim ap import gut.csv
+Importiert: 3 Gerät(e): SN-0001, SN-0002, SN-0003
+$ intunesim ap profile --name profil-vertrieb --mode user-driven --join entra --tag Vertrieb
+Autopilot-Profil profil-vertrieb: Modus user-driven, Einbindung entra, Zuordnung über Gruppen-Tag „Vertrieb“ (Modell)
+$ intunesim ap profile --name profil-technik --mode self-deploying --join entra --tag Technik
+Autopilot-Profil profil-technik: Modus self-deploying, Einbindung entra, Zuordnung über Gruppen-Tag „Technik“ (Modell)
+$ intunesim ap boot SN-0001
+Gerät SN-0001: Profil profil-vertrieb (user-driven, entra), zugewiesener Benutzer ana@labmuster.example
+$ intunesim ap boot SN-0002
+Gerät SN-0002: Profil profil-technik (self-deploying, entra)
+$ intunesim ap boot SN-0003
+Gerät SN-0003: registriert (Tag „“), aber kein Profil zugewiesen -> normale Einrichtung
+$ intunesim ap boot SN-9999
+Gerät SN-9999: nicht bei Autopilot registriert -> normale Einrichtung (OOBE) ohne Profil
+
+## 5. Selbstbereitstellend und hybrid (Modell; aus Microsoft Learn, Auszug, 20.11.2026, gelesen)
+$ intunesim ap profile --name profil-hybrid --mode self-deploying --join hybrid
+Fehler: Der selbstbereitstellende Modus wird für hybrid eingebundene Geräte nicht unterstützt [Learn, Teams-Rooms-Seite]

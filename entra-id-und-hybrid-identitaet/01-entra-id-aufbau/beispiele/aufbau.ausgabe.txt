@@ -1,0 +1,36 @@
+
+## 1. Befehle prüfen (echt gegen die installierte Azure CLI, offline)
+Azure CLI 2.93.0 (echt, nur Hilfetexte)
+az ad user create -> --display-name:ok --password:ok --user-principal-name:ok
+az ad user list -> --filter:ok
+az rest -> --method:ok --url:ok --body:ok
+
+## 2. Mandant und Domänen (Modell)
+$ entrasim domain list
+labmuster.onmicrosoft.com    verifiziert
+muster-lab.example           NICHT verifiziert
+
+## 3. Benutzer anlegen: nur mit verifizierter Domäne (Modell)
+$ entrasim user create ana@labmuster.onmicrosoft.com --dept Vertrieb
+Benutzer ana@labmuster.onmicrosoft.com angelegt (Objekt dee53000, Quelle Cloud)
+$ entrasim user create ben@labmuster.onmicrosoft.com --dept Technik
+Benutzer ben@labmuster.onmicrosoft.com angelegt (Objekt 765567a9, Quelle Cloud)
+$ entrasim user create cem@muster-lab.example --dept Technik
+Fehler: Domäne muster-lab.example ist nicht verifiziert; Benutzer können sie nicht als UPN-Suffix verwenden
+
+## 4. Domäne verifizieren: falscher und richtiger TXT-Eintrag (Modell)
+$ entrasim domain verify muster-lab.example --txt MS=falsch
+Verifizierung von muster-lab.example fehlgeschlagen: TXT-Eintrag nicht gefunden oder falsch (Modell erwartet MS=ms-erfunden-0001)
+$ entrasim domain verify muster-lab.example --txt MS=ms-erfunden-0001
+Domäne muster-lab.example verifiziert (Modell: über TXT-Eintrag im DNS)
+$ entrasim domain list
+labmuster.onmicrosoft.com    verifiziert
+muster-lab.example           verifiziert
+$ entrasim user create cem@muster-lab.example --dept Technik
+Benutzer cem@muster-lab.example angelegt (Objekt 8b8805f4, Quelle Cloud)
+
+## 5. Wer ist im Mandanten? (Modell)
+$ entrasim user list
+ana@labmuster.onmicrosoft.com        Cloud  Abteilung=Vertrieb   Objekt dee53000
+ben@labmuster.onmicrosoft.com        Cloud  Abteilung=Technik    Objekt 765567a9
+cem@muster-lab.example               Cloud  Abteilung=Technik    Objekt 8b8805f4

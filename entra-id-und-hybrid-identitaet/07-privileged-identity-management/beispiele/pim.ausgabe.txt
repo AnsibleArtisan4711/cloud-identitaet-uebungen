@@ -1,0 +1,48 @@
+
+## 1. Befehle prüfen (echt gegen die installierte Azure CLI, offline)
+Azure CLI 2.93.0 (echt, nur Hilfetexte)
+az rest -> --method:ok --url:ok
+PIM wird im echten Entra ID im Portal oder über die Graph-Schnittstelle bedient; hier nicht ausgeführt.
+
+## 2. Lizenzstand (Microsoft Learn, Suchauszug 20.11.2026)
+PIM ist laut dem Auszug in Entra ID P2, Entra ID Governance und Entra Suite enthalten, nicht in Free und P1.
+$ entrasim pim assign ana 'Global Administrator' --type eligible --license p1
+PIM nicht verfügbar: erfordert P2 oder Entra ID Governance (Microsoft Learn gelesen, Stand 20.11.2026)
+
+## 3. Berechtigt (eligible) und aktiv (Modell; Zeit in Minuten)
+$ entrasim pim assign ana 'Global Administrator' --type eligible
+ana: Global Administrator als eligible zugewiesen
+$ entrasim pim assign ben 'Helpdesk Administrator' --type active
+ben: Helpdesk Administrator als active zugewiesen
+$ entrasim pim status --at 0
+Stand Minute 0:
+  ana    Global Administrator               berechtigt, nicht aktiviert
+  ben    Helpdesk Administrator             aktiv (ständig)
+
+## 4. Aktivierung mit Begründung und Dauer (Modell)
+$ entrasim pim activate ana 'Global Administrator' --minutes 60 --at 100 --reason 'Konto fuer Rolle anlegen'
+ana: Global Administrator aktiv von Minute 100 bis 160 (Begründung: Konto fuer Rolle anlegen)
+$ entrasim pim status --at 120
+Stand Minute 120:
+  ana    Global Administrator               aktiv bis Minute 160
+  ben    Helpdesk Administrator             aktiv (ständig)
+$ entrasim pim status --at 160
+Stand Minute 160:
+  ana    Global Administrator               berechtigt, nicht aktiviert
+  ben    Helpdesk Administrator             aktiv (ständig)
+
+## 5. Fehlerfälle: ohne Begründung, zu lang, aktive Zuweisung (Modell)
+$ entrasim pim activate ana 'Global Administrator' --minutes 60 --at 200
+Fehler: Begründung fehlt
+$ entrasim pim activate ana 'Global Administrator' --minutes 600 --at 200 --reason Wartung
+Fehler: Aktivierung für 600 Minuten über der Modellgrenze 480
+$ entrasim pim activate ben 'Helpdesk Administrator' --minutes 30 --at 200 --reason Test
+Fehler: nur berechtigte (eligible) Zuweisungen werden aktiviert
+
+## 6. Genehmigung verlangen (Modell)
+$ entrasim pim assign cem 'Security Reader' --type eligible --approval
+cem: Security Reader als eligible zugewiesen (Aktivierung braucht Genehmigung)
+$ entrasim pim activate cem 'Security Reader' --minutes 30 --at 300 --reason Analyse
+Aktivierung wartet auf Genehmigung
+$ entrasim pim activate cem 'Security Reader' --minutes 30 --at 300 --reason Analyse --approved
+cem: Security Reader aktiv von Minute 300 bis 330 (Begründung: Analyse)

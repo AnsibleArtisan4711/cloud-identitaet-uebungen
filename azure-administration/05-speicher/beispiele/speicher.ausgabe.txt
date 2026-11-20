@@ -1,0 +1,53 @@
+
+## 1. Befehle prüfen (echt gegen die installierte Azure CLI, offline)
+Azure CLI 2.93.0 (echt, nur Hilfetexte)
+az storage account create -> --name:ok --resource-group:ok --sku:ok --kind:ok --location:ok
+az storage account generate-sas -> --account-name:ok --permissions:ok --expiry:ok --services:ok
+az storage container create -> --name:ok --account-name:ok --auth-mode:ok
+az storage account management-policy create -> --account-name:ok --policy:ok --resource-group:ok
+
+## 2. Redundanz (Modell, Fachwissen, nicht gegen die Dokumentation geprüft)
+$ azsim storage redundancy
+LRS     3 Kopien, 1 Standort(e): übersteht Ausfall eines Racks oder Servers; nicht: Ausfall des Rechenzentrums
+ZRS     3 Kopien, 3 Standort(e): übersteht Ausfall eines Rechenzentrums (Zone); nicht: Ausfall der Region
+GRS     6 Kopien, 2 Standort(e): übersteht Ausfall der Region (Lesen erst nach Failover); Kosten höher
+RA-GRS  6 Kopien, 2 Standort(e): übersteht wie GRS, zweite Region lesbar; Kosten am höchsten
+
+## 3. Speicherkonten anlegen: Namensregeln (Modell)
+$ azsim storage create labdaten01 --group rg-sp --sku Standard_LRS
+Speicherkonto labdaten01 (Standard_LRS) angelegt
+$ azsim storage create labdaten01 --group rg-sp --sku Standard_LRS
+Fehler: Name schon vergeben (Namen sind weltweit eindeutig)
+$ azsim storage create LabDaten --group rg-sp --sku Standard_LRS
+Fehler: Name „LabDaten“ ungültig: 3 bis 24 Zeichen, nur Kleinbuchstaben und Ziffern
+$ azsim storage create ab --group rg-sp --sku Standard_LRS
+Fehler: Name „ab“ ungültig: 3 bis 24 Zeichen, nur Kleinbuchstaben und Ziffern
+$ azsim storage create lab-daten-02 --group rg-sp --sku Standard_LRS
+Fehler: Name „lab-daten-02“ ungültig: 3 bis 24 Zeichen, nur Kleinbuchstaben und Ziffern
+
+## 4. Zugriff mit zeitlich begrenztem Token (Modell mit HMAC-SHA256, echt gerechnet; NICHT das echte SAS-Format)
+$ azsim storage sas --key testschluessel-erfunden --path labdaten01/berichte/q1.pdf --perm r --expiry 1000 --now 900 --use r
+Modell-Token: path=labdaten01/berichte/q1.pdf perm=r exp=1000 sig=7766a5a337a6 (NICHT das echte SAS-Format)
+Zugriff 'r' bei Zeit 900: erlaubt
+$ azsim storage sas --key testschluessel-erfunden --path labdaten01/berichte/q1.pdf --perm r --expiry 1000 --now 1001 --use r
+Modell-Token: path=labdaten01/berichte/q1.pdf perm=r exp=1000 sig=7766a5a337a6 (NICHT das echte SAS-Format)
+Zugriff 'r' bei Zeit 1001: abgelehnt (abgelaufen)
+$ azsim storage sas --key testschluessel-erfunden --path labdaten01/berichte/q1.pdf --perm r --expiry 1000 --now 900 --use w
+Modell-Token: path=labdaten01/berichte/q1.pdf perm=r exp=1000 sig=7766a5a337a6 (NICHT das echte SAS-Format)
+Zugriff 'w' bei Zeit 900: abgelehnt (Recht fehlt)
+Mit anderem Schlüssel entsteht eine andere Signatur (Schlüssel rotieren macht Token ungültig, Fachwissen):
+$ azsim storage sas --key anderer-schluessel --path labdaten01/berichte/q1.pdf --perm r --expiry 1000 --now 900 --use r
+Modell-Token: path=labdaten01/berichte/q1.pdf perm=r exp=1000 sig=3ea6d0af2724 (NICHT das echte SAS-Format)
+
+## 5. Lebenszyklus: Stufen nach Alter (Modell)
+$ azsim storage lifecycle --age 5 --cool 30 --archive 90 --delete 365
+Blob mit Alter 5 Tagen: Stufe Hot (Regel: Cool ab 30, Archive ab 90, Löschen ab 365)
+$ azsim storage lifecycle --age 40 --cool 30 --archive 90 --delete 365
+Blob mit Alter 40 Tagen: Stufe Cool (Regel: Cool ab 30, Archive ab 90, Löschen ab 365)
+$ azsim storage lifecycle --age 120 --cool 30 --archive 90 --delete 365
+Blob mit Alter 120 Tagen: Stufe Archive (Regel: Cool ab 30, Archive ab 90, Löschen ab 365)
+$ azsim storage lifecycle --age 400 --cool 30 --archive 90 --delete 365
+Blob mit Alter 400 Tagen: Stufe gelöscht (Regel: Cool ab 30, Archive ab 90, Löschen ab 365)
+
+## 6. Regel als JSON: echt gelesen, Struktur prüfen (Python)
+Regel alt-abkuehlen -> tierToCool nach 30 Tagen, delete nach 365 Tagen

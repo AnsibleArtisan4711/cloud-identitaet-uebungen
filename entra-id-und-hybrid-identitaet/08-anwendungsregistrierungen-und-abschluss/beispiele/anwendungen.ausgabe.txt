@@ -1,0 +1,45 @@
+
+## 1. Befehle prüfen (echt gegen die installierte Azure CLI, offline)
+Azure CLI 2.93.0 (echt, nur Hilfetexte)
+az ad app create -> --display-name:ok --web-redirect-uris:ok
+az ad app credential reset -> --id:ok --years:ok
+az ad sp create -> --id:ok
+
+## 2. Anwendung registrieren (Modell): Umleitung und Geheimnis
+$ entrasim app create berichte --redirect https://berichte.example.test/anmeldung --secret-days 180
+App berichte registriert (Client-ID 49505719), Geheimnis 180 Tage gültig, Umleitung https://berichte.example.test/anmeldung
+$ entrasim app create unsicher --redirect http://berichte.example.test/anmeldung
+Fehler: Umleitungs-URI http://berichte.example.test/anmeldung nicht erlaubt (Modell: nur https oder http://localhost)
+$ entrasim app create langlebig --redirect https://x.example.test/ --secret-days 3650
+Fehler: Gültigkeit 3650 Tage über der Modellgrenze 730 Tage
+
+## 3. Rechte: delegiert und Anwendungsrecht (Modell)
+$ entrasim app perm berichte --delegated User.Read --application Mail.Read
+berichte: delegiert ['User.Read'], Anwendung ['Mail.Read']
+$ entrasim app show berichte
+App berichte: delegierte Rechte (handelt im Namen eines Benutzers): ['User.Read']
+  Anwendungsrecht Mail.Read: OHNE Administratoreinwilligung unwirksam (Modell)
+$ entrasim app consent berichte
+berichte: Administratoreinwilligung für ['Mail.Read']
+$ entrasim app show berichte
+App berichte: delegierte Rechte (handelt im Namen eines Benutzers): ['User.Read']
+  Anwendungsrecht Mail.Read: mit Administratoreinwilligung wirksam
+
+## 4. Token prüfen (echt: RS256-Signatur mit PyJWT und cryptography)
+$ entrasim token
+Aufbau: drei Teile, durch Punkte getrennt (Kopf, Nutzdaten, Signatur)
+Kopf:      {"alg": "RS256", "kid": "demo-key-1", "typ": "JWT"}
+Nutzdaten: {"aud": "api://app-lab-0001", "exp": 1900, "iat": 1000, "iss": "https://login.example.test/00000000-0000-0000-0000-0000000000aa/v2.0", "nbf": 1000, "scp": "Berichte.Lesen", "sub": "ana"}
+Signatur:  <342 Zeichen Base64URL, zufällig je Schlüssel, nicht ausgegeben>
+Die Nutzdaten sind nur Base64URL-kodiert, NICHT verschlüsselt: jeder kann sie lesen. Geschützt ist nur die Unverfälschtheit (Signatur).
+unverändert, Zeit 1200             GÜLTIG
+abgelaufen, Zeit 2000              ABGELEHNT: Zeit: abgelaufen (exp 1900 <= jetzt 2000)
+falsche Zielgruppe (aud)           ABGELEHNT: InvalidAudienceError: Audience doesn't match
+falscher Aussteller (iss)          ABGELEHNT: InvalidIssuerError: Invalid issuer
+Nutzdaten verändert                ABGELEHNT: InvalidSignatureError: Signature verification failed
+mit fremdem Schlüssel geprüft      ABGELEHNT: InvalidSignatureError: Signature verification failed
+Ergebnis: Signatur, Zielgruppe, Aussteller und Zeit müssen ALLE stimmen.
+
+## 5. Abschluss: Kette von der Registrierung bis zur Prüfung (Zusammenfassung)
+Registrierung legt fest, wer die App ist und was sie darf; das Token belegt, wer sich angemeldet hat; die Ressource prüft Signatur, Aussteller, Zielgruppe und Zeit.
+Die Schlüssel in Schritt 4 werden bei jedem Lauf neu erzeugt; die Ausgabe enthält nur Werte, die davon nicht abhängen.

@@ -1,0 +1,69 @@
+
+## 1. Befehle prüfen (echt gegen die installierte Azure CLI, offline)
+Azure CLI 2.93.0 (echt, nur Hilfetexte)
+az role assignment create -> --assignee:ok --role:ok --scope:ok
+az role assignment list -> --assignee:ok --scope:ok --all:ok
+az role definition list -> --name:ok
+
+## 2. Aufbau (Modell): zwei Ressourcengruppen, Benutzer ana, ben, cem; Gruppe grp-admins mit ana
+$ azsim identity member-add grp-admins ana
+ana ist Mitglied von grp-admins
+
+## 3. Zuweisungen auf verschiedenen Bereichen (Modell)
+$ azsim role assign --assignee grp-admins --role Contributor --scope /subscriptions/00000000-0000-0000-0000-000000000001
+Zuweisung: grp-admins -> Contributor @ /subscriptions/<Abo>
+$ azsim role assign --assignee ben --role Reader --scope /subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/rg-web
+Zuweisung: ben -> Reader @ /subscriptions/<Abo>/resourceGroups/rg-web
+$ azsim role assign --assignee cem --role 'Virtual Machine Contributor' --scope /subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/rg-web
+Zuweisung: cem -> Virtual Machine Contributor @ /subscriptions/<Abo>/resourceGroups/rg-web
+$ azsim role assign --assignee cem --role 'Storage Blob Data Reader' --scope /subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/rg-daten
+Zuweisung: cem -> Storage Blob Data Reader @ /subscriptions/<Abo>/resourceGroups/rg-daten
+
+## 4. Wirksame Zuweisungen: Vererbung von oben nach unten (Modell)
+$ azsim role list --scope /subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/rg-web
+Wirksame Zuweisungen für /subscriptions/<Abo>/resourceGroups/rg-web:
+  grp-admins   Contributor                  @ /subscriptions/<Abo>  (geerbt)
+  ben          Reader                       @ /subscriptions/<Abo>/resourceGroups/rg-web
+  cem          Virtual Machine Contributor  @ /subscriptions/<Abo>/resourceGroups/rg-web
+$ azsim role list --scope /subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/rg-daten
+Wirksame Zuweisungen für /subscriptions/<Abo>/resourceGroups/rg-daten:
+  grp-admins   Contributor                  @ /subscriptions/<Abo>  (geerbt)
+  cem          Storage Blob Data Reader     @ /subscriptions/<Abo>/resourceGroups/rg-daten
+
+## 5. Wer darf was? (Modell); Gruppenmitgliedschaft und Vererbung zählen
+$ azsim role check --assignee ana --action Microsoft.Compute/virtualMachines/write --scope /subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/rg-web
+ana darf Microsoft.Compute/virtualMachines/write auf /subscriptions/<Abo>/resourceGroups/rg-web: JA
+  Grund: Contributor @ /subscriptions/<Abo> (über grp-admins)
+$ azsim role check --assignee ben --action Microsoft.Compute/virtualMachines/read --scope /subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/rg-web
+ben darf Microsoft.Compute/virtualMachines/read auf /subscriptions/<Abo>/resourceGroups/rg-web: JA
+  Grund: Reader @ /subscriptions/<Abo>/resourceGroups/rg-web (über ben)
+$ azsim role check --assignee ben --action Microsoft.Compute/virtualMachines/write --scope /subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/rg-web
+ben darf Microsoft.Compute/virtualMachines/write auf /subscriptions/<Abo>/resourceGroups/rg-web: NEIN
+$ azsim role check --assignee ben --action Microsoft.Compute/virtualMachines/read --scope /subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/rg-daten
+ben darf Microsoft.Compute/virtualMachines/read auf /subscriptions/<Abo>/resourceGroups/rg-daten: NEIN
+$ azsim role check --assignee cem --action Microsoft.Compute/virtualMachines/write --scope /subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/rg-web
+cem darf Microsoft.Compute/virtualMachines/write auf /subscriptions/<Abo>/resourceGroups/rg-web: JA
+  Grund: Virtual Machine Contributor @ /subscriptions/<Abo>/resourceGroups/rg-web (über cem)
+$ azsim role check --assignee cem --action Microsoft.Network/virtualNetworks/write --scope /subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/rg-web
+cem darf Microsoft.Network/virtualNetworks/write auf /subscriptions/<Abo>/resourceGroups/rg-web: NEIN
+
+## 6. Rollen vergeben darf nur, wer es ausdrücklich darf: Contributor kann keine Zuweisungen schreiben (Modell)
+$ azsim role check --assignee ana --action Microsoft.Authorization/roleAssignments/write --scope /subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/rg-web
+ana darf Microsoft.Authorization/roleAssignments/write auf /subscriptions/<Abo>/resourceGroups/rg-web: NEIN
+(Im Modell darf das nur ein Owner; diese Rolle wurde hier niemandem zugewiesen.)
+
+## 7. Steuerungsebene gegen Datenebene (Modell)
+$ azsim role check --assignee ana --action Microsoft.Storage/storageAccounts/blobServices/containers/blobs/read --scope /subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/rg-daten --data
+ana darf Microsoft.Storage/storageAccounts/blobServices/containers/blobs/read (Datenebene) auf /subscriptions/<Abo>/resourceGroups/rg-daten: NEIN
+$ azsim role check --assignee cem --action Microsoft.Storage/storageAccounts/blobServices/containers/blobs/read --scope /subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/rg-daten --data
+cem darf Microsoft.Storage/storageAccounts/blobServices/containers/blobs/read (Datenebene) auf /subscriptions/<Abo>/resourceGroups/rg-daten: JA
+  Grund: Storage Blob Data Reader @ /subscriptions/<Abo>/resourceGroups/rg-daten (über cem)
+Contributor (ana) darf Speicherkonten verwalten, aber die Daten nur mit einer Datenrolle lesen (Fachwissen, Modell).
+
+## 8. Sperre schlägt Rolle (Modell)
+$ azsim lock create --name nur-lesen --group rg-web --type ReadOnly
+Sperre nur-lesen (ReadOnly) auf rg-web
+$ azsim role check --assignee ana --action Microsoft.Compute/virtualMachines/write --scope /subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/rg-web
+ana darf Microsoft.Compute/virtualMachines/write auf /subscriptions/<Abo>/resourceGroups/rg-web: JA
+  Grund: Contributor @ /subscriptions/<Abo> (über grp-admins)
+  ABER: Sperre „nur-lesen“ (ReadOnly) blockiert write, die Rolle hilft nicht.

@@ -1,0 +1,20 @@
+
+## 1. Befehle prüfen (echt gegen die installierte Azure CLI, offline)
+Azure CLI 2.93.0 (echt, nur Hilfetexte)
+az rest -> --method:ok --url:ok --body:ok
+
+## 2. Drei Ringe für dieselbe Veröffentlichung am Tag 0 (Modell, erfundene Werte)
+$ intunesim upd --ring Pilot --release 0 --defer 0 --deadline 2
+Ring „Pilot“: Veröffentlichung Tag 0, Zurückstellung 0 Tage -> Angebot ab Tag 0; Frist 2 Tage -> Installation spätestens Tag 2
+$ intunesim upd --ring Breit --release 0 --defer 7 --deadline 5
+Ring „Breit“: Veröffentlichung Tag 0, Zurückstellung 7 Tage -> Angebot ab Tag 7; Frist 5 Tage -> Installation spätestens Tag 12
+$ intunesim upd --ring Spaet --release 0 --defer 21 --deadline 7
+Ring „Spaet“: Veröffentlichung Tag 0, Zurückstellung 21 Tage -> Angebot ab Tag 21; Frist 7 Tage -> Installation spätestens Tag 28
+
+## 3. Ein Problem wird entdeckt: der breite Ring wird für 10 Tage angehalten (Modell)
+$ intunesim upd --ring Breit --release 0 --defer 7 --deadline 5 --pause 10
+Ring „Breit“: Veröffentlichung Tag 0, Zurückstellung 7 Tage, angehalten 10 Tage -> Angebot ab Tag 17; Frist 5 Tage -> Installation spätestens Tag 22
+
+## 4. Einordnung (Fachwissen, nicht bestätigt)
+Zurückstellung verschiebt das Angebot, die Frist erzwingt danach die Installation; Pilotgruppen sehen Probleme zuerst.
+Die echten Einstellungen und Grenzen von Windows-Update-Ringen und Aktualisierungsrichtlinien wurden nicht gelesen.

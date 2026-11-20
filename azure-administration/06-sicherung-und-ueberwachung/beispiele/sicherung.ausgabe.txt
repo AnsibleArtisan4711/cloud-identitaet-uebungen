@@ -1,0 +1,45 @@
+
+## 1. Befehle prüfen (echt gegen die installierte Azure CLI, offline)
+Azure CLI 2.93.0 (echt, nur Hilfetexte)
+az backup vault create -> --name:ok --resource-group:ok --location:ok
+az backup protection enable-for-vm -> --vault-name:ok --vm:ok --policy-name:ok
+az backup restore restore-disks -> --storage-account:ok --restore-mode:ok
+az monitor metrics alert create -> --name:ok --scopes:ok --condition:ok --action:ok
+az monitor action-group create -> --name:ok --resource-group:ok
+
+## 2. Aufbewahrung: Wie viele Wiederherstellungspunkte gibt es? (Modell)
+$ azsim backup --daily 7 --weekly 4 --monthly 3 --age 100 --restore 3
+Richtlinie: täglich 7 Tage, wöchentlich 4 Wochen, monatlich 3 Monate (Modell: Wochen = Vielfache von 7 Tagen, Monate = Vielfache von 30 Tagen)
+Nach 100 Tagen gibt es 14 Wiederherstellungspunkte; ältester: vor 90 Tagen
+Wiederherstellung auf Stand vor 3 Tagen: möglich
+$ azsim backup --daily 7 --weekly 4 --monthly 3 --age 100 --restore 20
+Richtlinie: täglich 7 Tage, wöchentlich 4 Wochen, monatlich 3 Monate (Modell: Wochen = Vielfache von 7 Tagen, Monate = Vielfache von 30 Tagen)
+Nach 100 Tagen gibt es 14 Wiederherstellungspunkte; ältester: vor 90 Tagen
+Wiederherstellung auf Stand vor 20 Tagen: nicht möglich; nächster Punkt: vor 21 Tagen
+$ azsim backup --daily 30 --weekly 12 --monthly 12 --age 400
+Richtlinie: täglich 30 Tage, wöchentlich 12 Wochen, monatlich 12 Monate (Modell: Wochen = Vielfache von 7 Tagen, Monate = Vielfache von 30 Tagen)
+Nach 400 Tagen gibt es 50 Wiederherstellungspunkte; ältester: vor 360 Tagen
+
+## 3. Eine Sicherung ersetzt weder Replikation noch Sperre (Fachwissen, kein Modellergebnis)
+Gelöscht wird auch der Schutz, wenn das Löschen nicht abgesichert ist (Soft Delete, Sperre); das Modell bildet das nicht ab.
+
+## 4. Metrik-Alarm: Mittelwert über ein Fenster gegen Schwellwert (Modell)
+$ azsim alert --series 20 30 45 80 85 90 60 30 --window 3 --threshold 75
+Regel: Mittelwert über 3 Messung(en) > 75.0
+Ausgelöst bei: Messung 6 (Mittel 85.0), Messung 7 (Mittel 78.3)
+$ azsim alert --series 20 30 45 80 20 90 20 30 --window 3 --threshold 75
+Regel: Mittelwert über 3 Messung(en) > 75.0
+Ausgelöst bei: nie
+
+## 5. Kurze Spitzen lösen mit größerem Fenster nicht aus (Modell)
+$ azsim alert --series 20 30 45 80 20 90 20 30 --window 2 --threshold 75
+Regel: Mittelwert über 2 Messung(en) > 75.0
+Ausgelöst bei: nie
+$ azsim alert --series 90 10 10 10 --window 1 --threshold 75
+Regel: Mittelwert über 1 Messung(en) > 75.0
+Ausgelöst bei: Messung 1 (Mittel 90.0)
+
+## 6. Alarm bei zu wenig freiem Speicher (Operator <) (Modell)
+$ azsim alert --series 40 30 20 10 8 --window 2 --threshold 15 --op <
+Regel: Mittelwert über 2 Messung(en) < 15.0
+Ausgelöst bei: Messung 5 (Mittel 9.0)

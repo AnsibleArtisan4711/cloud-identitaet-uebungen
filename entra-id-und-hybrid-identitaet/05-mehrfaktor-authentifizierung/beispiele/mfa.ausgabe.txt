@@ -1,0 +1,43 @@
+
+## 1. Befehle prüfen (echt gegen die installierte Azure CLI, offline)
+Azure CLI 2.93.0 (echt, nur Hilfetexte)
+az rest -> --method:ok --url:ok --body:ok
+Authentifizierungsmethoden-Richtlinien werden im echten Entra ID über die Graph-Schnittstelle gesetzt (az rest); hier nicht ausgeführt.
+
+## 2. TOTP gegen die Testwerte der RFC 6238 prüfen (echt gerechnet)
+$ entrasim mfa selftest
+Zeit          59: RFC 94287082, berechnet 94287082 -> gleich
+Zeit  1111111109: RFC 07081804, berechnet 07081804 -> gleich
+Zeit  1111111111: RFC 14050471, berechnet 14050471 -> gleich
+Zeit  1234567890: RFC 89005924, berechnet 89005924 -> gleich
+Zeit  2000000000: RFC 69279037, berechnet 69279037 -> gleich
+Zeit 20000000000: RFC 65353130, berechnet 65353130 -> gleich
+Ergebnis: alle sechs Testwerte der RFC 6238 stimmen (SHA-1, 8 Stellen)
+
+## 3. Codes mit einem erfundenen Schlüssel (Base32) (echt gerechnet)
+$ entrasim mfa code --secret JBSWY3DPEHPK3PXP --time 1000
+Zeit 1000: Code 475209 (Schritt 33)
+$ entrasim mfa code --secret JBSWY3DPEHPK3PXP --time 1029
+Zeit 1029: Code 992976 (Schritt 34)
+$ entrasim mfa code --secret JBSWY3DPEHPK3PXP --time 1030
+Zeit 1030: Code 992976 (Schritt 34)
+$ entrasim mfa code --secret JBSWY3DPEHPK3PXP --time 1059
+Zeit 1059: Code 977407 (Schritt 35)
+$ entrasim mfa code --secret JBSWY3DPEHPK3PXP --time 1060
+Zeit 1060: Code 977407 (Schritt 35)
+
+## 4. Prüfung mit Toleranzfenster: eine Uhr, die nachgeht (echt gerechnet)
+$ entrasim mfa verify --secret JBSWY3DPEHPK3PXP --time 1000 --code 475209
+Code 475209 bei Zeit 1000: ANGENOMMEN (Schritt 33, Abweichung +0)
+$ entrasim mfa verify --secret JBSWY3DPEHPK3PXP --time 1030 --code 475209
+Code 475209 bei Zeit 1030: ABGELEHNT (Fenster ±0 Schritte)
+$ entrasim mfa verify --secret JBSWY3DPEHPK3PXP --time 1030 --code 475209 --window 1
+Code 475209 bei Zeit 1030: ANGENOMMEN (Schritt 33, Abweichung -1)
+$ entrasim mfa verify --secret JBSWY3DPEHPK3PXP --time 1090 --code 475209 --window 1
+Code 475209 bei Zeit 1090: ABGELEHNT (Fenster ±1 Schritte)
+
+## 5. Lizenzstand (Microsoft Learn, Suchauszug 20.11.2026, nicht die ganze Seite)
+Sicherheitsstandards (Security Defaults): für alle Kunden verfügbar, MFA ohne granulare Steuerung.
+Bedingter Zugriff (MFA nach Bedarf): erfordert Entra ID P1.
+Risikobasierte Richtlinien: erfordern Entra ID P2.
+Der Auszug nennt P1 als enthalten in Microsoft 365 E3/E5/F1/F3 und Business Premium; P2 in E5. Aktuelle Pläne vor der Anwendung prüfen.

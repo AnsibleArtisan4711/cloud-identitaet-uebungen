@@ -1,0 +1,56 @@
+
+## 1. Befehle prüfen (echt gegen die installierte Azure CLI, offline)
+Azure CLI 2.93.0 (echt, nur Hilfetexte)
+az account management-group create -> --name:ok --parent:ok
+az group create -> --name:ok --location:ok --tags:ok
+az lock create -> --name:ok --lock-type:ok --resource-group:ok
+az tag update -> --resource-id:ok --operation:ok
+
+## 2. Hierarchie aufbauen (Modell): Wurzel -> prod/test -> Abonnement
+$ azsim mg create mg-prod
+Verwaltungsgruppe mg-prod unter tenant-root angelegt
+$ azsim mg create mg-test
+Verwaltungsgruppe mg-test unter tenant-root angelegt
+$ azsim mg create mg-lab --parent mg-test
+Verwaltungsgruppe mg-lab unter mg-test angelegt
+$ azsim sub move lab-test --mg mg-lab
+Abonnement lab-test liegt jetzt unter mg-lab
+$ azsim mg tree
+tenant-root  (Wurzel)
+  mg-prod
+  mg-test
+    mg-lab
+      [Abonnement] lab-test
+
+## 3. Ressourcengruppen mit Tags (Modell)
+$ azsim group create rg-web --location westeurope --tags env=lab
+Ressourcengruppe rg-web in westeurope angelegt, Tags {"env": "lab"}
+$ azsim group create rg-daten --location westeurope --tags env=lab owner=ana
+Ressourcengruppe rg-daten in westeurope angelegt, Tags {"env": "lab", "owner": "ana"}
+$ azsim group list
+rg-daten       westeurope   Ressourcen: 0
+rg-web         westeurope   Ressourcen: 0
+
+## 4. Fehlerfälle: doppelte Gruppe und zu tiefe Hierarchie (Modell)
+$ azsim mg create mg-prod
+Fehler: Verwaltungsgruppe mg-prod existiert schon
+$ azsim mg create e1 --parent mg-lab
+Verwaltungsgruppe e1 unter mg-lab angelegt
+$ azsim mg create e2 --parent e1
+Verwaltungsgruppe e2 unter e1 angelegt
+$ azsim mg create e3 --parent e2
+Verwaltungsgruppe e3 unter e2 angelegt
+$ azsim mg create e4 --parent e3
+Fehler: Tiefe der Hierarchie überschritten (Modell: höchstens 6 Ebenen einschließlich Wurzel)
+
+## 5. Sperre: Löschen wird verweigert, bis die Sperre entfernt ist (Modell)
+$ azsim lock create --name nicht-loeschen --group rg-daten --type CanNotDelete
+Sperre nicht-loeschen (CanNotDelete) auf rg-daten
+$ azsim group delete rg-daten
+Fehler: Löschen verweigert, Sperre „nicht-loeschen“ (CanNotDelete) auf rg-daten
+$ azsim lock delete --name nicht-loeschen
+Sperre entfernt
+$ azsim group delete rg-daten
+Ressourcengruppe rg-daten samt Inhalt gelöscht
+$ azsim group list
+rg-web         westeurope   Ressourcen: 0

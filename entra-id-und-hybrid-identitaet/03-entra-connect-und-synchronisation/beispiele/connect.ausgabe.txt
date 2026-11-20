@@ -1,0 +1,66 @@
+
+## 1. Befehle prüfen (echt gegen die installierte Azure CLI, offline)
+Azure CLI 2.93.0 (echt, nur Hilfetexte)
+az ad user show -> --id:ok
+az ad user list -> --filter:ok
+Entra Connect ist ein Windows-Programm (PowerShell: Start-ADSyncSyncCycle); es wurde NICHT ausgeführt und seine Befehle nicht geprüft.
+
+## 2. Lokales AD (Modell): drei OUs, ein nicht routbares UPN-Suffix
+$ entrasim ad add ana --upn ana@labmuster.onmicrosoft.com --ou Vertrieb --dept Vertrieb
+AD-Benutzer ana in OU=Vertrieb, UPN ana@labmuster.onmicrosoft.com
+$ entrasim ad add ben --upn ben@firma.local --ou Technik --dept Technik
+AD-Benutzer ben in OU=Technik, UPN ben@firma.local
+$ entrasim ad add cem --upn cem@muster-lab.example --ou Technik --dept Technik
+AD-Benutzer cem in OU=Technik, UPN cem@muster-lab.example
+$ entrasim ad add dora --upn dora@firma.local --ou Test --dept Test
+AD-Benutzer dora in OU=Test, UPN dora@firma.local
+$ entrasim ad list
+ana      OU=Vertrieb   UPN=ana@labmuster.onmicrosoft.com Abteilung=Vertrieb
+ben      OU=Technik    UPN=ben@firma.local            Abteilung=Technik
+cem      OU=Technik    UPN=cem@muster-lab.example     Abteilung=Technik
+dora     OU=Test       UPN=dora@firma.local           Abteilung=Test
+
+## 3. Erste Synchronisation: Bereich OU Vertrieb und Technik (Modell)
+$ entrasim connect config --scope Vertrieb Technik --method phs
+Entra Connect (Modell): Bereich OU=Vertrieb, Technik, Anmeldemethode phs
+$ entrasim connect run
+Synchronisation: 3 neu, 0 geändert, 0 entfernt, 1 außerhalb des Bereichs
+  Hinweis ben: UPN-Suffix firma.local ist im Mandanten nicht verifiziert -> Cloud-UPN ben@labmuster.onmicrosoft.com
+  Hinweis cem: UPN-Suffix muster-lab.example ist im Mandanten nicht verifiziert -> Cloud-UPN cem@labmuster.onmicrosoft.com
+$ entrasim user list
+ana@labmuster.onmicrosoft.com        AD     Abteilung=Vertrieb   Objekt dee53000
+ben@labmuster.onmicrosoft.com        AD     Abteilung=Technik    Objekt 765567a9
+cem@labmuster.onmicrosoft.com        AD     Abteilung=Technik    Objekt 476291f1
+
+## 4. Namensraum richtigstellen: Domäne verifizieren und UPN ändern (Modell)
+$ entrasim ad set ben --upn ben@muster-lab.example
+AD-Benutzer ben geändert
+$ entrasim ad set cem --upn cem@muster-lab.example --dept Betrieb
+AD-Benutzer cem geändert
+$ entrasim connect run
+Synchronisation: 0 neu, 2 geändert, 0 entfernt, 1 außerhalb des Bereichs
+$ entrasim user list
+ana@labmuster.onmicrosoft.com        AD     Abteilung=Vertrieb   Objekt dee53000
+ben@muster-lab.example               AD     Abteilung=Technik    Objekt 765567a9
+cem@muster-lab.example               AD     Abteilung=Betrieb    Objekt 476291f1
+
+## 5. Löschen und Bereich: Objekte außerhalb oder gelöscht verschwinden (Modell)
+$ entrasim ad del ana
+AD-Benutzer ana gelöscht
+$ entrasim connect run
+Synchronisation: 0 neu, 0 geändert, 1 entfernt, 1 außerhalb des Bereichs
+
+## 6. Anmeldemethoden und Ausfall der lokalen Umgebung (Modell)
+$ entrasim connect methods
+Methode     Wo wird das Kennwort geprüft                   Abhängigkeit bei der Anmeldung
+PHS         in der Cloud (Hash des Hashs synchronisiert)   keine zum lokalen AD
+PTA         lokal, über einen Agenten                      Agent und lokales AD müssen erreichbar sein
+Federation  lokal, beim Verbund-Server (AD FS)             AD FS-Server und lokales AD müssen erreichbar sein
+$ entrasim connect signin ben@muster-lab.example --method phs --onprem down
+Anmeldung von ben@muster-lab.example mit phs, lokale Umgebung down: ERFOLGREICH
+$ entrasim connect signin ben@muster-lab.example --method pta --onprem down
+Anmeldung von ben@muster-lab.example mit pta, lokale Umgebung down: FEHLGESCHLAGEN (lokale Prüfung nicht erreichbar)
+$ entrasim connect signin ben@muster-lab.example --method federation --onprem down
+Anmeldung von ben@muster-lab.example mit federation, lokale Umgebung down: FEHLGESCHLAGEN (lokale Prüfung nicht erreichbar)
+$ entrasim connect signin ben@muster-lab.example --method pta --onprem up
+Anmeldung von ben@muster-lab.example mit pta, lokale Umgebung up: ERFOLGREICH

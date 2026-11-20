@@ -1,0 +1,36 @@
+
+## 1. Befehle prüfen (echt gegen die installierte Azure CLI, offline)
+Azure CLI 2.93.0 (echt, nur Hilfetexte)
+az appservice plan create -> --name:ok --resource-group:ok --sku:ok --is-linux:ok
+az webapp create -> --name:ok --plan:ok --resource-group:ok
+az webapp deployment slot swap -> --slot:ok --name:ok --resource-group:ok
+az monitor autoscale create -> --resource:ok --min-count:ok --max-count:ok --count:ok
+az container create -> --name:ok --image:ok --cpu:ok --memory:ok --resource-group:ok
+
+## 2. Autoskalierung: Regeln nach CPU (Modell, ohne Abkühlzeit)
+$ azsim app autoscale --start 2 --min 2 --max 4 --out 70 --in 30 --cpu 50 80 85 90 40 20 20
+Messung 1: CPU  50.0 % -> Instanzen 2 -> 2
+Messung 2: CPU  80.0 % -> Instanzen 2 -> 3
+Messung 3: CPU  85.0 % -> Instanzen 3 -> 4
+Messung 4: CPU  90.0 % -> Instanzen 4 -> 4
+Messung 5: CPU  40.0 % -> Instanzen 4 -> 4
+Messung 6: CPU  20.0 % -> Instanzen 4 -> 3
+Messung 7: CPU  20.0 % -> Instanzen 3 -> 2
+Regeln: ab 70 % eine Instanz mehr (höchstens 4), unter 30 % eine weniger (mindestens 2); Modell ohne Abkühlzeit
+
+## 3. Slot-Tausch: Einstellungen, die am Slot haften (Modell)
+$ azsim app swap --prod '{"VERSION":"1","DB":"produktiv"}' --staging '{"VERSION":"2","DB":"test"}' --sticky DB
+Vor dem Tausch:   Produktion {"DB": "produktiv", "VERSION": "1"} | Staging {"DB": "test", "VERSION": "2"}
+Nach dem Tausch:  Produktion {"DB": "produktiv", "VERSION": "2"} | Staging {"DB": "test", "VERSION": "1"}
+Sticky (bleiben am Slot): DB
+$ azsim app swap --prod '{"VERSION":"1","DB":"produktiv"}' --staging '{"VERSION":"2","DB":"test"}'
+Vor dem Tausch:   Produktion {"DB": "produktiv", "VERSION": "1"} | Staging {"DB": "test", "VERSION": "2"}
+Nach dem Tausch:  Produktion {"DB": "test", "VERSION": "2"} | Staging {"DB": "produktiv", "VERSION": "1"}
+Sticky (bleiben am Slot): -
+Ohne Markierung ginge die Test-Datenbank mit in die Produktion: darum Verbindungszeichenfolgen am Slot festhalten (Fachwissen).
+
+## 4. Container-Gruppe: Größe festlegen (Modell, erfundener Preis)
+$ azsim app aci --cpu 1 --mem 1.5
+Container-Gruppe mit 1 vCPU und 1.5 GiB: erfundener Preis 4.5 EUR/Tag (Modell)
+$ azsim app aci --cpu 2 --mem 4
+Container-Gruppe mit 2 vCPU und 4 GiB: erfundener Preis 10.0 EUR/Tag (Modell)

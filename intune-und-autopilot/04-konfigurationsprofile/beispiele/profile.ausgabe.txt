@@ -1,0 +1,29 @@
+
+## 1. Profile als JSON (eigenes Format, nicht das von Intune), echt gelesen
+Alle Profile sind gültiges JSON (echt)
+
+## 2. Zwei Profile ohne Widerspruch (Modell)
+$ intunesim cfg grundschutz.json buero.json
+  Bildschirmsperre_min         = 10       aus Grundschutz
+  BitLocker                    = True     aus Grundschutz
+  Firewall                     = True     aus Grundschutz
+  Hintergrund                  = firma.png aus Buero
+Ergebnis: 4 Einstellung(en) angewendet, 0 Konflikt(e)
+
+## 3. Drei Profile mit Widerspruch bei der Bildschirmsperre (Modell)
+$ intunesim cfg grundschutz.json buero.json streng.json
+  Bildschirmsperre_min         KONFLIKT: 10 (Grundschutz) gegen 5 (Streng) -> Wert nicht zuverlässig (im Modell: nicht angewendet)
+  BitLocker                    = True     aus Grundschutz
+  Firewall                     = True     aus Grundschutz
+  Hintergrund                  = firma.png aus Buero
+  USB_Speicher                 = False    aus Streng
+Ergebnis: 4 Einstellung(en) angewendet, 1 Konflikt(e)
+Gleicher Wert in zwei Profilen ist kein Konflikt; unterschiedliche Werte sind einer. Das genaue Verhalten bei Konflikten im echten Intune wurde nicht geprüft.
+
+## 4. Einordnung gegenüber Gruppenrichtlinien (Fachwissen, nicht bestätigt)
+                         Gruppenrichtlinien (GPO)           Intune-Konfigurationsprofil
+Ort der Verwaltung       lokales AD, Domänencontroller     Cloud
+Zielgeräte              domänenverbundene Geräte         bei Intune registrierte Geräte
+Zuweisung                OU, Verknüpfung, Filter           Gruppen und Filter
+Reichweite               sehr viele Windows-Einstellungen   viele, nicht alle Einstellungen
+Einstellungen, die in beiden Systemen gesetzt werden, können sich widersprechen; Vorrang und Planung der Umstellung sind im echten Mandanten zu prüfen (nicht geprüft).

@@ -1,0 +1,71 @@
+
+## 1. Befehle prüfen (echt gegen die installierte Azure CLI, offline)
+Azure CLI 2.93.0 (echt, nur Hilfetexte)
+az rest -> --method:ok --url:ok --body:ok
+Bedingter Zugriff wird im echten Entra ID über das Portal oder die Graph-Schnittstelle verwaltet; hier nicht ausgeführt.
+
+## 2. Richtlinien als JSON (eigenes Format, nicht das echte Graph-Format), echt gelesen
+Alle Richtlinien sind gültiges JSON (echt)
+
+## 3. Anfragen auswerten (Modell, Lizenz P1)
+$ entrasim ca --policies mfa-alle.json geraet-admins.json extern-sperren.json bericht.json --user ana --app Office --mfa no
+Anfrage: Benutzer ana, Gruppen -, App Office, Ort untrusted, Plattform windows, Risiko none, MFA nein, Gerät konform nein, Lizenz p1
+  MFA fuer alle          trifft zu: verlangt mfa
+  Admins nur konform     trifft nicht zu
+  Fremdplattform sperren trifft nicht zu
+  Nur Bericht            nur Bericht (nicht wirksam): verlangt compliantDevice
+Ergebnis: ZUGRIFF ERST NACH ERFÜLLEN: mfa
+$ entrasim ca --policies mfa-alle.json geraet-admins.json extern-sperren.json bericht.json --user ana --app Office --mfa yes
+Anfrage: Benutzer ana, Gruppen -, App Office, Ort untrusted, Plattform windows, Risiko none, MFA ja, Gerät konform nein, Lizenz p1
+  MFA fuer alle          trifft zu: verlangt mfa
+  Admins nur konform     trifft nicht zu
+  Fremdplattform sperren trifft nicht zu
+  Nur Bericht            nur Bericht (nicht wirksam): verlangt compliantDevice
+Ergebnis: ZUGRIFF ERLAUBT (Auflagen erfüllt: mfa)
+$ entrasim ca --policies mfa-alle.json geraet-admins.json extern-sperren.json bericht.json --user dora --groups admins --app Office --mfa yes --compliant no
+Anfrage: Benutzer dora, Gruppen admins, App Office, Ort untrusted, Plattform windows, Risiko none, MFA ja, Gerät konform nein, Lizenz p1
+  MFA fuer alle          trifft zu: verlangt mfa
+  Admins nur konform     trifft zu: verlangt compliantDevice
+  Fremdplattform sperren trifft nicht zu
+  Nur Bericht            nur Bericht (nicht wirksam): verlangt compliantDevice
+Ergebnis: ZUGRIFF ERST NACH ERFÜLLEN: compliantDevice
+$ entrasim ca --policies mfa-alle.json geraet-admins.json extern-sperren.json bericht.json --user dora --groups admins --app Office --mfa yes --compliant yes
+Anfrage: Benutzer dora, Gruppen admins, App Office, Ort untrusted, Plattform windows, Risiko none, MFA ja, Gerät konform ja, Lizenz p1
+  MFA fuer alle          trifft zu: verlangt mfa
+  Admins nur konform     trifft zu: verlangt compliantDevice
+  Fremdplattform sperren trifft nicht zu
+  Nur Bericht            nur Bericht (nicht wirksam): verlangt compliantDevice
+Ergebnis: ZUGRIFF ERLAUBT (Auflagen erfüllt: mfa, compliantDevice)
+
+## 4. Eine Sperre schlägt alles; die Notfallkonten sind ausgenommen (Modell)
+$ entrasim ca --policies mfa-alle.json geraet-admins.json extern-sperren.json bericht.json --user ana --app Office --platform linux --mfa yes
+Anfrage: Benutzer ana, Gruppen -, App Office, Ort untrusted, Plattform linux, Risiko none, MFA ja, Gerät konform nein, Lizenz p1
+  MFA fuer alle          trifft zu: verlangt mfa
+  Admins nur konform     trifft nicht zu
+  Fremdplattform sperren trifft zu: BLOCK
+  Nur Bericht            nur Bericht (nicht wirksam): verlangt compliantDevice
+Ergebnis: ZUGRIFF GESPERRT (eine Sperre schlägt alle anderen Richtlinien)
+$ entrasim ca --policies mfa-alle.json geraet-admins.json extern-sperren.json bericht.json --user notfall --groups notfall --app Office --platform linux
+Anfrage: Benutzer notfall, Gruppen notfall, App Office, Ort untrusted, Plattform linux, Risiko none, MFA nein, Gerät konform nein, Lizenz p1
+  MFA fuer alle          trifft nicht zu
+  Admins nur konform     trifft nicht zu
+  Fremdplattform sperren trifft nicht zu
+  Nur Bericht            nur Bericht (nicht wirksam): verlangt compliantDevice
+Ergebnis: ZUGRIFF ERLAUBT (keine Richtlinie verlangt etwas)
+
+## 5. Risiko-Bedingung braucht P2 (Modell, Lizenzstand aus Microsoft Learn-Auszug)
+$ entrasim ca --policies mfa-alle.json risiko.json --user ana --app Office --risk high --mfa yes --license p1
+Anfrage: Benutzer ana, Gruppen -, App Office, Ort untrusted, Plattform windows, Risiko high, MFA ja, Gerät konform nein, Lizenz p1
+  MFA fuer alle          trifft zu: verlangt mfa
+  Hohes Risiko MFA       wird übersprungen: Risikobedingung erfordert P2 (Learn gelesen)
+Ergebnis: ZUGRIFF ERLAUBT (Auflagen erfüllt: mfa)
+$ entrasim ca --policies mfa-alle.json risiko.json --user ana --app Office --risk high --mfa no --license p2
+Anfrage: Benutzer ana, Gruppen -, App Office, Ort untrusted, Plattform windows, Risiko high, MFA nein, Gerät konform nein, Lizenz p2
+  MFA fuer alle          trifft zu: verlangt mfa
+  Hohes Risiko MFA       trifft zu: verlangt mfa
+Ergebnis: ZUGRIFF ERST NACH ERFÜLLEN: mfa
+
+## 6. Ohne P1 gibt es keinen Bedingten Zugriff (Modell)
+$ entrasim ca --policies mfa-alle.json geraet-admins.json extern-sperren.json bericht.json --user ana --app Office --license free
+Anfrage: Benutzer ana, Gruppen -, App Office, Ort untrusted, Plattform windows, Risiko none, MFA nein, Gerät konform nein, Lizenz free
+Bedingter Zugriff nicht verfügbar: erfordert Entra ID P1 (Microsoft Learn gelesen, Stand 20.11.2026). Es gelten höchstens die Sicherheitsstandards.

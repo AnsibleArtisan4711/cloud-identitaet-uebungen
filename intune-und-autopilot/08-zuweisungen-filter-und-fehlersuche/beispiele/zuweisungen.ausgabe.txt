@@ -1,0 +1,84 @@
+
+## 1. Gruppen, Filter und Gerät als JSON (eigenes Format), echt gelesen
+Alle Dateien sind gültiges JSON (echt)
+
+## 2. Einfache Zuweisung mit Include-Filter (Modell)
+$ intunesim assign a1.json pc-a.json filter.json
+Gerät PC-A, Gruppen ['vertrieb']
+  Zuweisung an vertrieb   Filter NurSurface Modus include  Filterergebnis passt
+  Regel: Include-Filter mit ODER-Logik
+Ergebnis: Richtlinie wird ANGEWENDET
+$ intunesim assign a1.json pc-b.json filter.json
+Gerät PC-B, Gruppen ['vertrieb', 'technik']
+  Zuweisung an vertrieb   Filter NurSurface Modus include  Filterergebnis passt nicht
+  Regel: Include-Filter mit ODER-Logik
+Ergebnis: Richtlinie wird NICHT angewendet
+
+## 3. Vorrang: Exclude vor Kein Filter vor Include (Learn-Auszug)
+$ intunesim assign a2.json pc-b.json filter.json
+Gerät PC-B, Gruppen ['vertrieb', 'technik']
+  Zuweisung an vertrieb   Filter NurSurface Modus include  Filterergebnis passt nicht
+  Zuweisung an technik    Filter KeinSurface Modus exclude  Filterergebnis passt nicht
+  Regel: Ausschluss-Filter hat Vorrang (Exclude vor Kein Filter vor Include)
+Ergebnis: Richtlinie wird ANGEWENDET
+$ intunesim assign a3.json pc-b.json filter.json
+Gerät PC-B, Gruppen ['vertrieb', 'technik']
+  Zuweisung an vertrieb   Filter NurSurface Modus include  Filterergebnis passt nicht
+  Zuweisung an technik    Filter -          Modus none     Filterergebnis -
+  Regel: Zuweisung ohne Filter hat Vorrang vor Include
+Ergebnis: Richtlinie wird ANGEWENDET
+
+## 4. Gleiche Modi: ODER-Logik (Learn-Auszug)
+$ intunesim assign a4.json pc-b.json filter.json
+Gerät PC-B, Gruppen ['vertrieb', 'technik']
+  Zuweisung an vertrieb   Filter NurSurface Modus include  Filterergebnis passt nicht
+  Zuweisung an technik    Filter NurLaptop  Modus include  Filterergebnis passt
+  Regel: Include-Filter mit ODER-Logik
+Ergebnis: Richtlinie wird ANGEWENDET
+
+## 5. Gruppenausschluss (Modell)
+$ intunesim assign a5.json pc-a.json filter.json
+Gerät PC-A, Gruppen ['vertrieb']
+  Zuweisung an all        Filter -          Modus none     Filterergebnis -
+  Regel: Zuweisung ohne Filter hat Vorrang vor Include
+Ergebnis: Richtlinie wird ANGEWENDET
+$ intunesim assign a5.json pc-b.json filter.json
+Gerät PC-B, Gruppen ['vertrieb', 'technik']
+  ausgeschlossen durch Gruppenausschluss: technik
+Ergebnis: Richtlinie wird NICHT angewendet
+
+## 6. Fehlersuche: von der Registrierung bis zur Wirkung (Modell)
+$ intunesim diag pc-c.json
+Fehlersuche für PC-C (Reihenfolge der Prüfung von der Registrierung bis zur Wirkung):
+  [ok] Intune-Lizenz zugewiesen
+  [ok] Benutzer im MDM-Benutzerbereich
+  [ok] Registrierung nicht durch Einschränkung blockiert
+  [ok] Gerät hat zuletzt eingecheckt (Modell: höchstens 1 Tag)
+  [ok] Gerät ist in der Zielgruppe
+  [FEHLT] kein Filter schließt das Gerät aus
+  [ok] keine widersprüchliche Einstellung (Konflikt)
+Erste Ursache: kein Filter schließt das Gerät aus
+$ intunesim diag pc-d.json
+Fehlersuche für PC-D (Reihenfolge der Prüfung von der Registrierung bis zur Wirkung):
+  [ok] Intune-Lizenz zugewiesen
+  [FEHLT] Benutzer im MDM-Benutzerbereich
+  [ok] Registrierung nicht durch Einschränkung blockiert
+  [FEHLT] Gerät hat zuletzt eingecheckt (Modell: höchstens 1 Tag)
+  [ok] Gerät ist in der Zielgruppe
+  [ok] kein Filter schließt das Gerät aus
+  [ok] keine widersprüchliche Einstellung (Konflikt)
+Erste Ursache: Benutzer im MDM-Benutzerbereich
+$ intunesim diag pc-e.json
+Fehlersuche für PC-E (Reihenfolge der Prüfung von der Registrierung bis zur Wirkung):
+  [ok] Intune-Lizenz zugewiesen
+  [ok] Benutzer im MDM-Benutzerbereich
+  [ok] Registrierung nicht durch Einschränkung blockiert
+  [ok] Gerät hat zuletzt eingecheckt (Modell: höchstens 1 Tag)
+  [ok] Gerät ist in der Zielgruppe
+  [ok] kein Filter schließt das Gerät aus
+  [ok] keine widersprüchliche Einstellung (Konflikt)
+Erste Ursache: keine gefunden; Protokolle und Berichte im Dienst prüfen
+
+## 7. Abschlussprojekt: die Kette (Zusammenfassung)
+Registrieren (Lizenz, Bereich, Einschränkungen) -> Autopilot-Profil -> Konfigurationsprofile -> Compliance-Richtlinie -> Bedingter Zugriff -> Apps -> Updates.
+Zuweisungen und Filter entscheiden an jeder Stelle, ob die Maßnahme das Gerät erreicht.

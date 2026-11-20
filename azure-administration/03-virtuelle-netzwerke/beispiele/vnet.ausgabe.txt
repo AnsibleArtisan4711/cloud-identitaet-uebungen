@@ -1,0 +1,52 @@
+
+## 1. Befehle prüfen (echt gegen die installierte Azure CLI, offline)
+Azure CLI 2.93.0 (echt, nur Hilfetexte)
+az network vnet create -> --name:ok --resource-group:ok --address-prefixes:ok --subnet-prefixes:ok
+az network vnet subnet create -> --name:ok --vnet-name:ok --address-prefixes:ok
+az network vnet peering create -> --name:ok --vnet-name:ok --remote-vnet:ok --allow-vnet-access:ok
+az network nsg rule create -> --nsg-name:ok --priority:ok --access:ok --direction:ok --destination-port-ranges:ok
+
+## 2. Adressplanung rechnen (echt mit Python ipaddress): wie viele Adressen hat ein Subnetz?
+10.10.0.0/16    65536 Adressen, Netzadresse 10.10.0.0, Broadcast 10.10.255.255
+10.10.1.0/24      256 Adressen, Netzadresse 10.10.1.0, Broadcast 10.10.1.255
+10.10.2.0/27       32 Adressen, Netzadresse 10.10.2.0, Broadcast 10.10.2.31
+10.10.3.0/29        8 Adressen, Netzadresse 10.10.3.0, Broadcast 10.10.3.7
+Azure reserviert je Subnetz 5 Adressen (Fachwissen, hier nicht gegen die Dokumentation geprüft); das Modell rechnet damit.
+
+## 3. VNets anlegen (Modell)
+$ azsim vnet create hub --group rg-net --prefix 10.10.0.0/16 --subnet web=10.10.1.0/24 daten=10.10.2.0/27
+VNet hub 10.10.0.0/16 angelegt, 2 Subnetz(e)
+$ azsim vnet show hub
+VNet hub 10.10.0.0/16
+  daten      10.10.2.0/27     Adressen    32, davon nutzbar für Ressourcen    27 (5 sind reserviert)
+  web        10.10.1.0/24     Adressen   256, davon nutzbar für Ressourcen   251 (5 sind reserviert)
+$ azsim vnet create spoke --group rg-net --prefix 10.20.0.0/16 --subnet app=10.20.1.0/24
+VNet spoke 10.20.0.0/16 angelegt, 1 Subnetz(e)
+$ azsim vnet create falsch --group rg-net --prefix 10.30.0.0/24 --subnet a=10.31.0.0/24
+Fehler: Subnetz a (10.31.0.0/24) liegt nicht im Adressraum 10.30.0.0/24
+$ azsim vnet create ueber --group rg-net --prefix 10.40.0.0/24 --subnet a=10.40.0.0/25 b=10.40.0.64/26
+Fehler: Subnetze b und a überlappen
+
+## 4. Wie groß muss ein Subnetz für 60 Server sein? (Modell)
+$ azsim vnet plan --hosts 60
+Für 60 Adressen braucht ein Subnetz mindestens /25 (128 Adressen, 123 nutzbar)
+$ azsim vnet plan --hosts 27
+Für 27 Adressen braucht ein Subnetz mindestens /27 (32 Adressen, 27 nutzbar)
+
+## 5. Peering: Adressräume dürfen nicht überlappen (Modell)
+$ azsim vnet peer hub spoke
+Peering hub <-> spoke: möglich (10.10.0.0/16 / 10.20.0.0/16); gilt nicht transitiv (Fachwissen)
+$ azsim vnet create alt --group rg-net --prefix 10.10.128.0/17 --subnet x=10.10.128.0/24
+VNet alt 10.10.128.0/17 angelegt, 1 Subnetz(e)
+$ azsim vnet peer hub alt
+Peering hub <-> alt abgelehnt: Adressräume 10.10.0.0/16 und 10.10.128.0/17 überlappen
+
+## 6. NSG: Priorität entscheidet, kleinere Zahl zuerst; sonst greifen die Standardregeln (Modell)
+$ azsim nsg --port 443 --rule 100:https-erlauben:443:allow '200:alles-sperren:*:deny'
+Treffer: Regel https-erlauben (Priorität 100) -> allow
+$ azsim nsg --port 22 --rule 100:https-erlauben:443:allow '200:alles-sperren:*:deny'
+Treffer: Regel alles-sperren (Priorität 200) -> deny
+$ azsim nsg --port 22 --source Internet
+Treffer: Standardregel DenyAllInBound (Priorität 65500) -> deny
+$ azsim nsg --port 22 --source VirtualNetwork
+Treffer: Standardregel AllowVnetInBound (Priorität 65000) -> allow

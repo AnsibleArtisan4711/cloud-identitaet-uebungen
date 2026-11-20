@@ -1,0 +1,55 @@
+
+## 1. Befehle prüfen (echt gegen die installierte Azure CLI, offline)
+Azure CLI 2.93.0 (echt, nur Hilfetexte)
+az vm create -> --name:ok --resource-group:ok --image:ok --size:ok --zone:ok
+az vm resize -> --name:ok --size:ok
+az vm list-sizes -> --location:ok
+az deployment group validate -> --resource-group:ok --template-file:ok --parameters:ok
+az deployment group what-if -> --resource-group:ok --template-file:ok
+
+## 2. Umgebung (Modell)
+$ azsim vm sizes
+Lab_S1   1 vCPU   2 GiB    4 EUR/Tag (erfunden)
+Lab_S2   2 vCPU   4 GiB    9 EUR/Tag (erfunden)
+Lab_S4   4 vCPU   8 GiB   18 EUR/Tag (erfunden)
+Lab_M8   8 vCPU  32 GiB   52 EUR/Tag (erfunden)
+
+## 3. VMs anlegen: Zonen und Kontingent (Modell; Kontingent 12 vCPU erfunden)
+$ azsim vm create web1 --group rg-vm --size Lab_S2 --vnet netz --subnet web --zone 1
+VM web1: Lab_S2, Zone 1, Subnetz netz/web, Kontingent 2/12 vCPU
+$ azsim vm create web2 --group rg-vm --size Lab_S2 --vnet netz --subnet web --zone 2
+VM web2: Lab_S2, Zone 2, Subnetz netz/web, Kontingent 4/12 vCPU
+$ azsim vm create db1 --group rg-vm --size Lab_S4 --vnet netz --subnet web --zone 3
+VM db1: Lab_S4, Zone 3, Subnetz netz/web, Kontingent 8/12 vCPU
+$ azsim vm create gross --group rg-vm --size Lab_M8 --vnet netz --subnet web
+Fehler: Kontingent in westeurope überschritten (8 von 12 vCPU belegt, 8 angefordert; Modell-Kontingent erfunden)
+$ azsim vm create falsch --group rg-vm --size Lab_S1 --vnet netz --subnet web --zone 4
+Fehler: Zone muss 1, 2 oder 3 sein
+
+## 4. Größe ändern und Kosten (Modell, erfundene Preise)
+$ azsim vm resize web2 --size Lab_S1
+VM web2 -> Lab_S1 (im echten Azure Neustart nötig, Fachwissen)
+$ azsim vm cost
+db1      Lab_S4    18 EUR/Tag
+web1     Lab_S2     9 EUR/Tag
+web2     Lab_S1     4 EUR/Tag
+Summe 31 EUR/Tag, 930 EUR/30 Tage (erfundene Preise)
+
+## 5. ARM-Vorlage: gültige JSON-Datei lesen (echt, Python) und Struktur prüfen (Modell, nicht das Azure-Schema)
+JSON gültig (echt); Schlüssel oben: $schema, contentVersion, parameters, resources
+$ azsim template vorlage.json
+Strukturprüfung (eigenes Modell, nicht das Schema von Azure):
+  Hinweis: Parameter ungenutzt wird nicht benutzt
+  Ergebnis: in Ordnung
+
+## 6. Fehler in der Vorlage: Parameter nicht definiert, Pflichtfeld fehlt (Modell)
+$ azsim template fehler.json
+Strukturprüfung (eigenes Modell, nicht das Schema von Azure):
+  resources[0]: apiVersion fehlt
+  Parameter vnetname wird benutzt, aber nicht definiert
+  Hinweis: Parameter ungenutzt wird nicht benutzt
+  Hinweis: Parameter vnetName wird nicht benutzt
+  Ergebnis: FEHLER
+
+## 7. Kaputtes JSON (echt, Python meldet den Fehler)
+json.decoder.JSONDecodeError: Expecting value: line 1 column 18 (char 17)

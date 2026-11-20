@@ -1,0 +1,34 @@
+
+## 1. Prüfsumme eines Installationspakets (echt: SHA-256)
+$ intunesim app sha256 paket.bin 13fe6815adece39ddf5089245fd487e67172dbc5fa3285303f233206b5486522
+paket.bin: SHA-256 13fe6815adece39d…; stimmt mit der Vorgabe überein
+$ intunesim app sha256 paket2.bin 13fe6815adece39ddf5089245fd487e67172dbc5fa3285303f233206b5486522
+paket2.bin: SHA-256 3ed47bdcf30131b9…; WEICHT von der Vorgabe ab
+
+## 2. Zuweisungen mit Absicht (Modell; Learn: mehrere Absichten für dieselbe Gruppe sind nicht möglich)
+$ intunesim app intent --group alle:available technik:required
+Zuweisungen: alle -> available, technik -> required
+$ intunesim app intent --group technik:required technik:available
+Fehler: Gruppe technik hat schon die Absicht required; Intune verhindert mehrere Zuweisungen an dieselbe Gruppe [Learn]
+
+## 3. Erkennungsregeln (Modell): wann gilt eine App als installiert?
+Alle Dateien sind gültiges JSON (echt)
+Gerät neu:
+$ intunesim app detect regeln.json geraet-neu.json
+  Erkennungsregel file C:/Programme/App/app.exe: erfüllt
+  Erkennungsregel version C:/Programme/App/app.exe >= 2.1: erfüllt
+Ergebnis: App gilt als installiert
+Gerät alt:
+$ intunesim app detect regeln.json geraet-alt.json
+  Erkennungsregel file C:/Programme/App/app.exe: erfüllt
+  Erkennungsregel version C:/Programme/App/app.exe >= 2.1: NICHT erfüllt
+Ergebnis: App gilt als NICHT installiert (Installation wird wiederholt oder als fehlgeschlagen gemeldet)
+Gerät leer:
+$ intunesim app detect regeln.json geraet-leer.json
+  Erkennungsregel file C:/Programme/App/app.exe: NICHT erfüllt
+  Erkennungsregel version C:/Programme/App/app.exe >= 2.1: NICHT erfüllt
+Ergebnis: App gilt als NICHT installiert (Installation wird wiederholt oder als fehlgeschlagen gemeldet)
+Der Versionsvergleich im Modell ist ein Textvergleich und gilt nur für diese Beispiele.
+
+## 4. Hinweis (Fachwissen, nicht bestätigt)
+Ohne passende Erkennungsregel kann eine installierte App als „nicht installiert“ gelten und die Installation wiederholt werden; das Verpacken (Win32) wurde nicht ausgeführt.

@@ -1,0 +1,24 @@
+
+## 1. Befehle prüfen (echt gegen die installierte Azure CLI, offline)
+Azure CLI 2.93.0 (echt, nur Hilfetexte)
+az rest -> --method:ok --url:ok --body:ok
+Intune wird im echten Mandanten über das Verwaltungszentrum oder die Graph-Schnittstelle bedient (az rest); hier nicht ausgeführt.
+
+## 2. Lizenzstand (Microsoft Learn, Suchauszug 20.11.2026)
+Intune ist in einigen Microsoft-365-Plänen enthalten (laut Auszug u. a. Business Premium, F1/F3, E3/E5, EMS E3/E5 und Intune for Education).
+Auch bei einem Microsoft-365-Abonnement müssen Lizenzen den Benutzern zugewiesen werden, damit sie Geräte registrieren können.
+Entra ID P1 oder P2 (Bedingter Zugriff, MFA, dynamische Gruppen) kann zusätzlich nötig sein. Aktuelle Pläne vor der Anwendung prüfen.
+
+## 3. Welcher Weg passt? (Modell nach Fachwissen, nicht bestätigt)
+$ intunesim enroll decide --os windows --ownership corporate --new yes
+windows, corporate, neu=yes: Windows Autopilot (Gerät vom Hersteller oder Händler registriert, Einrichtung durch den Benutzer)
+$ intunesim enroll decide --os windows --ownership corporate --new no
+windows, corporate, neu=no: Einbindung in Entra ID mit automatischer MDM-Registrierung, oder Autopilot nach Erfassung des Hardware-Hashs
+$ intunesim enroll decide --os windows --ownership personal
+windows, personal, neu=no: App-Schutz (MAM) ohne Registrierung oder Registrierung als privates Gerät mit geringerer Kontrolle
+$ intunesim enroll decide --os android --ownership corporate
+android, corporate, neu=no: plattformspezifische Firmenregistrierung (nicht Gegenstand dieses Kurses)
+
+## 4. MDM und MAM (Fachwissen, kein Modellergebnis)
+MDM: Das Gerät wird registriert und als Ganzes verwaltet (Profile, Richtlinien, Apps, Löschen).
+MAM: Nur Apps und deren Daten werden geschützt; das Gerät bleibt unverwaltet (typisch für private Geräte).

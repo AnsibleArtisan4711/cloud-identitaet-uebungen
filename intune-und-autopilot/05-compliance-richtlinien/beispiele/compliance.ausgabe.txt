@@ -1,0 +1,36 @@
+
+## 1. Richtlinie und Geräte als JSON (eigenes Format), echt gelesen
+Alle Dateien sind gültiges JSON (echt)
+
+## 2. Konformes und nicht konformes Gerät (Modell)
+$ intunesim comp --policy richtlinie.json --device gut.json
+Gerät PC-GUT: alle Regeln erfüllt -> konform
+$ intunesim comp --policy richtlinie.json --device alt.json
+Gerät PC-ALT: verletzt: BitLocker (Soll True, Ist False); Kennwortlaenge (Soll 8, Ist 6); Windows_Build (Soll 22631, Ist 19045)
+  Tag   0 nach Feststellung: Gerät als nicht konform markieren
+  Tag   2 nach Feststellung: E-Mail an den Benutzer senden
+  Tag   5 nach Feststellung: E-Mail erneut senden
+  Tag  14 nach Feststellung: Gerät zur Außerbetriebnahme vormerken (retire list)
+  [Learn] „Gerät als nicht konform markieren“ ist immer vorhanden (Standard 0 Tage) und kann nicht entfernt werden; Bedingter Zugriff wirkt, sobald das Gerät als nicht konform gilt.
+
+## 3. Mit Bedingtem Zugriff: Sperre sofort (Modell; Learn: Bedingter Zugriff wirkt, sobald das Gerät als nicht konform gilt)
+$ intunesim comp --policy richtlinie.json --device alt.json --ca yes
+Gerät PC-ALT: verletzt: BitLocker (Soll True, Ist False); Kennwortlaenge (Soll 8, Ist 6); Windows_Build (Soll 22631, Ist 19045)
+  Tag   0 nach Feststellung: Gerät als nicht konform markieren
+  Tag   2 nach Feststellung: E-Mail an den Benutzer senden
+  Tag   5 nach Feststellung: E-Mail erneut senden
+  Tag  14 nach Feststellung: Gerät zur Außerbetriebnahme vormerken (retire list)
+  [Learn] „Gerät als nicht konform markieren“ ist immer vorhanden (Standard 0 Tage) und kann nicht entfernt werden; Bedingter Zugriff wirkt, sobald das Gerät als nicht konform gilt.
+  Zugriff gesperrt (Bedingter Zugriff verlangt Konformität) ab Tag 0
+
+## 4. Karenzzeit: „nicht konform markieren“ erst nach 3 Tagen (Modell; Learn: Zeitplan 0 bis 365 Tage)
+$ intunesim comp --policy richtlinie-karenz.json --device alt.json --ca yes
+Gerät PC-ALT: verletzt: BitLocker (Soll True, Ist False); Kennwortlaenge (Soll 8, Ist 6); Windows_Build (Soll 22631, Ist 19045)
+  Tag   1 nach Feststellung: E-Mail an den Benutzer senden
+  Tag   3 nach Feststellung: Gerät als nicht konform markieren
+  [Learn] „Gerät als nicht konform markieren“ ist immer vorhanden (Standard 0 Tage) und kann nicht entfernt werden; Bedingter Zugriff wirkt, sobald das Gerät als nicht konform gilt.
+  Zugriff gesperrt (Bedingter Zugriff verlangt Konformität) ab Tag 3
+
+## 5. Was die Standardaktion bedeutet (Microsoft Learn, Suchauszug 20.11.2026, nicht die ganze Seite)
+Jede Richtlinie enthält die Aktion „Gerät als nicht konform markieren“ mit 0 Tagen; sie kann nicht entfernt, aber zeitlich verschoben werden.
+Weitere Aktionen laut Auszug: E-Mail an Benutzer, Gerät aus der Ferne sperren, Gerät auf eine Retire-Liste setzen, Push-Benachrichtigung; nicht jede Aktion gibt es für jede Plattform.

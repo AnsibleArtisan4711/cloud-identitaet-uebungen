@@ -1,0 +1,40 @@
+
+## 1. Ausgangslage (Modell): ana mit Lizenz im Bereich, ben ohne Lizenz, cem ohne MDM-Bereich
+$ intunesim user ana
+ana: Intune-Lizenz ja, MDM-Benutzerbereich ja
+$ intunesim user ben
+ben: Intune-Lizenz nein, MDM-Benutzerbereich ja
+$ intunesim user cem
+cem: Intune-Lizenz ja, MDM-Benutzerbereich nein
+
+## 2. Registrierungsversuche (Modell)
+$ intunesim enroll try --user ben --os windows --ownership corporate --name PC-BEN
+Registrierung von PC-BEN FEHLGESCHLAGEN: Benutzer ben hat keine Intune-Lizenz [Learn: auch bei Microsoft-365-Abonnement müssen Lizenzen zugewiesen sein]
+$ intunesim enroll try --user cem --os windows --ownership corporate --name PC-CEM
+Registrierung von PC-CEM FEHLGESCHLAGEN: cem liegt nicht im MDM-Benutzerbereich der automatischen Windows-Registrierung [Learn: Bereich konfigurieren]
+$ intunesim enroll try --user ana --os windows --ownership corporate --name PC-ANA-1
+Registrierung von PC-ANA-1 (windows, corporate) für ana: ERFOLGREICH (1 von 3 Geräten)
+$ intunesim enroll try --user ana --os windows --ownership personal --name PC-ANA-PRIVAT
+Registrierung von PC-ANA-PRIVAT (windows, personal) für ana: ERFOLGREICH (2 von 3 Geräten)
+
+## 3. Private Windows-Geräte sperren (Modell; Learn: Einschränkungen können private Windows-Geräte blockieren)
+$ intunesim restrict set --block-personal yes
+Einschränkungen: private Windows-Geräte gesperrt, Limit 3 Geräte je Benutzer (Modellwert)
+$ intunesim enroll try --user ana --os windows --ownership personal --name PC-ANA-PRIVAT-2
+Registrierung von PC-ANA-PRIVAT-2 FEHLGESCHLAGEN: private Windows-Geräte sind gesperrt [Learn: Registrierungseinschränkungen können private Windows-Geräte sperren]
+
+## 4. Gerätelimit (Modellwert 3)
+$ intunesim enroll try --user ana --os windows --ownership corporate --name PC-ANA-2
+Registrierung von PC-ANA-2 (windows, corporate) für ana: ERFOLGREICH (3 von 3 Geräten)
+$ intunesim enroll try --user ana --os windows --ownership corporate --name PC-ANA-3
+Registrierung von PC-ANA-3 FEHLGESCHLAGEN: Limit von 3 Geräten für ana erreicht (Modellwert)
+
+## 5. Ursachen beheben: Lizenz und Bereich ergänzen (Modell)
+$ intunesim user ben --license yes
+ben: Intune-Lizenz ja, MDM-Benutzerbereich ja
+$ intunesim user cem --scope yes
+cem: Intune-Lizenz ja, MDM-Benutzerbereich ja
+$ intunesim enroll try --user ben --os windows --ownership corporate --name PC-BEN
+Registrierung von PC-BEN (windows, corporate) für ben: ERFOLGREICH (1 von 3 Geräten)
+$ intunesim enroll try --user cem --os windows --ownership corporate --name PC-CEM
+Registrierung von PC-CEM (windows, corporate) für cem: ERFOLGREICH (1 von 3 Geräten)

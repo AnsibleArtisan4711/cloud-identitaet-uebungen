@@ -1,0 +1,27 @@
+
+## 1. Befehle prüfen (echt gegen die installierte Azure CLI, offline)
+Azure CLI 2.93.0 (echt, nur Hilfetexte)
+az ad user list -> --filter:ok
+Die Geräteabfrage dsregcmd /status läuft nur unter Windows; sie wurde NICHT ausgeführt. Die Beispieldateien unten sind nachgebaut.
+
+## 2. Ausgaben von dsregcmd nachbilden (ERFUNDEN) und auswerten (Modell)
+$ entrasim device dsreg geraet-cloud.txt
+geraet-cloud.txt: AzureAdJoined=YES, DomainJoined=NO -> Entra eingebunden (nur Cloud)
+$ entrasim device dsreg geraet-hybrid.txt
+geraet-hybrid.txt: AzureAdJoined=YES, DomainJoined=YES -> Entra hybrid eingebunden
+$ entrasim device dsreg geraet-nur-domaene.txt
+geraet-nur-domaene.txt: AzureAdJoined=NO, DomainJoined=YES -> nur Domäne (hybride Einbindung steht aus oder schlug fehl)
+$ entrasim device dsreg geraet-privat.txt
+geraet-privat.txt: AzureAdJoined=NO, DomainJoined=NO -> nicht eingebunden (höchstens registriert)
+
+## 3. Voraussetzungen der hybriden Einbindung (Modell)
+$ entrasim device hybrid --connect yes --scp yes --dc yes
+Hybride Einbindung: möglich
+$ entrasim device hybrid --connect no --scp yes --dc yes
+Hybride Einbindung: NICHT möglich, es fehlt: Entra Connect synchronisiert das Gerät
+$ entrasim device hybrid --connect yes --scp no --dc no
+Hybride Einbindung: NICHT möglich, es fehlt: Dienstverbindungspunkt (SCP) ist konfiguriert; Sichtverbindung zum Domänencontroller
+
+## 4. Einordnung (Fachwissen, aus Microsoft Learn gelesen: nur der erste Punkt)
+Windows Autopilot im selbstbereitstellenden Modus wird für hybrid eingebundene Geräte nicht unterstützt (Microsoft Learn, Teams-Rooms-Seite, Suchauszug 20.11.2026).
+Alle anderen Aussagen zu Einbindungsarten sind Fachwissen und nicht bestätigt.
