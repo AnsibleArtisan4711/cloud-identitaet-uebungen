@@ -1,0 +1,4 @@
+# Azure CLI / PowerShell (Textdatei, NICHT ausgeführt: es gab kein Azure-Abonnement; Fachwissen, Befehle und Parameter nicht gegen die Dokumentation geprüft)
+az network private-endpoint create --name pe-konto1 --resource-group rg-lab --vnet-name vnet-hub --subnet verwaltung --private-connection-resource-id RESSOURCEN-ID --group-id blob --connection-name verbindung1
+az network private-dns zone create --resource-group rg-lab --name privatelink.blob.core.windows.net
+az network private-dns link vnet create --resource-group rg-lab --zone-name privatelink.blob.core.windows.net --name link1 --virtual-network vnet-hub --registration-enabled false

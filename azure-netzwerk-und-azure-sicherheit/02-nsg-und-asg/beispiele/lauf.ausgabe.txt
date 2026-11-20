@@ -1,0 +1,5 @@
+Quelle 203.0.113.5  Port 443   -> Allow durch erlaube-https
+Quelle 10.57.2.10   Port 22    -> Allow durch erlaube-ssh-intern
+Quelle 203.0.113.5  Port 22    -> Deny  durch verbiete-ssh
+Quelle 10.57.5.5    Port 3389  -> Allow durch AllowVnetInBound
+Quelle 203.0.113.5  Port 3389  -> Deny  durch DenyAllInBound

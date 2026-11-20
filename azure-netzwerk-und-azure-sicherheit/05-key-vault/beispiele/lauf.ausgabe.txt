@@ -1,0 +1,8 @@
+app1        Rolle Geheimnisleser      get  -> erlaubt
+app1        Rolle Geheimnisleser      set  -> verboten
+admin1      Rolle Geheimnisverwalter  get  -> erlaubt
+admin1      Rolle Geheimnisverwalter  set  -> erlaubt
+praktikant  Rolle Leser               get  -> verboten
+praktikant  Rolle Leser               set  -> verboten
+
+Geheimnis 'db-passwort' wird 90 Tage alt: Erneuerung planen; Ablaufdatum prüfen, nie im Klartext in Dateien oder Repositories ablegen.

@@ -1,0 +1,3 @@
+# Azure CLI / PowerShell (Textdatei, NICHT ausgeführt: es gab kein Azure-Abonnement; Fachwissen, Befehle und Parameter nicht gegen die Dokumentation geprüft)
+az network vnet create --name vnet-hub --resource-group rg-lab --address-prefixes 10.57.0.0/16 --subnet-name verwaltung --subnet-prefixes 10.57.2.0/24
+az network vnet peering create --name hub-zu-app --resource-group rg-lab --vnet-name vnet-hub --remote-vnet vnet-app --allow-vnet-access

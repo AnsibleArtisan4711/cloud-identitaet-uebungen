@@ -1,0 +1,3 @@
+Ziel 10.57.3.4  -> VirtualNetwork         (Präfix 10.57.0.0/16, Quelle System)
+Ziel 10.60.1.1  -> 10.57.0.4 (Firewall)   (Präfix 10.60.0.0/16, Quelle Eigene)
+Ziel 8.8.8.8    -> 10.57.0.4 (Firewall)   (Präfix 0.0.0.0/0, Quelle Eigene)

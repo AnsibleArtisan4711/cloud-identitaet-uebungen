@@ -1,0 +1,3 @@
+203.0.113.5    4 abgelehnt  -> ALARM (Schwelle 3)
+198.51.100.9   1 abgelehnt
+Gesamt: 7 Zeilen, 5 abgelehnt

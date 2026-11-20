@@ -1,0 +1,3 @@
+# Azure CLI / PowerShell (Textdatei, NICHT ausgeführt: es gab kein Azure-Abonnement; Fachwissen, Befehle und Parameter nicht gegen die Dokumentation geprüft)
+az monitor diagnostic-settings create --name diag1 --resource RESSOURCEN-ID --workspace WORKSPACE-ID --logs file://logs.json
+az security pricing list        # Defender-for-Cloud-Pläne anzeigen (Kosten mit Stand prüfen)

@@ -1,0 +1,3 @@
+# Azure CLI / PowerShell (Textdatei, NICHT ausgeführt: es gab kein Azure-Abonnement; Fachwissen, Befehle und Parameter nicht gegen die Dokumentation geprüft)
+az role assignment create --assignee BENUTZER --role "Reader" --scope /subscriptions/ABO-ID/resourceGroups/rg-lab
+az policy assignment create --name erlaubte-regionen --policy RICHTLINIEN-ID --scope /subscriptions/ABO-ID --params file://regionen.json

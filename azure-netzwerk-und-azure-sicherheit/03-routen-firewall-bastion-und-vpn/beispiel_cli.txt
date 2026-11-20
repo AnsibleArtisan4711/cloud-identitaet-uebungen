@@ -1,0 +1,4 @@
+# Azure CLI / PowerShell (Textdatei, NICHT ausgeführt: es gab kein Azure-Abonnement; Fachwissen, Befehle und Parameter nicht gegen die Dokumentation geprüft)
+az network route-table create --name rt-lab --resource-group rg-lab
+az network route-table route create --route-table-name rt-lab --resource-group rg-lab --name alles-zur-firewall --address-prefix 0.0.0.0/0 --next-hop-type VirtualAppliance --next-hop-ip-address 10.57.0.4
+az network firewall create --name fw-hub --resource-group rg-lab   # Azure Firewall (Kosten und Voraussetzungen mit Stand prüfen)

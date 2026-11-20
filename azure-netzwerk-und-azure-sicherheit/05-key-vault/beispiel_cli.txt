@@ -1,0 +1,4 @@
+# Azure CLI / PowerShell (Textdatei, NICHT ausgeführt: es gab kein Azure-Abonnement; Fachwissen, Befehle und Parameter nicht gegen die Dokumentation geprüft)
+az keyvault create --name kv-lab-4711 --resource-group rg-lab --enable-rbac-authorization true
+az keyvault secret set --vault-name kv-lab-4711 --name db-passwort --value PLATZHALTER   # nie echte Geheimnisse in Dateien oder Verlauf
+az keyvault secret show --vault-name kv-lab-4711 --name db-passwort

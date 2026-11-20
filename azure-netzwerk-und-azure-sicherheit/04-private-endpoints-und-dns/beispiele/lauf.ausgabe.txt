@@ -1,0 +1,2 @@
+VNet mit verknüpfter Zone    konto1.blob.core.windows.net -> 10.57.4.5 (über privatelink.blob.core.windows.net)
+VNet ohne verknüpfte Zone    konto1.blob.core.windows.net -> 203.0.113.20 (öffentlich)

@@ -1,0 +1,4 @@
+vm1 -> konto1 (Port 443)   -> erreichbar
+vm1 -> db1 (Port 1433)     -> blockiert bei: nsg
+vm2 -> konto1 (Port 443)   -> blockiert bei: dns
+vm3 -> app1 (Port 80)      -> blockiert bei: route

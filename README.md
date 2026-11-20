@@ -9,6 +9,7 @@ AWS, Microsoft 365, Azure und Google Cloud. Alles auf Deutsch. Jeder Kurs liegt 
 | [aws-cloud-practitioner](aws-cloud-practitioner/) | Lernskript | AWS Cloud Practitioner (CLF-C02), 12 Module |
 | [m365-governance](m365-governance/) | Lernskript mit Übungen | Microsoft 365 Governance, 12 Module |
 | [aws-administration-sysops](aws-administration-sysops/) | Übungsreihe (P56) | AWS-Administration (SysOps): Konten und IAM, VPC, EC2 mit Auto Scaling und Load Balancing, EBS, S3 und EFS, RDS, CloudWatch, AWS CLI und CloudFormation, Kosten, Sicherheit und Fehlersuche (8 Module, 100 UE; nur Python-Modelle ausgeführt, nichts in AWS) |
+| [azure-netzwerk-und-azure-sicherheit](azure-netzwerk-und-azure-sicherheit/) | Übungsreihe (P57) | Azure-Netzwerk und Azure-Sicherheit: VNets und Peering, NSG und ASG, Azure Firewall, Bastion und VPN, Private Endpoints und DNS, Key Vault, RBAC und Policy, Defender for Cloud, Fehlersuche (8 Module, 100 UE; nur Python-Modelle ausgeführt, nichts in Azure) |
 
 
 ## Lizenz

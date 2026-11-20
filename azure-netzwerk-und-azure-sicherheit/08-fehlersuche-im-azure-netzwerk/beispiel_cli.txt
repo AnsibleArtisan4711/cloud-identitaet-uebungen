@@ -1,0 +1,4 @@
+# Azure CLI / PowerShell (Textdatei, NICHT ausgeführt: es gab kein Azure-Abonnement; Fachwissen, Befehle und Parameter nicht gegen die Dokumentation geprüft)
+az network watcher test-connectivity --source-resource VM-ID --dest-address 10.57.2.10 --dest-port 22
+az network nic show-effective-route-table --name NIC --resource-group rg-lab
+az network nic list-effective-nsg --name NIC --resource-group rg-lab

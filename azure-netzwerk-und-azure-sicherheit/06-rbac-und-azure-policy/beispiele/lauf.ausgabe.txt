@@ -1,0 +1,9 @@
+anna  auf gruppe1/sub1/rg-web/vm1    -> ['Leser']
+ben   auf gruppe1/sub1/rg-web/vm1    -> ['Mitwirkender']
+cara  auf gruppe1/sub1/rg-db         -> keine
+cara  auf gruppe1/sub1/rg-web        -> ['Besitzer']
+
+Richtlinie 'erlaubte Regionen' (Effekt Deny):
+  vm1 in westeurope  -> erlaubt
+  vm2 in eastus      -> abgelehnt (Deny)
+Richtlinie 'Pflicht-Tag kostenstelle' (Effekt Audit): Ressourcen ohne Tag werden nur gemeldet, nicht abgelehnt

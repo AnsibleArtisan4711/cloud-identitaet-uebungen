@@ -1,0 +1,12 @@
+Subnetze im Hub (10.57.0.0/16): 
+  firewall    10.57.0.0/26   Adressen 64, nutzbar nach Abzug von 5 reservierten 59
+  gateway     10.57.1.0/27   Adressen 32, nutzbar nach Abzug von 5 reservierten 27
+  verwaltung  10.57.2.0/24   Adressen 256, nutzbar nach Abzug von 5 reservierten 251
+
+Peering-Prüfung (Überlappung der Adressräume):
+  hub    <-> app    ok
+  hub    <-> test   ok
+  hub    <-> onprem ok
+  app    <-> test   ÜBERLAPPUNG: Peering nicht möglich
+  app    <-> onprem ok
+  test   <-> onprem ok

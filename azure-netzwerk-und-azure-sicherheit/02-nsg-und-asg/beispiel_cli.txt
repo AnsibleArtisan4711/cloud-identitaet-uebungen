@@ -1,0 +1,4 @@
+# Azure CLI / PowerShell (Textdatei, NICHT ausgeführt: es gab kein Azure-Abonnement; Fachwissen, Befehle und Parameter nicht gegen die Dokumentation geprüft)
+az network nsg create --name nsg-web --resource-group rg-lab
+az network nsg rule create --nsg-name nsg-web --resource-group rg-lab --name erlaube-https --priority 100 --access Allow --direction Inbound --protocol Tcp --destination-port-ranges 443
+az network asg create --name asg-web --resource-group rg-lab
